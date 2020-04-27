@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+@font-face {
+    font-family: Oswald;
+}
+
+
+.tr_result{background-color: rgba(141, 202, 220, 0.77);
+font-size: 17px;
+color: #0D1B05;
+font-weight: bold;
+border: solid;
+border-color: #245269;}
+
+.tr_colum{
+    background-color: #1b6d85;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.td_colum{
+    text-align: center;
+    border: solid;
+    font-size: 14px;
+    border-color: #245269;
+    width: 200px;
+}
+
+.footer{
+    line-height: 70px;
+    text-align: center;
+    background-color: #0d3e4c;
+    color: #E7F2F5;
+    font-family: Roboto, sans-serif, serif;
+    height: 70px;
+    font-size: 20px;
+}
+
+.resultados{
+
+    background-color: aliceblue;
+    padding-top: 10px;
+    height: 1100px;
+}
+
+.title_metas{
+
+    margin-top: 10px;
+
+}
+
+.title_percentual{
+
+    background-color: #1f3344;
+    color: #d7e9ec;
+    text-align: center;
+    font-size: 28px;
+    font-family: Oswald;
+    border-radius: 10px;
+    height: 50px;
+    line-height: 50px;
+
+}
+
+.title_categoria{
+
+    color: white;
+    font-weight: 500;
+    font-family: Oswald;
+    height: 50px;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+    line-height: 50px;
+    border-radius: 10px;
+
+}
+.vendedor{
+
+    background-color: #074456;
+    color: #90ADB5;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: Roboto, sans-serif, serif;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+table{
+    margin: 0; width: 100%;
+}

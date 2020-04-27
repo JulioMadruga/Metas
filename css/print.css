@@ -1,0 +1,51 @@
+* {
+
+text-shadow:none !important;
+filter:none !important;
+-ms-filter:none !important;
+font-size: 12px !important;
+border-color: #777 !important;
+}
+
+body {
+
+padding:0;
+line-height: 1.4em;
+
+}
+
+#titulo {
+
+margin:0;
+margin-top:0;
+
+}
+
+#nav, #selecao, #tri, #baton, #cab,#btn_baton, .result, footer, video, audio, object, embed {
+display:none; 
+}
+
+#bat_vend{
+    display:block !important;
+    font-size: 28px !important;
+    font-weight: bold;
+}
+
+.vend{
+    font-size: 28px !important;
+    font-weight: bold;
+
+}
+
+#bat_titulo{
+    display:block !important;
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+#espaco{
+    display: none !important;
+}
+
+img{display: none}
+

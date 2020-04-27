@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+.bonus{
+    font-family: 'Bangers', cursive;
+    display: grid;
+    grid-template-columns: 2fr repeat(5,1fr);
+    height: 50px;
+    max-width: 500px;
+    background: #4CAF50;
+    align-content: center;
+}
+
+.titlebonus{
+    grid-column: 1;
+    font-size: 28px;
+    text-align: center;
+    color:#ff9b0c;
+    letter-spacing: 4px;
+    text-shadow:
+            3px 3px 0 #4c4c4c,
+            -1px -1px 0 #4c4c4c,
+            1px -1px 0 #4c4c4c,
+            -1px 1px 0 #4c4c4c,
+            1px 1px 0 #4c4c4c;
+}
+
+.medalha1{
+    grid-column: 2;
+    width: 45px;
+
+}
+.medalha2{
+    grid-column: 3;
+    width: 45px;
+
+}
+.medalha3{
+    grid-column: 4;
+    width: 45px;
+
+}
+.medalha4{
+    grid-column: 5;
+    width: 45px;
+
+}
+.medalha5{
+    grid-column: 6;
+    width: 45px;
+
+}
+

@@ -1,0 +1,23 @@
+{
+    "name": "JulioMadruga/relatoriopdf",
+    "description": "Gerar relatorios pdf",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Julio Cesar Madruga da Silva",
+            "email": "julio_snp@hotmail.com"
+        }
+    ],
+
+    "config": {
+
+        "vendor-dir": "vendor"
+
+    },
+
+
+    "require": {
+       "mpdf/mpdf":"8.0.*"
+    }
+}
