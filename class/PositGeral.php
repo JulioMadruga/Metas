@@ -130,6 +130,17 @@ class PositGeral extends  DB
 
     }
 
+    public function PositG(){
+
+        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where  a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+    }
 
 
 

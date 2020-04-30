@@ -122,6 +122,24 @@ class Vendabisc extends DB
     }
 
 
+    public  function TotalRcaBisc()
+    {
+
+
+        $sql = "SELECT vendedor as rca, sum(cast(replace(replace(Valor_total, '.', ''), ',', '.') as decimal(10,2))) as realizado FROM abril where material in ($this->Bisc) group by vendedor";
+
+        //print_r($sql);
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+    }
+
+
 
 
 

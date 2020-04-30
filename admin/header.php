@@ -82,6 +82,8 @@ $bisc = $kpis[0]->rech;
 $bat = $kpis[0]->baton;
 
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

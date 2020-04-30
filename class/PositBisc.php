@@ -148,4 +148,23 @@ class PositBisc extends  DB
 
     }
 
+    public function PositGeral(){
+
+        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where a.MATERIAL IN ($this->Bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
+
+        var_dump($sql);
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+    }
+
+
+
+
+
+
 }

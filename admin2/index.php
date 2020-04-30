@@ -1,8 +1,45 @@
 <?php require_once 'header.php'; ?>
 
-
-
 <?php
+
+$biscoito = new PositBisc();
+$biscoito->setTabMes($mes);
+$biscoito->setBisc($bisc);
+$biscoito = $biscoito->PositGeral();
+
+$baton = new PositBaton();
+$baton->setTabMes($mes);
+$baton->setBaton($bat);
+$baton = $baton->PositGeral();
+
+$geral = new PositGeral();
+$geral->setTabMes($mes);
+$geral = $geral->PositG();
+
+
+$atuaPosit = new MetaGeral($meta,$baton,$biscoito,$geral);
+
+
+$vendChoc = new Vendachoc();
+$vendChoc->setBisc($bisc);
+$vendChoc->setTabMes($mes);
+$vendChoc = $vendChoc->TotalRcaChoc();
+
+$vendBisc = new Vendabisc();
+$vendBisc->setBisc($bisc);
+$vendBisc->setTabMes($mes);
+$vendBisc = $vendBisc->TotalRcaBisc();
+
+$venda = new Venda();
+$venda->setTabMes($mes);
+$venda = $venda->TotalRca();
+
+
+$atuaVenda = $atuaPosit->AtualizaVenda($meta,$vendChoc,$vendBisc,$venda);
+
+
+
+
 
 $check0 = $check1 = $check2 = $check3 = $check4 = $check5 = $check6 = $check7 = $check8 = $check9 = $check10 = $check11 ="";
 switch ($meta) {

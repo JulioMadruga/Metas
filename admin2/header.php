@@ -77,6 +77,12 @@ if(isset($_GET['mes'])){
 
 $meta = $mes_meta["$mes"];
 
+$kpis = new Kpis();
+$kpis = $kpis->all();
+$bisc = $kpis[0]->rech;
+$bat = $kpis[0]->baton;
+
+
 
 ?>
 

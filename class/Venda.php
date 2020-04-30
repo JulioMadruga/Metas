@@ -82,6 +82,23 @@ class Venda extends  DB
 
     }
 
+    public  function TotalRca()
+    {
+
+
+        $sql = "SELECT vendedor as rca, sum(cast(replace(replace(Valor_total, '.', ''), ',', '.') as decimal(10,2))) as realizado FROM $this->TabMes group by vendedor";
+
+        //print_r($sql);
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+    }
+
 
 
 
