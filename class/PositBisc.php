@@ -87,8 +87,8 @@ class PositBisc extends  DB
     public  function index(){
 
 
-        $sql = "SELECT VENDEDOR, trimarca, COUNT(id) as realizado, if(trimarca - COUNT(id)<0,0,trimarca - COUNT(id)) as dif FROM
-                 (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.trimarca, b.Rca FROM $this->TabMes a, $this->TabMeta b where 
+        $sql = "SELECT trimarca, COUNT(id) as realizado FROM
+                 (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.trimarca, b.Rca FROM $this->TabMes a, $this->TabMeta b where 
                  a.MATERIAL IN ($this->Bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id )SUB where rca = $this->id GROUP BY VENDEDOR";
 
         $stm = DB::prepare($sql);

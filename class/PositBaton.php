@@ -87,9 +87,8 @@ class PositBaton extends  DB
     {
 
 
-        $sql = "SELECT VENDEDOR, meta_baton, COUNT(NOME_parceiro) as realizado, 
-                if(meta_baton - COUNT(NOME_parceiro)<0,0,meta_baton - COUNT(NOME_parceiro)) as dif FROM 
-                (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.vendedor as vend, b.meta_baton, b.rca FROM $this->TabMes a, $this->TabMeta b where a.MATERIAL IN ($this->Baton)
+        $sql = "SELECT meta_baton, COUNT(NOME_parceiro) as realizado FROM (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.meta_baton, b.rca FROM 
+                $this->TabMes a, $this->TabMeta b where a.MATERIAL IN ($this->Baton)
                  AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB where rca = $this->id GROUP BY VENDEDOR";
 
         $stm = DB::prepare($sql);

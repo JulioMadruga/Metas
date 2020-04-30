@@ -70,8 +70,9 @@ class PositGeral extends  DB
     {
 
 
-        $sql = "SELECT VENDEDOR, tab, COUNT(id) as realizado, if(tab - COUNT(id)<0,0,tab - COUNT(id)) as dif FROM
- (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.tab, b.Rca FROM $this->TabMes a, $this->TabMeta b where a.vendedor = b.rca group by a.id )SUB where rca = $this->id GROUP BY VENDEDOR";
+        $sql = "SELECT tab, COUNT(id) as realizado FROM
+                (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.tab, b.Rca FROM $this->TabMes a, $this->TabMeta b where 
+                  a.vendedor = b.rca group by a.id )SUB where rca = $this->id GROUP BY VENDEDOR";
 
         $stm = DB::prepare($sql);
         $stm->execute();
