@@ -35,6 +35,7 @@ $venda->setTabMes($mes);
 $venda = $venda->TotalRca();
 
 
+
 $atuaVenda = $atuaPosit->AtualizaVenda($meta,$vendChoc,$vendBisc,$venda);
 
 

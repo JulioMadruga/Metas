@@ -123,7 +123,7 @@ class Vendachoc extends DB
     {
 
 
-        $sql = "SELECT vendedor as rca, sum(cast(replace(replace(Valor_total, '.', ''), ',', '.') as decimal(10,2))) as realizado FROM abril where material not in ($this->Bisc) group by vendedor";
+        $sql = "SELECT vendedor as rca, sum(cast(replace(replace(Valor_total, '.', ''), ',', '.') as decimal(10,2))) as realizado FROM $this->tabMes where material not in ($this->Bisc) group by vendedor";
 
         //print_r($sql);
 
