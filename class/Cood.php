@@ -205,7 +205,7 @@ class Cood extends  DB
     {
 
 
-        $sql = "SELECT DISTINCT super FROM usuarios where super <> '' ORDER by super";
+        $sql = "SELECT DISTINCT super FROM usuarios where super <> '' ORDER by regiao, super";
 
         $stm = DB::prepare($sql);
         $stm->execute();

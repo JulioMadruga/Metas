@@ -68,7 +68,7 @@ if(isset($vendChoc[0]->Tot)){
     $vendaChocPercent = round((($vendaChocR / $vendaChocM)*100),2);
 }else{
 
-    $vendaChocM = $vendChoc[0]->valor;
+    $vendaChocM = $vendChoc[0]->valor_choc;
     $vendaChocR = 0;
     $vendaChocPercent = 0;
 

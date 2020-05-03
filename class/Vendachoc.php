@@ -108,7 +108,7 @@ class Vendachoc extends DB
 
     public function meta(){
 
-        $sql = "SELECT valor from $this->tabMeta where Rca = $this->id ";
+        $sql = "SELECT valor_choc from $this->tabMeta where Rca = $this->id ";
 
         $stm = DB::prepare($sql);
         $stm->execute();

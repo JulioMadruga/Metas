@@ -12,13 +12,16 @@ $baton->setTabMes($mes);
 $baton->setBaton($bat);
 $baton = $baton->PositGeral();
 
+
 $geral = new PositGeral();
 $geral->setTabMes($mes);
 $geral = $geral->PositG();
 
+$atuaPosit = new MetaGeral();
+$atuaPosit->setMeta($meta);
+$atuaVenda = $atuaPosit->AtualizaPosit($baton,$biscoito,$geral);
 
-$atuaPosit = new MetaGeral($meta,$baton,$biscoito,$geral);
-
+//-----------------------------------------------------------------------------------------------------
 
 $vendChoc = new Vendachoc();
 $vendChoc->setBisc($bisc);
@@ -35,11 +38,32 @@ $venda->setTabMes($mes);
 $venda = $venda->TotalRca();
 
 
+$atuaVenda = $atuaPosit->AtualizaVenda($vendChoc,$vendBisc,$venda);
 
-$atuaVenda = $atuaPosit->AtualizaVenda($meta,$vendChoc,$vendBisc,$venda);
+//-----------------------------------------------------------------------------------------------------
+
+$MetaMixchoc2 = new MixChoc();
+$MetaMixchoc2->setTabMes($mes);
+$MetaMixchoc = $MetaMixchoc2->TotPontosGeral();
+
+$RmixChoc = $MetaMixchoc2->TotRealPontos();
 
 
+$MetaMixbisc2 = new MixBisc();
+$MetaMixbisc2->setTabMes($mes);
+$MetaMixbisc = $MetaMixbisc2->TotPontosGeral();
 
+$RmixBisc = $MetaMixbisc2->TotRealPontos();
+
+
+$atuaMix = $atuaPosit->AtualizaMix($MetaMixchoc,$MetaMixbisc,$RmixChoc, $RmixBisc);
+
+//-----------------------------------------------------------------------------------------------------
+
+
+$coordenadores = new Cood();
+$coordenadores = $coordenadores->Cood_all();
+//var_dump($coordenadores);
 
 
 $check0 = $check1 = $check2 = $check3 = $check4 = $check5 = $check6 = $check7 = $check8 = $check9 = $check10 = $check11 ="";
@@ -125,14 +149,14 @@ switch ($meta) {
             </div>
         </form>
 
-
+          <?php foreach ($coordenadores as $cood) :?>
         <!-- Row -->
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default card-view">
                     <div class="panel-heading">
                         <div class="pull-left">
-                            <h6 class="panel-title txt-dark">customer support</h6>
+                            <h4 class="panel-title txt-dark"><?= $cood->super ?></h4>
                         </div>
                         <div class="pull-right">
                             <a href="#" class="pull-left inline-block full-screen">
@@ -145,98 +169,228 @@ switch ($meta) {
                         <div class="panel-body row pa-0">
                             <div class="table-wrap">
                                 <div class="table-responsive">
+
+                                    <?php
+
+                                    $result = $atuaPosit->ResultCoodGeral($cood->super);
+
+                                    ?>
+
+
                                     <table class="table display product-overview border-none" id="support_table">
                                         <thead>
                                         <tr>
-                                            <th>ticket ID</th>
-                                            <th>Customer</th>
-                                            <th>issue</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+                                            <th colspan="7" style="background:#556b49e3;text-align: center ">Positivações</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="4" style="background:#4c6d6a;text-align: center ">Mix Ideal</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="7" style="background:#324450;text-align: center ">Valor</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Vendedores</th>
+                                            <th>Meta Geral</th>
+                                            <th>Real Geral</th>
+                                            <th>Meta Baton</th>
+                                            <th>Real Baton</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th>Meta Total</th>
+                                            <th>Real Total</th>
+                                            <th>Devoluções</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="font-size: 14px">
+
+                                        <?php foreach ($result as $value): ?>
                                         <tr>
-                                            <td>#85457898</td>
-                                            <td>Jens Brincker</td>
-                                            <td>Jetson chart</td>
-                                            <td>Oct 27</td>
-                                            <td>
-                                                <span class="label label-success">done</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
+                                            <td><?= $value->nome ?></td>
+                                            <td><?= $value->tab ?></td>
+
+                                            <?php $dif = $value->tab - $value->Rgeral ; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+                                            <td><?= $value->meta_baton ?></td>
+
+
+                                            <?php $dif = $value->meta_baton - $value->Rbaton; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td><?= $value->trimarca ?></td>
+
+                                            <?php $dif = $value->trimarca - $value->Rbisc; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+
+
+
+                                            <td style="width: 3px; border: none !important;" ></td>
+
+
+                                            <?php
+                                            $MetaMixchoc2->setTabMeta($meta);
+                                            $MetaMixchoc2->setId($value->rca);
+                                            $percent = $MetaMixchoc2->MPercent();
+                                            $MetaMixC = Round($value->MetaMixChoc * $percent[0]->topchoc);
+
+                                            ?>
+
+
+                                            <td><?= $MetaMixC  ?></td>
+
+                                            <?php $dif = $value->MetaMixChoc - $value->RmixChoc ; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RmixChoc  ?></span>
+                                                </td>
+
+                                            <?php elseif(empty($value->RmixChoc )):?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">0</span>
+                                                </td>
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RmixChoc  ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+                                            <?php
+                                            $MetaMixbisc2->setTabMeta($meta);
+                                            $MetaMixbisc2->setId($value->rca);
+                                            $percent = $MetaMixbisc2->MPercent();
+                                            $MetaMixB = Round($value->MetaMixBisc * $percent[0]->topbisc);
+
+                                            ?>
+
+
+
+
+
+                                            <td><?= $MetaMixB ?></td>
+
+                                            <?php $dif = $value->MetaMixBisc - $value->RMixBisc ; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RMixBisc ?></span>
+                                                </td>
+
+                                            <?php elseif(empty($value->RMixBisc)):?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">0</span>
+                                                </td>
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RMixBisc  ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+
+
+
+
+                                            <td style="width: 3px; border: none !important;" ></td>
+
+                                            <td>R$ <?= number_format($value->valor_choc , 2, ',', '.') ?></td>
+
+                                            <?php $dif = $value->valor_choc - $value->RVendaChoc; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaChoc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaChoc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td>R$ <?= number_format($value->valor_bisc , 2, ',', '.') ?></td>
+
+                                            <?php $dif = $value->valor_bisc- $value->RVendaBisc; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaBisc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaBisc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td>R$ <?= number_format($value->valor , 2, ',', '.') ?></td>
+
+                                            <?php $dif = $value->valor- $value->RVendaTotal; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaTotal, 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaTotal, 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+
+
+                                            <?php
+                                            $dev = new  Devolucoes();
+                                            $dev = $dev->index($mes,$cood->super,$value->rca);
+                                           // var_dump($dev);
+                                            ?>
+
+                                            <?php if(!empty($dev)): ?>
+
+                                                <td>
+                                                    <span class="label label-warning" style="color: black; font-size: 14px">
+                                                        R$ <?= number_format($dev->Total, 2, ',', '.') ?>
+                                                    </span>
+                                                </td>
+
+                                            <?php else: ?>
+
+                                                <td> <span class="label label-default"></span></td>
+
+                                            <?php endif; ?>
+
+
+
+
                                         </tr>
-                                        <tr>
-                                            <td>#85457897</td>
-                                            <td>Mark Hay</td>
-                                            <td>PSD resolution</td>
-                                            <td>Oct 26</td>
-                                            <td>
-                                                <span class="label label-warning ">Pending</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#85457896</td>
-                                            <td>Anthony Davie</td>
-                                            <td>Cinnabar</td>
-                                            <td>Oct 25</td>
-                                            <td>
-                                                <span class="label label-success ">done</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#85457895</td>
-                                            <td>David Perry</td>
-                                            <td>Felix PSD</td>
-                                            <td>Oct 25</td>
-                                            <td>
-                                                <span class="label label-danger">pending</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#85457894</td>
-                                            <td>Anthony Davie</td>
-                                            <td>Beryl iphone</td>
-                                            <td>Oct 25</td>
-                                            <td>
-                                                <span class="label label-success ">done</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#85457893</td>
-                                            <td>Alan Gilchrist</td>
-                                            <td>Pogody button</td>
-                                            <td>Oct 22</td>
-                                            <td>
-                                                <span class="label label-warning ">Pending</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#85457892</td>
-                                            <td>Mark Hay</td>
-                                            <td>Beavis sidebar</td>
-                                            <td>Oct 18</td>
-                                            <td>
-                                                <span class="label label-success ">done</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>#85457891</td>
-                                            <td>Sue Woodger</td>
-                                            <td>Pogody header</td>
-                                            <td>Oct 17</td>
-                                            <td>
-                                                <span class="label label-danger">pending</span>
-                                            </td>
-                                            <td><a href="javascript:void(0)" class="pr-10" data-toggle="tooltip" title="completed" ><i class="zmdi zmdi-check"></i></a> <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="zmdi zmdi-delete"></i></a></td>
-                                        </tr>
+                                        <?php endforeach; ?>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -247,6 +401,8 @@ switch ($meta) {
             </div>
         </div>
         <!-- /Row -->
+
+             <?php endforeach;?>
 
 
     </div>
