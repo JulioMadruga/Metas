@@ -37,6 +37,10 @@
 <!-- Init JavaScript -->
 <script src="dist/js/init.js"></script>
 
+<!-- Progressbar Animation JavaScript -->
+<script src="vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+<script src="vendors/bower_components/jquery.counterup/jquery.counterup.min.js"></script>
+
 
 </body>
 

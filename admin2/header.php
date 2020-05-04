@@ -393,52 +393,27 @@ $bat = $kpis[0]->baton;
             <h1 style="height: 10px"></h1>
 
             <li>
-                <a href="index.phpl"><div class="pull-left"><i class="fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Resultados</span></div><div class="clearfix"></div></a>
+                <a href="index.php"><div class="pull-left"><i class="txt-primary ti-pie-chart mr-20"></i><span class="right-nav-text">Início</span></div><div class="clearfix"></div></a>
             </li>
 
            <li>
-                <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><div class="pull-left"><i class="zmdi zmdi-apps mr-20"></i><span class="right-nav-text">Apps </span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+                <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><div class="pull-left"><i class="txt-success fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Resultados</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
                 <ul id="app_dr" class="collapse collapse-level-1">
+
                     <li>
-                        <a href="chats.html">chats</a>
+                        <a href="geral.php">Geral</a>
                     </li>
+
                     <li>
-                        <a href="calendar.html">calendar</a>
+                        <a href="resultcood.php">Por Coodenadores</a>
                     </li>
-                    <li>
-                        <a href="weather.html">weather</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#email_dr">Email<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-                        <ul id="email_dr" class="collapse collapse-level-2">
-                            <li>
-                                <a href="inbox.html">inbox</a>
-                            </li>
-                            <li>
-                                <a href="inbox-detail.html">detail email</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#contact_dr">Contacts<div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
-                        <ul id="contact_dr" class="collapse collapse-level-2">
-                            <li>
-                                <a href="contact-list.html">list</a>
-                            </li>
-                            <li>
-                                <a href="contact-card.html">cards</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="file-manager.html">File Manager</a>
-                    </li>
-                    <li>
-                        <a href="todo-tasklist.html">To Do/Tasklist</a>
-                    </li>
+
                 </ul>
             </li>
 
+            <li>
+                <a href="mixideal.php"><div class="pull-left"><i class="txt-warning fa fa-list-alt mr-20"></i><span class="right-nav-text">Mix Ideal</span></div><div class="clearfix"></div></a>
+            </li>
 
 
 

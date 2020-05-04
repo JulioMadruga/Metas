@@ -30,6 +30,24 @@ class Devolucoes extends  DB
 
 
 
+    public  function total($mes,$cood)
+    {
+
+
+        $sql = "SELECT sum(cast(replace(replace(a.Valor_total, '.', ''), ',', '.') as decimal(10,2))) as Total from $mes a, usuarios b 
+                where a.VENDEDOR = b.Rca and a.Valor_total <0 and b.super = '$cood'";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchObject();
+
+
+    }
+
+
+
 
 
 
