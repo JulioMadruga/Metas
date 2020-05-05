@@ -262,6 +262,7 @@ switch ($meta) {
 
 
                                             <?php
+
                                             $MetaMixchoc2->setTabMeta($meta);
                                             $MetaMixchoc2->setId($value->rca);
                                             $percent = $MetaMixchoc2->MPercent();
@@ -272,7 +273,15 @@ switch ($meta) {
 
                                             <td><?= $MetaMixC  ?></td>
 
-                                            <?php $dif = $value->MetaMixChoc - $value->RmixChoc ; if( $dif<=0): ?>
+                                            <?php
+                                            if(empty($value->RmixChoc)){
+                                                $dif = $value->MetaMixChoc ;
+                                            }else{
+                                                $dif = $value->MetaMixChoc - $value->RmixChoc ;
+                                            }
+                                            if($dif<=0):
+                                            ?>
+
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RmixChoc  ?></span>
                                                 </td>
@@ -290,6 +299,7 @@ switch ($meta) {
 
 
                                             <?php
+
                                             $MetaMixbisc2->setTabMeta($meta);
                                             $MetaMixbisc2->setId($value->rca);
                                             $percent = $MetaMixbisc2->MPercent();
@@ -303,7 +313,15 @@ switch ($meta) {
 
                                             <td><?= $MetaMixB ?></td>
 
-                                            <?php $dif = $value->MetaMixBisc - $value->RMixBisc ; if( $dif<=0): ?>
+                                            <?php
+                                               if(empty($value->RMixBisc )){
+                                                   $dif = $value->MetaMixBisc;
+                                               }else{
+                                                   $dif = $value->MetaMixBisc - $value->RMixBisc ;
+                                                   }
+                                               if( $dif<=0):
+
+                                                ?>
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RMixBisc ?></span>
                                                 </td>
@@ -323,14 +341,19 @@ switch ($meta) {
 
 
 
-
                                             <td style="width: 3px; border: none !important;" ></td>
 
                                             <td>R$ <?= number_format($value->valor_choc , 2, ',', '.') ?></td>
 
-                                            <?php $dif = $value->valor_choc - $value->RVendaChoc; if( $dif<=0): ?>
+                                            <?php
+                                                 $RvendaChoc = (empty($value->RVendaChoc)) ? 0 : $value->RVendaChoc;
+                                                 $dif = $value->valor_choc - $RvendaChoc;
+
+                                                  if( $dif<=0):
+
+                                            ?>
                                                 <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaChoc , 2, ',', '.') ?></span>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
                                                 </td>
                                             <?php else:?>
                                                 <td>
@@ -444,9 +467,18 @@ switch ($meta) {
 
 
                                         <td style="width: 3px; border: none !important;" ></td>
-                                        <td><?= $item->MetaMixChoc?></td>
 
-                                            <?php $dif = $item->MetaMixChoc - $item->RmixChoc; if( $dif<=0): ?>
+                                        <?php
+
+                                            $MetaMixchoc2->setTabMeta($meta);
+                                            $MetaMixchoc2->setId($value->rca);
+                                            $percent = $MetaMixchoc2->MPercent();
+                                            $MixChoc = round($item->MetaMixChoc * $percent[0]->topchoc) ?>
+
+
+                                        <td><?= $MixChoc ?></td>
+
+                                            <?php $dif = $MixChoc - $item->RmixChoc; if( $dif<=0): ?>
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->RmixChoc ?></span>
                                                 </td>
