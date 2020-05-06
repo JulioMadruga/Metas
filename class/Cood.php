@@ -268,6 +268,23 @@ class Cood extends  DB
     }
 
 
+    public  function MetaPosit($meta)
+    {
+
+
+        $sql = "SELECT  sum(a.meta_baton) as baton, sum(a.trimarca) as bisc, sum(a.tab) as geral FROM `$meta`a, usuarios b WHERE a.rca = b.rca and super = '$this->cood'";
+
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+    }
+
+
 
 
 

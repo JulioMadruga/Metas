@@ -5,21 +5,21 @@
 $biscoito = new PositBisc();
 $biscoito->setTabMes($mes);
 $biscoito->setBisc($bisc);
-$biscoito = $biscoito->PositGeral();
+$biscoito2 = $biscoito->PositGeral();
 
 $baton = new PositBaton();
 $baton->setTabMes($mes);
 $baton->setBaton($bat);
-$baton = $baton->PositGeral();
+$baton2 = $baton->PositGeral();
 
 
 $geral = new PositGeral();
 $geral->setTabMes($mes);
-$geral = $geral->PositG();
+$geral2 = $geral->PositG();
 
 $atuaPosit = new MetaGeral();
 $atuaPosit->setMeta($meta);
-$atuaVenda = $atuaPosit->AtualizaPosit($baton,$biscoito,$geral);
+$atuaVenda = $atuaPosit->AtualizaPosit($baton2,$biscoito2,$geral2);
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -66,6 +66,8 @@ $result->setMeta($meta);
 $result = $result->ResultGeral();
 
 
+$coordenadores = new Cood();
+$coordenadores2 = $coordenadores->Cood_all();
 
 
 $check0 = $check1 = $check2 = $check3 = $check4 = $check5 = $check6 = $check7 = $check8 = $check9 = $check10 = $check11 ="";
@@ -159,9 +161,21 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 24px">Positivação Geral</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Positivação Geral</span>
+
                             <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
@@ -202,9 +216,21 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 24px">Positivação Baton</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Positivação Baton</span>
+
                             <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
@@ -245,9 +271,22 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 24px">Positivação Biscoito</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Positivação Biscoito</span>
+
                             <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
@@ -288,25 +327,53 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 24px">Pontos Mix Chocolate</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Pontos Mix Chocolate</span>
+
                             <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
-                                <span class="counter-anim">93.13</span><span>%</span>
+
+                                <?php
+
+                                $MetaMixchoc2->setTabMeta($meta);
+                                $percentM = $MetaMixchoc2->MPercentGeral();
+
+                                $MixChoc = Round($value->MetaMixChoc * $percentM[0]->media,0);
+
+                                $percentMixChoc =  round(($value->RmixChoc / $MixChoc) * 100,2)
+
+
+
+                                ?>
+
+
+                                <span class="counter-anim"><?= $percentMixChoc ?></span><span>%</span>
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="93.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentMixChoc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
                                 <li>
                                     <span class="block">Meta</span>
-                                    <span class="block txt-dark weight-500 font-15">50</span>
+                                    <span class="block txt-dark weight-500 font-15"><?= $MixChoc ?></span>
                                 </li>
                                 <li>
                                     <span class="block">Realizado</span>
-                                    <span class="block txt-dark weight-500 font-15">40</span>
+                                    <span class="block txt-dark weight-500 font-15"><?= $value->RmixChoc ?></span>
                                 </li>
                                 <li>
 
@@ -327,25 +394,53 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 24px">Pontos Mix Biscoitos</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Ponto Mix Biscoitos</span>
+
                             <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
-                                <span class="counter-anim">93.13</span><span>%</span>
+
+                                <?php
+
+                                $MetaMixbisc2->setTabMeta($meta);
+                                $percentM = $MetaMixbisc2->MPercentGeral();
+
+                                $MixBisc = Round($value->MetaMixBisc * $percentM[0]->media,0);
+
+                                $percentMixBisc =  round(($value->RMixBisc / $MixBisc) * 100,2)
+
+
+
+                                ?>
+
+
+
+                                <span class="counter-anim"><?= $percentMixBisc ?></span><span>%</span>
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="93.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentMixBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
                                 <li>
                                     <span class="block">Meta</span>
-                                    <span class="block txt-dark weight-500 font-15">50</span>
+                                    <span class="block txt-dark weight-500 font-15"><?= $MixBisc ?></span>
                                 </li>
                                 <li>
                                     <span class="block">Realizado</span>
-                                    <span class="block txt-dark weight-500 font-15">40</span>
+                                    <span class="block txt-dark weight-500 font-15"><?= $value->RMixBisc ?></span>
                                 </li>
                                 <li>
 
@@ -363,25 +458,44 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 28px">Valor Chocolate</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Valor Chocolate</span>
+
                             <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
-                                <span class="counter-anim">93.13</span><span>%</span>
+
+                                <?php
+
+                                  $percentChoc = round(($value->RVendaChoc / $value->valor_choc)*100,2);
+
+                                ?>
+
+                                <span class="counter-anim"><?= $percentChoc ?></span><span>%</span>
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="93.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentChoc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
                                 <li>
                                     <span class="block">Meta</span>
-                                    <span class="block txt-dark weight-500 font-15">50</span>
+                                    <span class="block txt-dark weight-500 font-13">R$ <?= number_format($value->valor_choc , 2, ',', '.')  ?></span>
                                 </li>
                                 <li>
                                     <span class="block">Realizado</span>
-                                    <span class="block txt-dark weight-500 font-15">40</span>
+                                    <span class="block txt-dark weight-500 font-13">R$ <?= number_format($value->RVendaChoc , 2, ',', '.')  ?></span>
                                 </li>
                                 <li>
 
@@ -399,25 +513,44 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 28px">Valor Biscoito</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Valor Biscoito</span>
+
                             <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
-                                <span class="counter-anim">93.13</span><span>%</span>
+
+                                <?php
+
+                                $percentBisc= round(($value->RVendaBisc / $value->valor_bisc)*100,2);
+
+                                ?>
+
+                                <span class="counter-anim"><?= $percentBisc ?></span><span>%</span>
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="93.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
                                 <li>
                                     <span class="block">Meta</span>
-                                    <span class="block txt-dark weight-500 font-15">50</span>
+                                    <span class="block txt-dark weight-500 font-15">R$ <?= number_format($value->valor_bisc , 2, ',', '.')  ?></span>
                                 </li>
                                 <li>
                                     <span class="block">Realizado</span>
-                                    <span class="block txt-dark weight-500 font-15">40</span>
+                                    <span class="block txt-dark weight-500 font-15">R$ <?= number_format($value->RVendaBisc , 2, ',', '.')  ?></span>
                                 </li>
                                 <li>
 
@@ -435,25 +568,44 @@ switch ($meta) {
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <span class="panel-title txt-dark" style="font-size: 28px">Valor Total</span>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
-                            <span class="uppercase-font weight-500 font-20 block text-center txt-dark">Valor Total</span>
+
                             <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
-                                <span class="counter-anim">93.13</span><span>%</span>
+
+                                <?php
+
+                                $percentTotal= round(($value->RVendaTotal / $value->Valor)*100,2);
+
+                                ?>
+
+                                <span class="counter-anim"><?= $percentTotal ?></span><span>%</span>
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="93.12" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentTotal ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
                                 <li>
                                     <span class="block">Meta</span>
-                                    <span class="block txt-dark weight-500 font-15">50</span>
+                                    <span class="block txt-dark weight-500 font-13">R$ <?= number_format($value->Valor , 2, ',', '.')  ?></span>
                                 </li>
                                 <li>
                                     <span class="block">Realizado</span>
-                                    <span class="block txt-dark weight-500 font-15">40</span>
+                                    <span class="block txt-dark weight-500 font-13">R$ <?= number_format($value->RVendaTotal , 2, ',', '.')  ?></span>
                                 </li>
                                 <li>
 
@@ -473,6 +625,126 @@ switch ($meta) {
         <!-- /Row -->
 
     <?php endforeach; ?>
+
+        <!-- Row -->
+        <div class="row">
+
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Resultados por Coordenadores</h6>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen ">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+
+                                        <thead>
+
+                                        <tr>
+                                            <th>Coordenador</th>
+                                            <th>Positivações</th>
+                                            <th>Mix ideal</th>
+                                            <th>Valor</th>
+                                        </tr>
+
+                                        </thead>
+                                        <tbody>
+
+                                        <?php foreach ($coordenadores2 as $value): ?>
+                                        <tr>
+                                            <td><?= $value->super?></td>
+
+                                           <?php
+
+                                           $batonCoodR = $baton->PositCoodBat($value->super)->total;
+                                           If($batonCoodR <= 0){$batonCoodR=1;}
+                                           $biscCoodR =$biscoito->PositCoodBisc($value->super)->total;
+                                           If($biscCoodR <= 0){$biscCoodR=1;}
+                                           $geralCoodR = $geral->PositCoodGeral($value->super)->total;
+                                           If($geralCoodR <= 0){$geralCoodR=1;}
+
+
+
+
+                                           $coordenadores->setCood($value->super);
+                                           $PositCoodM = $coordenadores->MetaPosit($meta);
+
+                                           $batonCoodM = $PositCoodM[0]->baton;
+                                           $biscCoodM = $PositCoodM[0]->bisc;
+                                           $geralCoodM = $PositCoodM[0]->geral;
+
+
+
+                                          $calcPosit = ((( $batonCoodR / $batonCoodM )*100) + (( $biscCoodR/$biscCoodM )*100) + (( $geralCoodR/$geralCoodM )*100))/3;
+
+                                           $calcPosit = Round($calcPosit);
+
+                                           if($calcPosit< 33){
+                                               $color = "danger";
+                                           }elseif ($calcPosit >33 && $calcPosit< 66){
+                                               $color = "warning";
+                                           }else{
+                                               $color = "success";
+                                           }
+
+
+                                           ?>
+
+
+
+                                            <td>
+                                                <span class="badge weight-500 txt-<?= $color ?>" style="margin-bottom: 5px; background: #1e2021 !important;"><?= $calcPosit ?>%</span>
+                                                <div class="progress progress-xs mb-0 ">
+                                                    <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcPosit ?>%"></div>
+                                                </div>
+                                            </td>
+
+
+
+                                            <td>
+                                                <span class="badge badge-warning txt-dark weight-500" style="margin-bottom: 5px; color: black !important;">55%</span>
+                                                <div class="progress progress-xs mb-0 ">
+                                                    <div class="progress-bar progress-bar-warning" style="width: 55%"></div>
+                                                </div>
+                                            </td>
+
+
+
+                                            <td>
+                                                <span class="badge badge-success weight-500" style="margin-bottom: 5px; color: black !important;">85%</span>
+                                                <div class="progress progress-xs mb-0 ">
+                                                    <div class="progress-bar progress-bar-success" style="width: 85%"></div>
+                                                </div>
+                                            </td>
+
+
+                                        </tr>
+                                        <?php endforeach; ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+
+
 
 
     </div>

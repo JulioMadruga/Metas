@@ -142,6 +142,22 @@ class PositGeral extends  DB
 
     }
 
+    public function PositCoodGeral($cood){
+
+
+        $sql = "SELECT sum(realizado) as total from(SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where 
+                a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchObject();
+
+        return $stm;
+
+    }
+
+
+
 
 
 

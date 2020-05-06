@@ -150,6 +150,21 @@ class MixBisc extends  DB
     }
 
 
+    public function MPercentGeral(){
+
+        $sql = "SELECT round(AVG(topbisc),2) as media FROM $this->TabMeta ";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+
+    }
+
+
 
 
 
