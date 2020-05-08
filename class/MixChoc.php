@@ -153,11 +153,12 @@ class MixChoc extends  DB
         $stm->execute();
 
 
-        return $stm->fetchAll();
+        return $stm->fetchObject();
 
 
 
     }
+
 
 
 

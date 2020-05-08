@@ -174,6 +174,9 @@ switch ($meta) {
 
                                     $result = $atuaPosit->ResultCoodGeral($cood->super);
 
+                                    //var_dump($result);
+
+
                                     ?>
 
 
@@ -274,26 +277,20 @@ switch ($meta) {
                                             <td><?= $MetaMixC  ?></td>
 
                                             <?php
-                                            if(empty($value->RmixChoc)){
-                                                $dif = $value->MetaMixChoc ;
-                                            }else{
-                                                $dif = $value->MetaMixChoc - $value->RmixChoc ;
-                                            }
+                                            $RmixChoc= strlen($value->RmixChoc ) == 0 ? 0 : $value->RmixChoc ;
+                                            $dif = $MetaMixC - $RmixChoc;
+
                                             if($dif<=0):
                                             ?>
 
                                                 <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RmixChoc  ?></span>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
                                                 </td>
 
-                                            <?php elseif(empty($value->RmixChoc )):?>
-                                                <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px">0</span>
-                                                </td>
 
                                             <?php else:?>
                                                 <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RmixChoc  ?></span>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
                                                 </td>
                                             <?php endif;?>
 
@@ -314,26 +311,20 @@ switch ($meta) {
                                             <td><?= $MetaMixB ?></td>
 
                                             <?php
-                                               if(empty($value->RMixBisc )){
-                                                   $dif = $value->MetaMixBisc;
-                                               }else{
-                                                   $dif = $value->MetaMixBisc - $value->RMixBisc ;
-                                                   }
+                                            $RMixBisc = strlen($value->RMixBisc) == 0 ? 0 : $value->RMixBisc;
+                                            $dif = $MetaMixB - $RMixBisc;
+
                                                if( $dif<=0):
 
                                                 ?>
                                                 <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RMixBisc ?></span>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
                                                 </td>
 
-                                            <?php elseif(empty($value->RMixBisc)):?>
-                                                <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px">0</span>
-                                                </td>
 
                                             <?php else:?>
                                                 <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RMixBisc  ?></span>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
                                                 </td>
                                             <?php endif;?>
 
@@ -346,7 +337,8 @@ switch ($meta) {
                                             <td>R$ <?= number_format($value->valor_choc , 2, ',', '.') ?></td>
 
                                             <?php
-                                                 $RvendaChoc = (empty($value->RVendaChoc)) ? 0 : $value->RVendaChoc;
+                                           //var_dump(strlen($value->RVendaChoc));
+                                                 $RvendaChoc = strlen($value->RVendaChoc) == 0 ? 0 : $value->RVendaChoc;
                                                  $dif = $value->valor_choc - $RvendaChoc;
 
                                                   if( $dif<=0):
@@ -357,31 +349,33 @@ switch ($meta) {
                                                 </td>
                                             <?php else:?>
                                                 <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaChoc , 2, ',', '.') ?></span>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
                                                 </td>
                                             <?php endif;?>
 
                                             <td>R$ <?= number_format($value->valor_bisc , 2, ',', '.') ?></td>
 
-                                            <?php $dif = $value->valor_bisc- $value->RVendaBisc; if( $dif<=0): ?>
+                                            <?php $RVendaBisc = strlen($value->RVendaBisc) == 0 ? 0 : $value->RVendaBisc;
+                                            $dif = $value->valor_bisc- $RVendaBisc; if( $dif<=0): ?>
                                                 <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaBisc , 2, ',', '.') ?></span>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
                                                 </td>
                                             <?php else:?>
                                                 <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaBisc , 2, ',', '.') ?></span>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
                                                 </td>
                                             <?php endif;?>
 
                                             <td>R$ <?= number_format($value->valor , 2, ',', '.') ?></td>
 
-                                            <?php $dif = $value->valor- $value->RVendaTotal; if( $dif<=0): ?>
+                                            <?php  $RVendaTotal = strlen($value->RVendaTotal) == 0 ? 0 : $value->RVendaTotal;
+                                            $dif = $value->valor - $RVendaTotal ; if( $dif<=0): ?>
                                                 <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaTotal, 2, ',', '.') ?></span>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
                                                 </td>
                                             <?php else:?>
                                                 <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($value->RVendaTotal, 2, ',', '.') ?></span>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
                                                 </td>
                                             <?php endif;?>
 
@@ -472,8 +466,8 @@ switch ($meta) {
 
                                             $MetaMixchoc2->setTabMeta($meta);
                                             $MetaMixchoc2->setId($value->rca);
-                                            $percent = $MetaMixchoc2->MPercent();
-                                            $MixChoc = round($item->MetaMixChoc * $percent[0]->topchoc) ?>
+                                            $percent = $MetaMixchoc2->MPercentGeral()->media;
+                                            $MixChoc = round($item->MetaMixChoc * $percent) ?>
 
 
                                         <td><?= $MixChoc ?></td>
@@ -482,6 +476,7 @@ switch ($meta) {
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->RmixChoc ?></span>
                                                 </td>
+
                                             <?php else:?>
                                                 <td>
                                                     <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->RmixChoc ?></span>
@@ -489,10 +484,18 @@ switch ($meta) {
                                             <?php endif;?>
 
 
-                                        <td><?= $item->MetaMixBisc?></td>
+                                            <?php
+
+                                            $MetaMixbisc2->setTabMeta($meta);
+                                            $MetaMixbisc2->setId($value->rca);
+                                            $percent = $MetaMixbisc2->MPercentGeral()->media;
+                                            $MixBisc = round($item->MetaMixBisc * $percent); ?>
 
 
-                                            <?php $dif = $item->MetaMixBisc - $item->RMixBisc; if( $dif<=0): ?>
+                                        <td><?= $MixBisc?></td>
+
+
+                                            <?php $dif = $MixBisc - $item->RMixBisc; if( $dif<=0): ?>
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->RMixBisc ?></span>
                                                 </td>

@@ -348,9 +348,9 @@ switch ($meta) {
                                 <?php
 
                                 $MetaMixchoc2->setTabMeta($meta);
-                                $percentM = $MetaMixchoc2->MPercentGeral();
+                                $percentM = $MetaMixchoc2->MPercentGeral()->media;
 
-                                $MixChoc = Round($value->MetaMixChoc * $percentM[0]->media,0);
+                                $MixChoc = Round($value->MetaMixChoc * $percentM,0);
 
                                 $percentMixChoc =  round(($value->RmixChoc / $MixChoc) * 100,2)
 
@@ -414,9 +414,9 @@ switch ($meta) {
                                 <?php
 
                                 $MetaMixbisc2->setTabMeta($meta);
-                                $percentM = $MetaMixbisc2->MPercentGeral();
+                                $percentM = $MetaMixbisc2->MPercentGeral()->media;
 
-                                $MixBisc = Round($value->MetaMixBisc * $percentM[0]->media,0);
+                                $MixBisc = Round($value->MetaMixBisc * $percentM,0);
 
                                 $percentMixBisc =  round(($value->RMixBisc / $MixBisc) * 100,2)
 
@@ -669,11 +669,11 @@ switch ($meta) {
                                            <?php
 
                                            $batonCoodR = $baton->PositCoodBat($value->super)->total;
-                                           If($batonCoodR <= 0){$batonCoodR=1;}
+                                           If($batonCoodR <= 0){$batonCoodR=0.01;}
                                            $biscCoodR =$biscoito->PositCoodBisc($value->super)->total;
-                                           If($biscCoodR <= 0){$biscCoodR=1;}
+                                           If($biscCoodR <= 0){$biscCoodR=0.01;}
                                            $geralCoodR = $geral->PositCoodGeral($value->super)->total;
-                                           If($geralCoodR <= 0){$geralCoodR=1;}
+                                           If($geralCoodR <= 0){$geralCoodR=0.01;}
 
 
 
@@ -712,22 +712,111 @@ switch ($meta) {
                                             </td>
 
 
+                                            <?php
+
+
+
+                                            $MixChocCoodR = $atuaPosit->ResultCoodGeral2($value->super)->RmixChoc;
+                                            If($MixChocCoodR <= 0){$MixChocCoodR=0.01;}
+
+                                            $MixBiscCoodR = $atuaPosit->ResultCoodGeral2($value->super)->RMixBisc;
+                                            If($MixBiscCoodR <= 0){$MixBiscCoodR=0.01;}
+
+                                            $MixChocCood = $atuaPosit->ResultCoodGeral2($value->super)->MetaMixChoc;
+                                            $percent = $MetaMixchoc2->MPercentGeral()->media;
+                                            $MixChocCood = $MixChocCood * $percent;
+                                            If($MixChocCood <= 0){$MixChocCood=0.01;}
+
+                                            $MixBiscCood = $atuaPosit->ResultCoodGeral2($value->super)->MetaMixBisc;
+                                            $percent = $MetaMixbisc2->MPercentGeral()->media;
+                                            $MixBiscCood = $MixBiscCood * $percent;
+                                            If($MixBiscCood <= 0){$MixBiscCood=0.01;}
+
+
+
+
+                                            $calcMix = ((( $MixChocCoodR / $MixChocCood )*100) + (( $MixBiscCoodR/$MixBiscCood )*100) )/2;
+
+                                            $calcMix= Round($calcMix);
+
+                                            if($calcMix< 33){
+                                                $color = "danger";
+                                            }elseif ($calcMix >33 && $calcMix< 66){
+                                                $color = "warning";
+                                            }else{
+                                                $color = "success";
+                                            }
+
+
+                                            ?>
+
+
 
                                             <td>
-                                                <span class="badge badge-warning txt-dark weight-500" style="margin-bottom: 5px; color: black !important;">55%</span>
+                                                <span class="badge weight-500 txt-<?= $color ?>" style="margin-bottom: 5px; background: #1e2021 !important;"><?= $calcMix ?>%</span>
                                                 <div class="progress progress-xs mb-0 ">
-                                                    <div class="progress-bar progress-bar-warning" style="width: 55%"></div>
+                                                    <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcMix ?>%"></div>
                                                 </div>
                                             </td>
 
 
 
+                                            <?php
+
+
+
+                                            $RVendaChocR = $atuaPosit->ResultCoodGeral2($value->super)->RVendaChoc;
+                                            If($RVendaChocR <= 0){$RVendaChocR=0.01;}
+
+                                            $RVendaBiscR = $atuaPosit->ResultCoodGeral2($value->super)->RVendaBisc;
+                                            If($RVendaBiscR <= 0){$RVendaBiscR=0.01;}
+
+                                            $RVendaTotalR = $atuaPosit->ResultCoodGeral2($value->super)->RVendaTotal;
+                                            If($RVendaTotalR <= 0){$RVendaTotalR=0.01;}
+
+
+
+                                            $Mvalor_choc = $atuaPosit->ResultCoodGeral2($value->super)->valor_choc;
+                                            If($Mvalor_choc <= 0){$Mvalor_choc=0.01;}
+
+                                            $Mvalor_bisc = $atuaPosit->ResultCoodGeral2($value->super)->valor_bisc;
+                                            If($Mvalor_bisc <= 0){$Mvalor_bisc=0.01;}
+
+                                            $Mvalor = $atuaPosit->ResultCoodGeral2($value->super)->Valor;
+                                            If($Mvalor<= 0){$Mvalor=0.01;}
+
+
+
+
+                                            $calcTot= ( $RVendaTotalR/$Mvalor)*100;
+
+                                            $calcTot= Round($calcTot);
+
+                                            if($calcTot< 33){
+                                                $color = "danger";
+                                            }elseif ($calcTot >33 && $calcTot< 66){
+                                                $color = "warning";
+                                            }else{
+                                                $color = "success";
+                                            }
+
+
+                                            ?>
+
+
+
                                             <td>
-                                                <span class="badge badge-success weight-500" style="margin-bottom: 5px; color: black !important;">85%</span>
+                                                <span class="badge weight-500 txt-<?= $color ?>" style="margin-bottom: 5px; background: #1e2021 !important;"><?= $calcTot?>%</span>
                                                 <div class="progress progress-xs mb-0 ">
-                                                    <div class="progress-bar progress-bar-success" style="width: 85%"></div>
+                                                    <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcTot ?>%"></div>
                                                 </div>
                                             </td>
+
+
+
+
+
+
 
 
                                         </tr>
