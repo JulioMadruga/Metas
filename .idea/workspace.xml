@@ -20,117 +20,13 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/PHPMailer/composer.json</pharConfigPath>
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-470537753">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="8" />
-          <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.20" value="1" />
-          <entry key="project.open.time.21" value="1" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.23" value="1" />
-          <entry key="project.open.time.25" value="1" />
-          <entry key="project.open.time.27" value="1" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="9" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="css" value="315" />
-          <entry key="html" value="49" />
-          <entry key="php" value="10314" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="CSS" value="315" />
-          <entry key="HTML" value="53" />
-          <entry key="PHP" value="10250" />
-          <entry key="SQL" value="60" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="css" value="2" />
-          <entry key="html" value="10" />
-          <entry key="js" value="1" />
-          <entry key="php" value="101" />
-          <entry key="scss" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CSS" value="2" />
-          <entry key="HTML" value="10" />
-          <entry key="JavaScript" value="1" />
-          <entry key="PHP" value="101" />
-          <entry key="SCSS" value="2" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin2/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="703" selection-start-line="703" selection-end-line="703" />
-              <folding>
-                <element signature="e#4410#4433#0#HTML" expanded="true" />
-                <element signature="e#6541#6564#0#HTML" expanded="true" />
-                <element signature="e#8671#8694#0#HTML" expanded="true" />
-                <element signature="e#10795#10818#0#HTML" expanded="true" />
-                <element signature="e#13323#13346#0#HTML" expanded="true" />
-                <element signature="e#15701#15724#0#HTML" expanded="true" />
-                <element signature="e#17912#17935#0#HTML" expanded="true" />
-                <element signature="e#20118#20141#0#HTML" expanded="true" />
-                <element signature="e#27980#28032#0#HTML" expanded="true" />
-                <element signature="e#29132#29150#0#HTML" expanded="true" />
-                <element signature="e#29415#29467#0#HTML" expanded="true" />
-                <element signature="e#29667#29685#0#HTML" expanded="true" />
-                <element signature="e#29941#29993#0#HTML" expanded="true" />
-                <element signature="e#30193#30211#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/class/PositBaton.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="168" column="144" selection-start-line="167" selection-start-column="16" selection-end-line="168" selection-end-column="144" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/class/PositGeral.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/class/PositBisc.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/class/Cood.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="274" column="168" selection-start-line="274" selection-start-column="16" selection-end-line="274" selection-end-column="168" />
+            <state relative-caret-position="4842">
+              <caret line="291" column="1" selection-start-line="291" selection-start-column="1" selection-end-line="291" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -138,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin2/index3.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
+            <state relative-caret-position="23418">
               <caret line="1301" column="16" selection-start-line="1301" selection-start-column="16" selection-end-line="1514" selection-end-column="28" />
             </state>
           </provider>
@@ -147,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/class/MetaGeral.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3344">
-              <caret line="199" column="34" selection-start-line="199" selection-start-column="34" selection-end-line="199" selection-end-column="34" />
+            <state relative-caret-position="-699">
+              <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -156,17 +52,50 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/class/MixChoc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+            <state relative-caret-position="-191">
+              <caret line="87" column="72" selection-start-line="87" selection-start-column="72" selection-end-line="87" selection-end-column="72" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/venda_diaria.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-604">
+              <caret line="127" column="26" lean-forward="true" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://Y:/objetivos/admin/clientes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="759">
+              <caret line="152" column="45" lean-forward="true" selection-start-line="152" selection-start-column="45" selection-end-line="152" selection-end-column="45" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="286" column="222" lean-forward="true" selection-start-line="285" selection-start-column="41" selection-end-line="286" selection-end-column="222" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/class/MixBisc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+            <state relative-caret-position="1082">
+              <caret line="148" selection-start-line="148" selection-end-line="148" />
             </state>
           </provider>
         </entry>
@@ -174,8 +103,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin2/resultcood.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="63" selection-start-line="63" selection-end-line="64" selection-end-column="44" />
+            <state relative-caret-position="360">
+              <caret line="44" column="22" lean-forward="true" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -192,7 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.loader</find>
       <find>card-header white</find>
       <find>onload</find>
       <find>plane-container</find>
@@ -222,6 +150,7 @@
       <find>CUSTOMER SATISFACTION</find>
       <find>Visit By Traffic Type</find>
       <find>$per</find>
+      <find>HIERA</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -230,18 +159,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vendas.php" />
-        <option value="$PROJECT_DIR$/class/Users.php" />
-        <option value="$PROJECT_DIR$/../objetivos/metas.php" />
-        <option value="$PROJECT_DIR$/../objetivos/admin/venda_diaria.php" />
+        <option value="Y:/objetivos/metas.php" />
         <option value="$PROJECT_DIR$/baton.php" />
         <option value="$PROJECT_DIR$/biscoito.php" />
         <option value="$PROJECT_DIR$/geral.php" />
         <option value="$PROJECT_DIR$/vendames.php" />
-        <option value="$PROJECT_DIR$/../qrcode/qrcode.php" />
-        <option value="$PROJECT_DIR$/../qrcode/index.php" />
-        <option value="$PROJECT_DIR$/../qrcode/juntar.php" />
-        <option value="$PROJECT_DIR$/../assinatura/ex1.php" />
+        <option value="Y:/qrcode/qrcode.php" />
+        <option value="Y:/qrcode/index.php" />
+        <option value="Y:/qrcode/juntar.php" />
+        <option value="Y:/assinatura/ex1.php" />
         <option value="$PROJECT_DIR$/Database/conectar.php" />
         <option value="$PROJECT_DIR$/api/login.php" />
         <option value="$PROJECT_DIR$/admin/index.php" />
@@ -252,7 +178,7 @@
         <option value="$PROJECT_DIR$/assets/css/style.css" />
         <option value="$PROJECT_DIR$/header.php" />
         <option value="$PROJECT_DIR$/cadastro2.php" />
-        <option value="$PROJECT_DIR$/../AnalisePDV/painel.php" />
+        <option value="Y:/AnalisePDV/painel.php" />
         <option value="$PROJECT_DIR$/class/CadCli.php" />
         <option value="$PROJECT_DIR$/cadastro.php" />
         <option value="$PROJECT_DIR$/footer.php" />
@@ -281,50 +207,13 @@
         <option value="$PROJECT_DIR$/class/PositGeral.php" />
         <option value="$PROJECT_DIR$/class/Cood.php" />
         <option value="$PROJECT_DIR$/admin2/index.php" />
+        <option value="$PROJECT_DIR$/admin/venda_diaria.php" />
+        <option value="Y:/objetivos/admin/clientes.php" />
+        <option value="Y:/objetivos/admin/venda_diaria.php" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths>
-      <path value="$PROJECT_DIR$/admin/email/open-iconic/package.json" />
-      <path value="$PROJECT_DIR$/admin/flexx/open-iconic/package.json" />
-      <path value="$PROJECT_DIR$/admin2/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/Flot/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/FooTable/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/awesome-bootstrap-checkbox/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/bootstrap-treeview/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/components-font-awesome/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/eonasdan-bootstrap-datetimepicker/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/eve/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/filament-tablesaw/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/ion.rangeSlider/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/jquery-countTo/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/jquery-slimscroll/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/jquery-toast-plugin/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/jquery-ui/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/jquery.easy-pie-chart/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/jszip/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/morris.js/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/owl.carousel/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/peity/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/respond/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/select2/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/simpleWeather/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/sparklines/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/summernote/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/sweetalert/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/switchery/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/transitionize/package.json" />
-      <path value="$PROJECT_DIR$/admin2/vendors/bower_components/typeahead.js/package.json" />
-    </packageJsonPaths>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="235" />
     <option name="width" value="1487" />
     <option name="height" value="1057" />
@@ -340,8 +229,13 @@
         <subPane>
           <expand>
             <path>
-              <item name="garoto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="garoto" type="462c0819:PsiDirectoryNode" />
+              <item name="metas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="metas" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="metas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="metas" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -350,6 +244,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/admin" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
@@ -420,18 +315,19 @@
       <workItem from="1588377452648" duration="4181000" />
       <workItem from="1588460537195" duration="30021000" />
       <workItem from="1588720108248" duration="11420000" />
+      <workItem from="1588883799938" duration="2983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="296628000" />
+    <option name="totallyTimeSpent" value="299611000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.1444563" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.11140725" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -453,34 +349,10 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cadastro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3864">
-          <caret line="184" selection-start-line="184" selection-end-line="212" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/cadcampanha.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="903">
-          <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/venda_diaria.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2310">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/cadmeta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3255">
@@ -600,27 +472,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../AnalisePDV/class/ImportarCSV.php">
+    <entry file="file://Y:/AnalisePDV/class/ImportarCSV.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-252" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../AnalisePDV/class/Users.php">
+    <entry file="file://Y:/AnalisePDV/class/Users.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../AnalisePDV/class/CkGaroto.php">
+    <entry file="file://Y:/AnalisePDV/class/CkGaroto.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../garoto2/usuario.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../garoto2/autenticador.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2562">
-          <caret line="122" column="34" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://Y:/garoto2/usuario.php" />
+    <entry file="file://Y:/garoto2/autenticador.php" />
     <entry file="file://$PROJECT_DIR$/admin/posit_diario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -690,13 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="824">
-          <caret line="392" column="256" selection-start-line="392" selection-start-column="40" selection-end-line="392" selection-end-column="256" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/painel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="824">
@@ -720,89 +577,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin2/index3.html">
+    <entry file="file://$PROJECT_DIR$/admin2/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="1301" column="16" selection-start-line="1301" selection-start-column="16" selection-end-line="1514" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin2/resultcood.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="63" selection-start-line="63" selection-end-line="64" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/class/MixChoc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/class/MixBisc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/class/PositGeral.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="143" lean-forward="true" selection-start-line="143" selection-end-line="143" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/class/PositBisc.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/class/MetaGeral.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3344">
-          <caret line="199" column="34" selection-start-line="199" selection-start-column="34" selection-end-line="199" selection-end-column="34" />
+        <state relative-caret-position="754">
+          <caret line="753" selection-start-line="753" selection-end-line="753" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/class/PositBaton.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="168" column="144" selection-start-line="167" selection-start-column="16" selection-end-line="168" selection-end-column="144" />
+        <state relative-caret-position="2916">
+          <caret line="186" column="1" selection-start-line="186" selection-start-column="1" selection-end-line="186" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class/PositGeral.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2484">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class/PositBisc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2952">
+          <caret line="183" selection-start-line="183" selection-end-line="183" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/class/Cood.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="274" column="168" selection-start-line="274" selection-start-column="16" selection-end-line="274" selection-end-column="168" />
+        <state relative-caret-position="4842">
+          <caret line="291" column="1" selection-start-line="291" selection-start-column="1" selection-end-line="291" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin2/index.php">
+    <entry file="file://$PROJECT_DIR$/admin2/index3.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="703" selection-start-line="703" selection-end-line="703" />
+        <state relative-caret-position="23418">
+          <caret line="1301" column="16" selection-start-line="1301" selection-start-column="16" selection-end-line="1514" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class/MetaGeral.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-699">
+          <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin2/resultcood.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="44" column="22" lean-forward="true" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class/MixChoc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-191">
+          <caret line="87" column="72" selection-start-line="87" selection-start-column="72" selection-end-line="87" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="286" column="222" lean-forward="true" selection-start-line="285" selection-start-column="41" selection-end-line="286" selection-end-column="222" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Y:/objetivos/admin/clientes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="152" column="45" lean-forward="true" selection-start-line="152" selection-start-column="45" selection-end-line="152" selection-end-column="45" />
           <folding>
-            <element signature="e#4410#4433#0#HTML" expanded="true" />
-            <element signature="e#6541#6564#0#HTML" expanded="true" />
-            <element signature="e#8671#8694#0#HTML" expanded="true" />
-            <element signature="e#10795#10818#0#HTML" expanded="true" />
-            <element signature="e#13323#13346#0#HTML" expanded="true" />
-            <element signature="e#15701#15724#0#HTML" expanded="true" />
-            <element signature="e#17912#17935#0#HTML" expanded="true" />
-            <element signature="e#20118#20141#0#HTML" expanded="true" />
-            <element signature="e#27980#28032#0#HTML" expanded="true" />
-            <element signature="e#29132#29150#0#HTML" expanded="true" />
-            <element signature="e#29415#29467#0#HTML" expanded="true" />
-            <element signature="e#29667#29685#0#HTML" expanded="true" />
-            <element signature="e#29941#29993#0#HTML" expanded="true" />
-            <element signature="e#30193#30211#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Y:/objetivos/admin/venda_diaria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/venda_diaria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-604">
+          <caret line="127" column="26" lean-forward="true" selection-start-line="127" selection-start-column="26" selection-end-line="127" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class/MixBisc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1082">
+          <caret line="148" selection-start-line="148" selection-end-line="148" />
         </state>
       </provider>
     </entry>

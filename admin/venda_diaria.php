@@ -133,17 +133,18 @@ $cli= $conn->prepare("SELECT cod_cli, rca FROM `clientes_flexx`");
 $cli->execute();
 $result_cli = $cli->fetchAll();
 
-//
-//foreach ($result_cli as $key => $value){
-//
-//    $upvenda = $conn->prepare("UPDATE clientes set rca = ".$value['rca']." where cod_cli = ".$value['cod_cli']."");
-//    //var_dump($upvenda);
-//    $upvenda->execute();
-//
-//    $upvenda2 = $conn->prepare("UPDATE $mes set vendedor = ".$value['rca']." where ID = ".$value['cod_cli']."");
-//    //var_dump($upvenda);
-//    $upvenda2->execute();
-//}
+
+
+foreach ($result_cli as $key => $value){
+
+    $upvenda = $conn->prepare("UPDATE clientes set rca = ".$value['rca']." where cod_cli = ".$value['cod_cli']."");
+    //var_dump($upvenda);
+    $upvenda->execute();
+
+    $upvenda2 = $conn->prepare("UPDATE $mes set vendedor = ".$value['rca']." where ID = ".$value['cod_cli']."");
+    //var_dump($upvenda);
+    $upvenda2->execute();
+}
 
 
 
