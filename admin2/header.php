@@ -12,6 +12,7 @@ include_once '../database/conectar.php';
 $id = $_SESSION['user_session'];
 
 $usuario =  $_SESSION['name_session'];
+
 $rca =  $_SESSION['rca_session'];
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -91,7 +92,7 @@ $bat = $kpis[0]->baton;
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Painel Aministrador de Acompanhamentos</title>
+    <title>Painel Administrador de Acompanhamentos</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -115,7 +116,9 @@ $bat = $kpis[0]->baton;
     <link href="dist/css/style.css" rel="stylesheet" type="text/css">
 
 
-    <script>   // aqui eh a base da pagina
+    <script>
+
+               // aqui eh a base da pagina
         window.onload = function(){
             document.getElementById('mes').onchange = function(){
                 window.location = '?mes=' + this.value;

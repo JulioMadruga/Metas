@@ -27,11 +27,13 @@ class Users extends  DB
 
     }
 
-    public  function Vend_all()
+    public  function UserMixCood($cood)
     {
 
 
-        $sql = "SELECT DISTINCT cod_vend, vendedor FROM `ck_disnorte`";
+        $sql = "SELECT DISTINCT super FROM usuarios where super = '$cood' ORDER by regiao, super";
+        var_dump($sql);
+
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -41,6 +43,45 @@ class Users extends  DB
 
 
     }
+
+    public  function all_Vendedores()
+    {
+
+
+        $sql = "SELECT rca,nome FROM usuarios where super <> '' ORDER by nome";
+        var_dump($sql);
+
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+    }
+
+    public  function VendedoresCood($cood)
+    {
+
+
+        $sql = "SELECT rca,nome FROM usuarios where super = '$cood' order by nome";
+        var_dump($sql);
+
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+    }
+
+
+
+
+
 
 
 

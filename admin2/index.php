@@ -816,9 +816,6 @@ switch ($meta) {
 
 
 
-
-
-
                                         </tr>
                                         <?php endforeach; ?>
 
