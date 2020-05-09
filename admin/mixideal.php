@@ -113,7 +113,7 @@ switch ($meta) {
                                             <tr>
                                                 <td><?= $value->rca ?></td>
                                                 <td><?= $value->nome?></td>
-                                                <td class='text-center'><a id='pdf' href='../admin/pdf/mixideal.php?rca=<?= $value->rca ?>'><img width='50px' src='../images/pdf.svg'></a></td>
+                                                <td class='text-center'><a id='pdf' href='../admin3/pdf/mixideal.php?rca=<?= $value->rca ?>'><img width='50px' src='../images/pdf.svg'></a></td>
 
 
                                             </tr>
