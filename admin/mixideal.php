@@ -77,6 +77,7 @@ if(empty($result_sup)){
 //var_dump($dados_user);
     $vendedores ->execute();
     $result_Vend = $vendedores ->fetchAll();
+
 }else{
 
 

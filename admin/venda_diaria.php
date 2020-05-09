@@ -129,22 +129,23 @@ for($i=0;$i<=6;$i++) {
  $dias_decorrido =  date("d");
 
 
-$cli= $conn->prepare("SELECT cod_cli, rca FROM `clientes_flexx`");
+$cli= $conn->prepare("SELECT a.cod_cli, a.rca, b.nome FROM `clientes_flexx` a , usuarios b where a.rca = b.rca");
 $cli->execute();
 $result_cli = $cli->fetchAll();
 
-//
+
+
 //foreach ($result_cli as $key => $value){
+//    $nome = $value['nome'];
 //
-//    $upvenda = $conn->prepare("UPDATE clientes set rca = ".$value['rca']." where cod_cli = ".$value['cod_cli']."");
-//    //var_dump($upvenda);
+//    $upvenda = $conn->prepare("UPDATE clientes set rca = ".$value['rca'].", vendedor ='$nome' where cod_cli = ".$value['cod_cli']."");
+// var_dump($upvenda);
 //    $upvenda->execute();
 //
 //    $upvenda2 = $conn->prepare("UPDATE $mes set vendedor = ".$value['rca']." where ID = ".$value['cod_cli']."");
 //    //var_dump($upvenda);
 //    $upvenda2->execute();
 //}
-
 
 
 $zeratabela = $conn->prepare("Truncate table venda_diaria");

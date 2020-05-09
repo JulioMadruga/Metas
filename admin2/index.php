@@ -176,7 +176,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
 
                                 <?php
 
@@ -185,10 +185,12 @@ switch ($meta) {
                                 ?>
 
                                 <span class="counter-anim"><?= $percentGeral ?></span><span>%</span>
+
+
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentGeral ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentGeral ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -203,7 +205,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -231,7 +233,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
 
                                 <?php
 
@@ -243,7 +245,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBaton ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBaton ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -258,7 +260,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -409,7 +411,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
 
@@ -430,7 +432,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentMixBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentMixBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -445,7 +447,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -473,7 +475,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
 
@@ -485,7 +487,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentChoc ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentChoc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -500,7 +502,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -528,7 +530,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
 
@@ -540,7 +542,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -555,7 +557,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -583,7 +585,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
 
@@ -595,7 +597,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentTotal ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentTotal ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -610,7 +612,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -691,9 +693,9 @@ switch ($meta) {
 
                                            $calcPosit = Round($calcPosit);
 
-                                           if($calcPosit< 33){
+                                           if($calcPosit<= 33){
                                                $color = "danger";
-                                           }elseif ($calcPosit >33 && $calcPosit< 66){
+                                           }elseif ($calcPosit >33 && $calcPosit<50){
                                                $color = "warning";
                                            }else{
                                                $color = "success";
@@ -739,9 +741,9 @@ switch ($meta) {
 
                                             $calcMix= Round($calcMix);
 
-                                            if($calcMix< 33){
+                                            if($calcMix<= 33){
                                                 $color = "danger";
-                                            }elseif ($calcMix >33 && $calcMix< 66){
+                                            }elseif ($calcMix >33 && $calcMix< 50){
                                                 $color = "warning";
                                             }else{
                                                 $color = "success";
@@ -792,9 +794,9 @@ switch ($meta) {
 
                                             $calcTot= Round($calcTot);
 
-                                            if($calcTot< 33){
+                                            if($calcTot<= 33){
                                                 $color = "danger";
-                                            }elseif ($calcTot >33 && $calcTot< 66){
+                                            }elseif ($calcTot >33 && $calcTot< 50){
                                                 $color = "warning";
                                             }else{
                                                 $color = "success";
@@ -811,9 +813,6 @@ switch ($meta) {
                                                     <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcTot ?>%"></div>
                                                 </div>
                                             </td>
-
-
-
 
 
 
