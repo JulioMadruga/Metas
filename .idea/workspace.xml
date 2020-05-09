@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="aedecb4e-9074-41aa-9002-5deece1c9e52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin2/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin2/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin2/resultcood.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin2/resultcood.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/MetaGeral.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/MetaGeral.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/MixBisc.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/MixBisc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/MixChoc.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/MixChoc.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +17,7 @@
     <session id="-470537753">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.20" value="2" />
@@ -39,14 +34,14 @@
         <counts>
           <entry key="css" value="315" />
           <entry key="html" value="49" />
-          <entry key="php" value="10859" />
+          <entry key="php" value="10860" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="315" />
           <entry key="HTML" value="53" />
-          <entry key="PHP" value="10795" />
+          <entry key="PHP" value="10796" />
           <entry key="SQL" value="60" />
         </counts>
       </usages-collector>
@@ -72,11 +67,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin2/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="773" column="79" lean-forward="true" selection-start-line="773" selection-start-column="79" selection-end-line="773" selection-end-column="79" />
+            <state relative-caret-position="321">
+              <caret line="784" column="105" lean-forward="true" selection-start-line="784" selection-start-column="105" selection-end-line="784" selection-end-column="105" />
               <folding>
                 <element signature="e#32098#32131#0#HTML" expanded="true" />
                 <element signature="e#34817#34848#0#HTML" expanded="true" />
@@ -121,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/class/MetaGeral.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="216" column="73" selection-start-line="214" selection-start-column="12" selection-end-line="216" selection-end-column="73" />
+            <state relative-caret-position="321">
+              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
             </state>
           </provider>
         </entry>
@@ -174,7 +169,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>loader</find>
       <find>Basic Examples</find>
       <find>btnexcluido</find>
       <find>onkeyup=&quot;formatarMoeda();&quot;</find>
@@ -204,6 +198,7 @@
       <find>class=&quot;label label-success&quot;</find>
       <find>metager</find>
       <find>RVendaChoc</find>
+      <find>sum</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -260,8 +255,8 @@
         <option value="$PROJECT_DIR$/class/Cood.php" />
         <option value="$PROJECT_DIR$/class/MixBisc.php" />
         <option value="$PROJECT_DIR$/class/MixChoc.php" />
-        <option value="$PROJECT_DIR$/class/MetaGeral.php" />
         <option value="$PROJECT_DIR$/admin2/resultcood.php" />
+        <option value="$PROJECT_DIR$/class/MetaGeral.php" />
         <option value="$PROJECT_DIR$/admin2/index.php" />
       </list>
     </option>
@@ -407,20 +402,19 @@
       <workItem from="1588377452648" duration="4181000" />
       <workItem from="1588460537195" duration="30021000" />
       <workItem from="1588720108248" duration="12120000" />
-      <workItem from="1588898688109" duration="9715000" />
+      <workItem from="1588898688109" duration="10155000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="307043000" />
+    <option name="totallyTimeSpent" value="307483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.14605543" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.14605543" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -431,7 +425,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17755991" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17755991" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3279743" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -770,21 +764,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/class/MetaGeral.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin2/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="773" column="79" lean-forward="true" selection-start-line="773" selection-start-column="79" selection-end-line="773" selection-end-column="79" />
+        <state relative-caret-position="321">
+          <caret line="784" column="105" lean-forward="true" selection-start-line="784" selection-start-column="105" selection-end-line="784" selection-end-column="105" />
           <folding>
             <element signature="e#32098#32131#0#HTML" expanded="true" />
             <element signature="e#34817#34848#0#HTML" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/class/MetaGeral.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="216" column="73" selection-start-line="214" selection-start-column="12" selection-end-line="216" selection-end-column="73" />
         </state>
       </provider>
     </entry>
