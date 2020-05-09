@@ -199,6 +199,23 @@ class Cood extends  DB
     }
 
 
+    public  function index($user)
+    {
+
+
+        $sql = "SELECT DISTINCT super FROM usuarios where super = '$user'";
+        var_dump($sql);
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+
+
+        return $stm->fetchAll();
+
+
+    }
+
+
 
 
     public  function Cood_all()

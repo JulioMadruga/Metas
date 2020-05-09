@@ -263,7 +263,37 @@ class MetaGeral extends  DB
 
     }
 
+    public function ResultGeralNorte(){
 
+        $sql = "SELECT Sum(a.tab) as Mgeral, Sum(a.Rgeral) as Rgeral, Sum(a.meta_baton) as Mbaton, Sum(a.Rbaton) as Rbaton, Sum(a.trimarca) as Mbisc, Sum(a.Rbisc) as Rbisc, Sum(a.MetaMixChoc) as MetaMixChoc , Sum(a.RmixChoc) as RmixChoc , 
+                Sum(a.MetaMixBisc) as MetaMixBisc, Sum(a.RMixBisc) as RMixBisc , round(Sum(a.valor_choc),2) as valor_choc, round(Sum(a.RVendaChoc),2) as RVendaChoc, round(Sum(a.valor_bisc),2) as valor_bisc, round(Sum(a.RVendaBisc),2) as RVendaBisc, 
+                round(Sum(a.valor),2) as Valor, round(Sum(a.RVendaTotal),2) as RVendaTotal FROM `$this->meta`a, `usuarios` b 
+                WHERE a.rca = b.Rca and b.regiao = 'Norte'  ORDER by b.nome";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+
+    }
+
+    public function ResultGeralSul(){
+
+        $sql = "SELECT Sum(a.tab) as Mgeral, Sum(a.Rgeral) as Rgeral, Sum(a.meta_baton) as Mbaton, Sum(a.Rbaton) as Rbaton, Sum(a.trimarca) as Mbisc, Sum(a.Rbisc) as Rbisc, Sum(a.MetaMixChoc) as MetaMixChoc , Sum(a.RmixChoc) as RmixChoc , 
+                Sum(a.MetaMixBisc) as MetaMixBisc, Sum(a.RMixBisc) as RMixBisc , round(Sum(a.valor_choc),2) as valor_choc, round(Sum(a.RVendaChoc),2) as RVendaChoc, round(Sum(a.valor_bisc),2) as valor_bisc, round(Sum(a.RVendaBisc),2) as RVendaBisc, 
+                round(Sum(a.valor),2) as Valor, round(Sum(a.RVendaTotal),2) as RVendaTotal FROM `$this->meta`a, `usuarios` b 
+                WHERE a.rca = b.Rca and b.regiao = 'Sul'  ORDER by b.nome";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+
+    }
 
 
 

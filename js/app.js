@@ -44,7 +44,7 @@ var app = new Vue({
 
                               if(app.users[0].tipo === "admin"){
 
-                                  window.location.href = './admin/load.php';
+                                  window.location.href = './admin/index.php';
 
                               }else {
 

@@ -1,548 +1,912 @@
-﻿<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php require_once 'header.php'; ?>
+
 <?php
-session_start();
 
-if(!isset($_SESSION['user_session']))
-{
-    header("Location: index.html");
+$Geral =  new MetaGeral();
+$Geral->setMeta($meta);
+$result = $Geral->ResultGeral();
+
+$result2 = $Geral->ResultGeralNorte();
+
+$result3 = $Geral->ResultGeralSul();
+
+
+
+$check0 = $check1 = $check2 = $check3 = $check4 = $check5 = $check6 = $check7 = $check8 = $check9 = $check10 = $check11 ="";
+switch ($meta) {
+    case "meta1": {
+        $check0 = "selected";
+        break;
+    }
+    case "meta2": {
+        $check1 = "selected";
+        break;
+    }
+    case "meta3": {
+        $check2 = "selected";
+        break;
+    }
+    case "meta4": {
+        $check3 = "selected";
+        break;
+    }
+    case "meta5": {
+        $check4 = "selected";
+        break;
+    }
+    case "meta6": {
+        $check5 = "selected";
+        break;
+    }
+    case "meta7": {
+        $check6 = "selected";
+        break;
+    }
+    case "meta8": {
+        $check7 = "selected";
+        break;
+    }
+    case "meta9": {
+        $check8= "selected";
+        break;
+    }
+    case "meta10": {
+        $check9 = "selected";
+        break;
+    }
+    case "meta11": {
+        $check10 = "selected";
+        break;
+    }
+    case "meta12": {
+        $check11 = "selected";
+        break;
+    }
 }
-
-include_once '../Database/Conexao.php';
-
-$id2 = $_SESSION['user_session'];
-
-$dados_user = $conn->prepare("SELECT * FROM usuarios where id = $id2");
-//var_dump($dados_user);
-$dados_user->execute();
-$result = $dados_user->fetchAll();
-
-$id_user = $result[0]['id'];
-$usuario = $result[0]['nome'];
-
-date_default_timezone_set('America/Cuiaba'); 
-
- $id = $usuario;
-$date = date('Ymd' );
- 
-
-
-  
- 
- $data = date('D');
-    $mes = date('M');
-    $dia = date('d');
-    $ano = date('Y');
-    
-    $mes_meta = array(
-        'Jan' => 'meta1',
-        'Feb' => 'meta2',
-        'Mar' => 'meta3',
-        'Apr' => 'meta4',
-        'May' => 'meta5',
-        'Jun' => 'meta6',
-        'Jul' => 'meta7',
-        'Aug' => 'meta8',
-        'Nov' => 'meta11',
-        'Sep' => 'meta9',
-        'Oct' => 'meta10',
-        'Dec' => 'meta12'
-    );
-    
-     $mes_extenso = array(
-        'Jan' => 'Janeiro',
-        'Feb' => 'Fevereiro',
-        'Mar' => 'Marco',
-        'Apr' => 'Abril',
-        'May' => 'Maio',
-        'Jun' => 'Junho',
-        'Jul' => 'Julho',
-        'Aug' => 'Agosto',
-        'Nov' => 'Novembro',
-        'Sep' => 'Setembro',
-        'Oct' => 'Outubro',
-        'Dec' => 'Dezembro'
-    );
- 
- $meta = $mes_meta["$mes"];
- 
- $mes = $mes_extenso["$mes"];
-// var_dump($mes);
- 
- if (isset($_GET['mes'])){
-    $meta = $_GET['mes'];
-    
-    $mes_select = array(
-        'meta1' => 'Janeiro',
-        'meta2' => 'Fevereiro',
-        'meta3' => 'Marco',
-        'meta4' => 'Abril',
-        'meta5' => 'Maio',
-        'meta6' => 'Junho',
-        'meta7' => 'Julho',
-        'meta8' => 'Agosto',
-        'meta11' => 'Novembro',
-        'meta9' => 'Setembro',
-        'meta10' => 'Outubro',
-        'meta12' => 'Dezembro'
-    );
-    
-    $mes = $mes_select["$meta"];
-}
- 
-
-
-$cont_tri = $conn->prepare("select * from trimarca");
-$cont_tri->execute();
-$result_cont = $cont_tri->fetchAll();
-
-$bat = $result_cont[0][3];
-
-if(isset($_GET['regiao'])) {
-
-    $regiao = $_GET['regiao'];
-
-    $consulta_baton = $conn->prepare("SELECT rca, meta_baton, COUNT(NOME_parceiro) as realizado, if(meta_baton - COUNT(NOME_parceiro)<0,0,meta_baton - COUNT(NOME_parceiro)) as dif FROM (SELECT b.rca, a.NOME_PARCEIRO, b.vendedor as vend, b.meta_baton FROM $mes a, $meta b, usuarios c where a.MATERIAL IN ($bat) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.rca = c.rca and c.regiao = '$regiao' group by a.id)SUB GROUP BY rca");
-    $consulta_baton->execute();
-    $result_baton = $consulta_baton->fetchAll();
-
-
-    $consulta_baton2 = $conn->prepare(" select a.rca, a.tab, a.rca from $meta a, usuarios b where a.rca = b.rca and b.regiao = '$regiao' order by rca");
-    $consulta_baton2->execute(array('id' => $id));
-    $result_baton2 = $consulta_baton2->fetchAll();
-
-// var_dump($result_baton2);
-
-    $consulta_TOTAL = $conn->prepare("Select sum(meta_baton), sum(realizado), IF(sum(meta_baton) - sum(realizado)<0,0,sum(meta_baton) - sum(realizado)) AS DIF from ( SELECT VENDEDOR, meta_baton, 
-COUNT(NOME_parceiro) as realizado, if(meta_baton - COUNT(NOME_parceiro)<0,0,meta_baton - COUNT(NOME_parceiro)) as dif 
-FROM (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.vendedor as vend, b.meta_baton FROM $mes a, $meta b, usuarios c 
-where a.MATERIAL IN ($bat) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.rca = c.rca and c.regiao = '$regiao' group by a.id)SUB GROUP BY VENDEDOR)sub");
-    $consulta_TOTAL->execute(array('id' => $id));
-    $result_TOTAL = $consulta_TOTAL->fetchAll();
-
-
-}
-if(!isset($_GET['regiao'] )|| $regiao == 'Todos'){
-
-
-    $consulta_baton = $conn->prepare("SELECT rca, tab, COUNT(NOME_parceiro) as realizado, if(tab - COUNT(NOME_parceiro)<0,0,tab - COUNT(NOME_parceiro)) as dif FROM (SELECT b.rca, a.NOME_PARCEIRO, b.vendedor as vend, b.tab FROM $mes a, $meta b where  a.vendedor = b.rca group by a.id)SUB GROUP BY rca");
-    $consulta_baton->execute();
-    $result_baton = $consulta_baton->fetchAll();
-
-
-    $consulta_baton2 = $conn->prepare(" select rca, tab, rca from $meta order by vendedor");
-    $consulta_baton2->execute(array('id' => $id));
-    $result_baton2 = $consulta_baton2->fetchAll();
-
-// var_dump($result_baton2);
-
-    $consulta_TOTAL = $conn->prepare("Select sum(tab), sum(realizado), IF(sum(tab) - sum(realizado)<0,0,sum(tab) - sum(realizado)) AS DIF from ( SELECT rca, tab, COUNT(NOME_parceiro) as realizado, if(tab - COUNT(NOME_parceiro)<0,0,tab - COUNT(NOME_parceiro)) as dif FROM (SELECT b.rca, a.NOME_PARCEIRO, b.vendedor as vend, b.tab FROM $mes a, $meta b where  a.vendedor = b.rca group by a.id)SUB GROUP BY rca)sub");
-    $consulta_TOTAL->execute(array('id' => $id));
-    $result_TOTAL = $consulta_TOTAL->fetchAll();
-
-}
-
-$mes_sel = array(
-    '1' => 'Janeiro',
-    '2' => 'Fevereiro',
-    '3' => 'Marco',
-    '4' => 'Abril',
-    '5' => 'Maio',
-    '6' => 'Junho',
-    '7' => 'Julho',
-    '8' => 'Agosto',
-    '11' => 'Novembro',
-    '9' => 'Setembro',
-    '10' => 'Outubro',
-    '12' => 'Dezembro'
-);
-
-
-
 ?>
 
+<!-- Main Content -->
+<div class="page-wrapper">
+    <div class="container-fluid">
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Painel Administrador</title>
-        <style type="text/css">
-        .link a { color: #000000;}
-        .link a:hover {text-decoration: none; font-weight: bold;
-        }
-        .link:hover{ background: #9ef15c;}
+        <form>
+            <div class="row">
 
-        </style>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label mb-10">Selecionar Mês:</label>
+                        <select id="mes" style="border-radius: 8px" class="form-control" data-placeholder="Choose a Category" tabindex="1">
+                            <option <?=$check0?>>Janeiro</option>
+                            <option <?=$check1?>>Fevereiro</option>
+                            <option <?=$check2?>>Março</option>
+                            <option <?=$check3?>>Abril</option>
+                            <option <?=$check4?>>Maio</option>
+                            <option <?=$check5?>>Junho</option>
+                            <option <?=$check6?>>Julho</option>
+                            <option <?=$check7?>>Agosto</option>
+                            <option <?=$check8?>>Setembro</option>
+                            <option <?=$check9?>>Outubro</option>
+                            <option <?=$check10?>>Novembro</option>
+                            <option <?=$check11?>>Dezembro</option>
+                        </select>
+                    </div>
+                </div>
 
-         <link rel="stylesheet" href="../css/bootstrap.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="../css/print.css" media="print" />
-                <link rel="stylesheet" href="../css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.css.map">
-    <link rel="stylesheet" href="../css/bootstrap.css.map">
-    <link rel="stylesheet" href="../css/menu.css">
-
-    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.png" />
-    <script src="../js/bootstrap.js"></script>
-    <script src="../js/calc_total.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     
-     <script>   // aqui eh a base da pagina
-         window.onload = function(){
-             document.getElementById('regiao').onchange = function(){
-                 window.location = '?regiao=' + this.value + '&mes=' + document.getElementById('mes').value;
-
-             }
-             document.getElementById('mes').onchange = function(){
-                 window.location = '?mes=' + this.value;
+            </div>
+        </form>
 
 
-             }
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h4 class="panel-title txt-dark">RESULTADO GERAL</h4>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
 
-         }
 
 
-$(document).ready( function(){
-    
-$("#painel").hide(); 
-$("#painel").slideDown(1500);  
+                                    <table class="table display product-overview border-none" id="support_table">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="7" style="background:#556b49e3;text-align: center ">Positivações</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="4" style="background:#4c6d6a;text-align: center ">Mix Ideal</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="7" style="background:#324450;text-align: center ">Valor</th>
+                                        </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Meta Geral</th>
+                                            <th>Real Geral</th>
+                                            <th>Meta Baton</th>
+                                            <th>Real Baton</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th>Meta Total</th>
+                                            <th>Real Total</th>
+                                            <th>Devoluções</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 14px">
 
-$("tr:even").css("background","#6292bb");
-$("tr:last").css("background","#0f3f6f");
+                                        <?php foreach ($result as $value): ?>
+                                        <tr>
+                                            <td>TOTAL</td>
+                                            <td><?= $value->Mgeral?></td>
+
+                                            <?php $dif = $value->Mgeral - $value->Rgeral ; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                </td>
+                                            <?php endif;?>
 
 
-});
+                                            <td><?= $value->Mbaton ?></td>
 
-jQuery(document).ready(function (e) {
-    function t(t) {
-        e(t).bind("click", function (t) {
-            t.preventDefault();
-            e(this).parent().fadeOut()
-        })
-    }
-    e(".dropdown-toggle").click(function () {
-        var t = e(this).parents(".button-dropdown").children(".dropdown-menu").is(":hidden");
-        e(".button-dropdown .dropdown-menu").hide();
-        e(".button-dropdown .dropdown-toggle").removeClass("active");
-        if (t) {
-            e(this).parents(".button-dropdown").children(".dropdown-menu").toggle().parents(".button-dropdown").children(".dropdown-toggle").addClass("active")
-        }
-    });
-    e(document).bind("click", function (t) {
-        var n = e(t.target);
-        if (!n.parents().hasClass("button-dropdown")) e(".button-dropdown .dropdown-menu").hide();
-    });
-    e(document).bind("click", function (t) {
-        var n = e(t.target);
-        if (!n.parents().hasClass("button-dropdown")) e(".button-dropdown .dropdown-toggle").removeClass("active");
-    })
-});
 
-</script>
-     
-     
-    </head>
-    <body>
-    <div id="nav" class="col-lg-12"  style="background: #121415;">
-        <ul class="nav">
-            <li role="presentation"><a href="index.php">Resumo de vendas</a></li>
+                                            <?php $dif = $value->Mbaton - $value->Rbaton; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                </td>
+                                            <?php endif;?>
 
-        </ul>
+                                            <td><?= $value->Mbisc ?></td>
+
+                                            <?php $dif = $value->Mbisc - $value->Rbisc; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+
+
+
+                                            <td style="width: 3px; border: none !important;" ></td>
+
+
+                                            <?php
+
+
+                                            $MetaMixchoc2 = new MixChoc();
+                                            $MetaMixchoc2->setTabMeta($meta);
+                                            $percent = $MetaMixchoc2->MPercentGeral()->media;
+                                            $MetaMixC = Round($value->MetaMixChoc * $percent);
+
+                                            ?>
+
+
+                                            <td><?= $MetaMixC  ?></td>
+
+                                            <?php
+                                            $RmixChoc= strlen($value->RmixChoc ) == 0 ? 0 : $value->RmixChoc ;
+                                            $dif = $MetaMixC - $RmixChoc;
+
+                                            if($dif<=0):
+                                            ?>
+
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+                                            <?php
+
+                                            $MetaMixbisc2 = new MixBisc();
+                                            $MetaMixbisc2->setTabMeta($meta);
+                                            $percent = $MetaMixbisc2 ->MPercentGeral()->media;
+                                            $MetaMixB = Round($value->MetaMixBisc * $percent);
+
+                                            ?>
+
+
+
+                                            <td><?= $MetaMixB ?></td>
+
+                                            <?php
+                                            $RMixBisc = strlen($value->RMixBisc) == 0 ? 0 : $value->RMixBisc;
+                                            $dif = $MetaMixB - $RMixBisc;
+
+                                               if( $dif<=0):
+
+                                                ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+
+
+
+                                            <td style="width: 3px; border: none !important;" ></td>
+
+                                            <td>R$ <?= number_format($value->valor_choc , 2, ',', '.') ?></td>
+
+                                            <?php
+                                           //var_dump(strlen($value->RVendaChoc));
+                                                 $RvendaChoc = strlen($value->RVendaChoc) == 0 ? 0 : $value->RVendaChoc;
+                                                 $dif = $value->valor_choc - $RvendaChoc;
+
+                                                  if( $dif<=0):
+
+                                            ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td>R$ <?= number_format($value->valor_bisc , 2, ',', '.') ?></td>
+
+                                            <?php $RVendaBisc = strlen($value->RVendaBisc) == 0 ? 0 : $value->RVendaBisc;
+                                            $dif = $value->valor_bisc- $RVendaBisc; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td>R$ <?= number_format($value->Valor , 2, ',', '.') ?></td>
+
+                                            <?php  $RVendaTotal = strlen($value->RVendaTotal) == 0 ? 0 : $value->RVendaTotal;
+                                            $dif = $value->Valor - $RVendaTotal ; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
+                                                </td>
+                                            <?php endif;?>
+
+
+
+
+                                            <?php
+                                            $dev = new  Devolucoes();
+                                            $dev = $dev->totalGeral($mes);
+                                           // var_dump($dev);
+                                            ?>
+
+                                            <?php if(!empty($dev)): ?>
+
+                                                <td>
+                                                    <span class="label label-warning" style="color: black; font-size: 14px">
+                                                        R$ <?= number_format($dev->Total, 2, ',', '.') ?>
+                                                    </span>
+                                                </td>
+
+                                            <?php else: ?>
+
+                                                <td> <span class="label label-default"></span></td>
+
+                                            <?php endif; ?>
+
+
+
+
+                                        </tr>
+                                        <?php endforeach; ?>
+
+                                        </tbody>
+
+
+
+
+
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row
+
+
+
+
+
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h4 class="panel-title txt-dark">RESULTADO NORTE</h4>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
+
+
+
+                                    <table class="table display product-overview border-none" id="support_table">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="7" style="background:#556b49e3;text-align: center ">Positivações</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="4" style="background:#4c6d6a;text-align: center ">Mix Ideal</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="7" style="background:#324450;text-align: center ">Valor</th>
+                                        </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Meta Geral</th>
+                                            <th>Real Geral</th>
+                                            <th>Meta Baton</th>
+                                            <th>Real Baton</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th>Meta Total</th>
+                                            <th>Real Total</th>
+                                            <th>Devoluções</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 14px">
+
+                                        <?php foreach ($result2 as $value): ?>
+                                            <tr>
+                                                <td>TOTAL</td>
+                                                <td><?= $value->Mgeral?></td>
+
+                                                <?php $dif = $value->Mgeral - $value->Rgeral ; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+                                                <td><?= $value->Mbaton ?></td>
+
+
+                                                <?php $dif = $value->Mbaton - $value->Rbaton; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+                                                <td><?= $value->Mbisc ?></td>
+
+                                                <?php $dif = $value->Mbisc - $value->Rbisc; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                    </td>
+
+
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+
+
+
+                                                <td style="width: 3px; border: none !important;" ></td>
+
+
+                                                <?php
+
+
+                                                $MetaMixchoc2 = new MixChoc();
+                                                $MetaMixchoc2->setTabMeta($meta);
+                                                $percent = $MetaMixchoc2->MPercentGeral()->media;
+                                                $MetaMixC = Round($value->MetaMixChoc * $percent);
+
+                                                ?>
+
+
+                                                <td><?= $MetaMixC  ?></td>
+
+                                                <?php
+                                                $RmixChoc= strlen($value->RmixChoc ) == 0 ? 0 : $value->RmixChoc ;
+                                                $dif = $MetaMixC - $RmixChoc;
+
+                                                if($dif<=0):
+                                                    ?>
+
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
+                                                    </td>
+
+
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+                                                <?php
+
+                                                $MetaMixbisc2 = new MixBisc();
+                                                $MetaMixbisc2->setTabMeta($meta);
+                                                $percent = $MetaMixbisc2 ->MPercentGeral()->media;
+                                                $MetaMixB = Round($value->MetaMixBisc * $percent);
+
+                                                ?>
+
+
+
+                                                <td><?= $MetaMixB ?></td>
+
+                                                <?php
+                                                $RMixBisc = strlen($value->RMixBisc) == 0 ? 0 : $value->RMixBisc;
+                                                $dif = $MetaMixB - $RMixBisc;
+
+                                                if( $dif<=0):
+
+                                                    ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
+                                                    </td>
+
+
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+
+
+
+                                                <td style="width: 3px; border: none !important;" ></td>
+
+                                                <td>R$ <?= number_format($value->valor_choc , 2, ',', '.') ?></td>
+
+                                                <?php
+                                                //var_dump(strlen($value->RVendaChoc));
+                                                $RvendaChoc = strlen($value->RVendaChoc) == 0 ? 0 : $value->RVendaChoc;
+                                                $dif = $value->valor_choc - $RvendaChoc;
+
+                                                if( $dif<=0):
+
+                                                    ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+                                                <td>R$ <?= number_format($value->valor_bisc , 2, ',', '.') ?></td>
+
+                                                <?php $RVendaBisc = strlen($value->RVendaBisc) == 0 ? 0 : $value->RVendaBisc;
+                                                $dif = $value->valor_bisc- $RVendaBisc; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+                                                <td>R$ <?= number_format($value->Valor , 2, ',', '.') ?></td>
+
+                                                <?php  $RVendaTotal = strlen($value->RVendaTotal) == 0 ? 0 : $value->RVendaTotal;
+                                                $dif = $value->Valor - $RVendaTotal ; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+
+
+                                                <?php
+                                                $dev = new  Devolucoes();
+                                                $dev = $dev->totalGeralNorte($mes);
+                                                // var_dump($dev);
+                                                ?>
+
+                                                <?php if(!empty($dev)): ?>
+
+                                                    <td>
+                                                    <span class="label label-warning" style="color: black; font-size: 14px">
+                                                        R$ <?= number_format($dev->Total, 2, ',', '.') ?>
+                                                    </span>
+                                                    </td>
+
+                                                <?php else: ?>
+
+                                                    <td> <span class="label label-default"></span></td>
+
+                                                <?php endif; ?>
+
+
+
+
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                        </tbody>
+
+
+
+
+
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+
+
+
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h4 class="panel-title txt-dark">RESULTADO SUL</h4>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
+
+
+
+                                    <table class="table display product-overview border-none" id="support_table">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="7" style="background:#556b49e3;text-align: center ">Positivações</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="4" style="background:#4c6d6a;text-align: center ">Mix Ideal</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="7" style="background:#324450;text-align: center ">Valor</th>
+                                        </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Meta Geral</th>
+                                            <th>Real Geral</th>
+                                            <th>Meta Baton</th>
+                                            <th>Real Baton</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th>Meta Total</th>
+                                            <th>Real Total</th>
+                                            <th>Devoluções</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody style="font-size: 14px">
+
+                                        <?php foreach ($result3 as $value): ?>
+                                            <tr>
+                                                <td>TOTAL</td>
+                                                <td><?= $value->Mgeral?></td>
+
+                                                <?php $dif = $value->Mgeral - $value->Rgeral ; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rgeral  ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+                                                <td><?= $value->Mbaton ?></td>
+
+
+                                                <?php $dif = $value->Mbaton - $value->Rbaton; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbaton ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+                                                <td><?= $value->Mbisc ?></td>
+
+                                                <?php $dif = $value->Mbisc - $value->Rbisc; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                    </td>
+
+
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->Rbisc ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+
+
+
+                                                <td style="width: 3px; border: none !important;" ></td>
+
+
+                                                <?php
+
+
+                                                $MetaMixchoc2 = new MixChoc();
+                                                $MetaMixchoc2->setTabMeta($meta);
+                                                $percent = $MetaMixchoc2->MPercentGeral()->media;
+                                                $MetaMixC = Round($value->MetaMixChoc * $percent);
+
+                                                ?>
+
+
+                                                <td><?= $MetaMixC  ?></td>
+
+                                                <?php
+                                                $RmixChoc= strlen($value->RmixChoc ) == 0 ? 0 : $value->RmixChoc ;
+                                                $dif = $MetaMixC - $RmixChoc;
+
+                                                if($dif<=0):
+                                                    ?>
+
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
+                                                    </td>
+
+
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $RmixChoc  ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+                                                <?php
+
+                                                $MetaMixbisc2 = new MixBisc();
+                                                $MetaMixbisc2->setTabMeta($meta);
+                                                $percent = $MetaMixbisc2 ->MPercentGeral()->media;
+                                                $MetaMixB = Round($value->MetaMixBisc * $percent);
+
+                                                ?>
+
+
+
+                                                <td><?= $MetaMixB ?></td>
+
+                                                <?php
+                                                $RMixBisc = strlen($value->RMixBisc) == 0 ? 0 : $value->RMixBisc;
+                                                $dif = $MetaMixB - $RMixBisc;
+
+                                                if( $dif<=0):
+
+                                                    ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
+                                                    </td>
+
+
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px"><?= $RMixBisc  ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+
+
+
+                                                <td style="width: 3px; border: none !important;" ></td>
+
+                                                <td>R$ <?= number_format($value->valor_choc , 2, ',', '.') ?></td>
+
+                                                <?php
+                                                //var_dump(strlen($value->RVendaChoc));
+                                                $RvendaChoc = strlen($value->RVendaChoc) == 0 ? 0 : $value->RVendaChoc;
+                                                $dif = $value->valor_choc - $RvendaChoc;
+
+                                                if( $dif<=0):
+
+                                                    ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RvendaChoc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+                                                <td>R$ <?= number_format($value->valor_bisc , 2, ',', '.') ?></td>
+
+                                                <?php $RVendaBisc = strlen($value->RVendaBisc) == 0 ? 0 : $value->RVendaBisc;
+                                                $dif = $value->valor_bisc- $RVendaBisc; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaBisc , 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+                                                <td>R$ <?= number_format($value->Valor , 2, ',', '.') ?></td>
+
+                                                <?php  $RVendaTotal = strlen($value->RVendaTotal) == 0 ? 0 : $value->RVendaTotal;
+                                                $dif = $value->Valor - $RVendaTotal ; if( $dif<=0): ?>
+                                                    <td>
+                                                        <span class="label label-success" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php else:?>
+                                                    <td>
+                                                        <span class="label label-danger" style="color: black; font-size: 14px">R$ <?= number_format($RVendaTotal, 2, ',', '.') ?></span>
+                                                    </td>
+                                                <?php endif;?>
+
+
+
+
+                                                <?php
+                                                $dev = new  Devolucoes();
+                                                $dev = $dev->totalGeralSul($mes);
+                                                // var_dump($dev);
+                                                ?>
+
+                                                <?php if(!empty($dev)): ?>
+
+                                                    <td>
+                                                    <span class="label label-warning" style="color: black; font-size: 14px">
+                                                        R$ <?= number_format($dev->Total, 2, ',', '.') ?>
+                                                    </span>
+                                                    </td>
+
+                                                <?php else: ?>
+
+                                                    <td> <span class="label label-default"></span></td>
+
+                                                <?php endif; ?>
+
+
+
+
+                                            </tr>
+                                        <?php endforeach; ?>
+
+                                        </tbody>
+
+
+
+
+
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+
+
+
+
+
+
     </div>
-
-    <div class="row" style="padding-top: 50px;background: #737373;">
-       
-        <div class="col-md-2"></div> 
-        <div class="col-md-2" style="text-align:center; background-color:#074456; font-family:Oswald; color:#E4F3F7;height: 50px; padding-top: 5px;"><img src="../images/disnorte.png"></div> 
-        <div class="col-md-4" style="text-align:center; background-color:#074456; font-family:Oswald; color:#E4F3F7;height: 50px; padding-top: 5px;"><h4>SISTEMA DE ACOMPANHAMENTO DE METAS</h4></div>
-        <div class="col-md-2" style="text-align:center; background-color:#074456; font-family:Oswald; color:#E4F3F7;"><img src="../images/garoto.png"></div> 
-        <div class="col-md-2"></div>
-        
-       </div>     
-        
-
-         <div class="row" style="background: #737373;">   
-         <div class="col-md-2"></div> 
-         <div class="col-md-2" style="text-align:center; background-color:#074456; font-family:Oswald; color:#E4F3F7;height: 32px; padding-top: 5px;"></div> 
-        <div class="col-md-4" style="text-align:center; background-color:#074456; font-family:Oswald; color:#E4F3F7;height: 32px;">
-        Selecionar Mês: &nbsp&nbsp
-
-            <?php echo' <select id="mes" name="mes"style="height: 30px; background-color: #0C4F63;color: #ffffff; font-family: sans-serif; width: 200px; font-size: 18px;text-align: center; font-weight: bold;" > 
-      
-';
-
-            $i=1;
-
-
-            while ($i <= 12) {
-                $consulta_mes = $conn->prepare("SELECT data_doc from " . $mes_sel [$i] . " limit 1");
-                $consulta_mes->execute();
-                $result_mes = $consulta_mes->fetchAll();
-
-
-                echo '
-    
-     <option value="meta' . $i . '"';
-
-                if ($i > 9) {
-                    if ($i == substr($meta, -2)) {
-                        echo 'selected';
-                    }
-                } else{
-                    if ($i == substr($meta, -1)) {
-                        echo 'selected';
-                    }
-                }
-
-                if(empty($result_mes)){
-
-                    echo '>'.$mes.' - '.$ano.'</option>';
-
-                }else{
-
-                    echo '>'.$mes_sel[$i].' - '.substr($result_mes[0][0], -4).'</option>';
-
-                }
-
-                $i++;
-            };
-
-            ?>
-
-<?php
-
-echo '         
-
-
-
-
-
-      </select>
-
-
 </div>
-       
-       <div class="col-md-2" style="margin: auto; background-color:#074456;font-family:Oswald; color:#E4F3F7;height: 32px;"> 
+<!-- /Main Content -->
 
-</div>
-       
-        <div class="col-md-2"></div> 
-       
-    </div>    
-    
-
-<div class="row" style="background: #737373; height:15px;">
-<div class="col-md-2"></div>
-<div class="col-md-8" style="background: #CED4D6; height: 15px;"></div>
-<div class="col-md-2"></div>
-
-</div>
-    
-<div id="baton" class="row" style="background: #737373;">
-<div class="col-md-2" ></div>
-<div class="col-md-1" style="background: #CED4D6; height: 90px;"></div>
-<div class="col-md-6" style=" background: #CED4D6; height: 90px;">    
-<table align="center" cellpadding="5"> 
-           <tr style="background-color: #0f3f6f; color: #FFFFFF; font-weight: bold; font-family:Dosis; " >
-               <td colspan="4" style="width: 680px; height: 90px; text-align: center; font-size: 25px;background: #FF2012;"><img src="../images/trimarca.png"></td>
-           </tr>
-</table>
-           </div>
-<div class="col-md-1" style="background: #CED4D6; height: 90px;"></div>
-<div class="col-md-2"></div>
-
-</div>
-
-<div id="painel" class="row" style="background: #737373;">
-<div class="col-md-2"></div> 
-
-<div class="col-md-8" style="text-align:center; padding-top: 15px; background-color:#CED4D6; font-family:Oswald; color:#270301;">
-
-<label style="font-size: 18px">Selecionar Região:&nbsp&nbsp&nbsp</label><select id="regiao"  name="regiao " style="height: 30px; background-color: #0C4F63;color: #ffffff; font-family: sans-serif; width: 280px; font-size: 18px;text-align: center; font-weight: bold;">
-
-<option id="todos" selected>Todos</option>
-<option id="norte">Norte</option>
-<option id="sul">Sul</option>
-
-</select> 
-';
-
- $nome = $usuario;
-
-if($nome == "Julio" || $nome == "Ewerton") {
-
-
-   echo'<button class="btn btn-default btn-lg" ><a style="color: #0D3744" href = "enviabaton.php" > Enviar</a > </button >';
-
-  }
-
- echo '
-
-
-</div>
-
-<div class="col-md-2"></div> 
-</div>
-
-
-    
-<div id="painel" class="row" style="background: #737373;">
-<div class="col-md-2"></div> 
-
-<div class="col-md-8" style="text-align:center; padding-top: 15px; background-color:#CED4D6; font-family:Oswald; color:#270301;">
-<table id="tabela" align="center" cellpadding="5">
-
-<tr style="font-size: 16px;background: #083f6f;color: aliceblue; font-size:20px;"> 
-<td style="width: 150px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: aliceblue;">Vendedores</td>
-<td style="width: 200px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: aliceblue;">Meta Positivação</td>
-<td style="width: 150px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: aliceblue;">Realizado</td>
-<td style="width: 150px; text-align: center; border: solid; border-color: #0f3f6f;">A Realizar</td>
-
-
-
-
-</tr>
-
-
-
-';
-       
-       
-    
-if (count($result_baton2) ) {
-       $i=0;
-    foreach($result_baton2 as $row) {
-        
-        extract($row);
-       
-                $verfic = true;
-                           echo '<tr class="success" style="background: #9cbac5; font-size:20px;">';
-                           echo'<td class="link" style="width: 150px; text-align: center; border: solid; border-color: #245269;">'.$row[0].'</td>';
-                           echo '<td  id="meta'.$i.'" style="width: 200px; text-align: center; border: solid; border-color: #4B5F65;">'.$row[1].'</td>';
-                           foreach ($result_baton as $row2){
-                               If($row[0] == $row2[0]){
-                           echo '<td style="width: 150px; text-align: center; border: solid; border-color: #4B5F65;">'.$row2[2].'</td>';
-                           echo '<td style="width: 150px; text-align: center; border: solid; border-color: #4B5F65;">'.$row2[3].'</td>';
-                           $verfic = false;
-  
-                           //echo  '<td style="width: 150px; text-align: center; border: solid; border-color: #4B5F65;">'.$row[3].'</td>';
-                               }
-                                                                                         
-                           } 
-                           
-                           If($verfic == true){
-                           echo '<td style="width: 150px; text-align: center; border: solid; border-color: #4B5F65;">0</td>';
-                           echo '<td style="width: 150px; text-align: center; border: solid; border-color: #4B5F65;">'.$row[1].'</td>';
-  
-                           //echo  '<td style="width: 150px; text-align: center; border: solid; border-color: #4B5F65;">'.$row[3].'</td>';
-                               }
-      echo "</tr>"; 
-    
-      
-   $i++;
-   
-    }  
-  } else {
-    echo "Nennhum resultado retornado.";
-    echo $id;
-   
-  }
-
-    echo '</table>';
-      echo '</br>';
-      echo '<table align="center" cellpadding="5">';
-  
-   if (count($result_TOTAL) ) {
-      
-    foreach($result_TOTAL as $row) {
-        
-        extract($row);
-       
-                 do {  
-                           echo '<tr class="success" style="background: #BED1D6">';
-                          
-                          echo '<tr class="success" style="background: #820505; font-size:16px;color: aliceblue;height: 40px;">';
-                           echo'<td style="width: 150px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: #CED4D6;">Total</td>';
-                           echo '<td id="totalmetatri" style="width: 200px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: #CED4D6;"></td>';
-                           echo '<td id ="totaltri" style="width: 150px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: #CED4D6;">'. $row[1].'</td>';
-                           echo '<td id="diftri" style="width: 150px; text-align: center; border: solid; border-color: #0f3f6f;border-right-color: #CED4D6;"></td>';
-                       
-      
-       
-       
-       } while ($row= null);
-      echo "</tr>"; 
-    
-      
-   
-   
-    }  
-  } else {
-    echo "Nennhum resultado retornado.";
-    echo $id;
-   
-  }
-       
-                 
-       
-       
-       
-
-
-  echo '
-</table>
-</br>
-
-</div>
-<div class="col-md-2"></div> 
-<div class="col-md-2"></div> 
-</div>
-
-';
-
-echo '<script>
- 
- calc_metatri(); 
- 
-  function getUrlVars() {
-             var vars = {};
-             var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-                 vars[key] = value;
-             });
-             return vars;
-         }
- 
- 
-           teste = getUrlVars()["regiao"];
-           
-           if(teste == "Sul"){
-                     document.getElementById("sul").selected = "true";
-                      
-                 }
-                 if(teste == "Norte"){
-                     document.getElementById("norte").selected = "true";
-                     
-                 }
-             if(teste == "Todos"){
-                 document.getElementById("todos").selected = "true";}
-            
-           
-
-
-</script>';
-       
-       
-       ?>
-        
-        
-        
-    </body>
-</html>
+<?php require_once 'footer.php'; ?>

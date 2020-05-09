@@ -32,7 +32,7 @@ class Users extends  DB
 
 
         $sql = "SELECT DISTINCT super FROM usuarios where super = '$cood' ORDER by regiao, super";
-        var_dump($sql);
+        //var_dump($sql);
 
 
         $stm = DB::prepare($sql);

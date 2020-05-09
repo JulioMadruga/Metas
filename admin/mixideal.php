@@ -1,223 +1,146 @@
+<?php require_once 'header.php'; ?>
+
 <?php
 
-session_start();
+$user =  new Users();
+$result = $user->UserMixCood($usuario);
 
-if(!isset($_SESSION['user_session']))
-{
-    header("Location: index.html");
-}
+if(empty($result)){
 
-include_once '../Database/Conexao.php';
-
-$id2 = $_SESSION['user_session'];
-
-$dados_user = $conn->prepare("SELECT * FROM usuarios where id = $id2");
-//var_dump($dados_user);
-$dados_user->execute();
-$result = $dados_user->fetchAll();
-
-$id_user = $result[0]['id'];
-$usuario = $result[0]['nome'];
-
-
-date_default_timezone_set('America/Cuiaba');
-
-//$id = $usuario;
-$date = date('Ymd' );
-
-
-$data = date('D');
-$mes = date('M');
-$dia = date('d');
-$ano = date('Y');
-
-$mes_meta = array(
-    'Jan' => 'meta1',
-    'Feb' => 'meta2',
-    'Mar' => 'meta3',
-    'Apr' => 'meta4',
-    'May' => 'meta5',
-    'Jun' => 'meta6',
-    'Jul' => 'meta7',
-    'Aug' => 'meta8',
-    'Nov' => 'meta11',
-    'Sep' => 'meta9',
-    'Oct' => 'meta10',
-    'Dec' => 'meta12'
-);
-
-$mes_extenso = array(
-    'Jan' => 'Janeiro',
-    'Feb' => 'fevereiro',
-    'Mar' => 'Marco',
-    'Apr' => 'Abril',
-    'May' => 'Maio',
-    'Jun' => 'Junho',
-    'Jul' => 'Julho',
-    'Aug' => 'Agosto',
-    'Nov' => 'Novembro',
-    'Sep' => 'Setembro',
-    'Oct' => 'Outubro',
-    'Dec' => 'Dezembro'
-);
-
-$meta = $mes_meta["$mes"];
-
-$mes = $mes_extenso["$mes"];
-
-
-$consulta_sup = $conn->prepare("SELECT DISTINCT super FROM usuarios where super = '$usuario' ORDER by regiao, super");
-
-$consulta_sup->execute();
-$result_sup = $consulta_sup->fetchAll();
-
-
-if(empty($result_sup)){
-    $vendedores = $conn->prepare("SELECT rca,nome FROM usuarios where super <> '' ORDER by nome");
-//var_dump($dados_user);
-    $vendedores ->execute();
-    $result_Vend = $vendedores ->fetchAll();
+    $vendedores = $user->all_Vendedores();
 
 }else{
 
-
-    $vendedores = $conn->prepare("SELECT rca,nome FROM usuarios where super = '$usuario' order by nome");
-//var_dump($dados_user);
-    $vendedores ->execute();
-    $result_Vend = $vendedores ->fetchAll();
+    $vendedores = $user->VendedoresCood($usuario);
 
 }
 
 
 
-//$vendedores = $conn->prepare("SELECT rca,nome FROM usuarios where super = '$usuario' order by nome");
-////var_dump($dados_user);
-//$vendedores ->execute();
-//$result_Vend = $vendedores ->fetchAll();
-
-
-//var_dump($result_Vend);
-
-
-
-
-
-
-
+$check0 = $check1 = $check2 = $check3 = $check4 = $check5 = $check6 = $check7 = $check8 = $check9 = $check10 = $check11 ="";
+switch ($meta) {
+    case "meta1": {
+        $check0 = "selected";
+        break;
+    }
+    case "meta2": {
+        $check1 = "selected";
+        break;
+    }
+    case "meta3": {
+        $check2 = "selected";
+        break;
+    }
+    case "meta4": {
+        $check3 = "selected";
+        break;
+    }
+    case "meta5": {
+        $check4 = "selected";
+        break;
+    }
+    case "meta6": {
+        $check5 = "selected";
+        break;
+    }
+    case "meta7": {
+        $check6 = "selected";
+        break;
+    }
+    case "meta8": {
+        $check7 = "selected";
+        break;
+    }
+    case "meta9": {
+        $check8= "selected";
+        break;
+    }
+    case "meta10": {
+        $check9 = "selected";
+        break;
+    }
+    case "meta11": {
+        $check10 = "selected";
+        break;
+    }
+    case "meta12": {
+        $check11 = "selected";
+        break;
+    }
+}
 ?>
 
+<!-- Main Content -->
+<div class="page-wrapper">
 
-<!DOCTYPE html>
+    <div class="container-fluid">
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Importação de Aquivos Flexx</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <script>
-
-        function fechar(){
-            document.getElementById('painel').style.display = 'none';
-        }
-
-        function abrir(){
-            document.getElementById('painel').style.display = 'block';
-            setTimeout ("fechar()", 18000);
-        }
-
-    </script>
-
-</head>
-<body>
-
-<div style="  position: fixed;  z-index: 1000; left: 10px;  top: 15px;">
-    <a href="load.php"> <img width="85px" src="../images/voltar.png"></a>
-</div>
-
-<div class="col align-self-center" style=" background:#FFC107!important; border-radius:25px; width: 80%; margin: auto; text-align: center; top:15px">
-
-    <h1 style="font-family: 'Roboto', serif; font-weight: bold; color:#ff2c33; padding: 20px">Relatório de Mix Ideal</h1>
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h4 class="panel-title txt-dark">Gerar Relatório de Mix Ideal</h4>
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" class="pull-left inline-block full-screen">
+                                <i class="zmdi zmdi-fullscreen"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body row pa-0">
+                            <div class="table-wrap">
+                                <div class="table-responsive">
 
 
-</div>
+
+                                    <table class="table display product-overview border-none" id="support_table">
+                                        <thead>
+                                             <tr>
+
+                                                <th>RCA</th>
+                                                <th>Vendedor</th>
+                                                <th class='text-center'>Gerar Relatório de Mix Ideal</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody style="font-size: 14px">
+
+                                        <?php foreach ($vendedores as $value): ?>
+                                            <tr>
+                                                <td><?= $value->rca ?></td>
+                                                <td><?= $value->nome?></td>
+                                                <td class='text-center'><a id='pdf' href='../admin/pdf/mixideal.php?rca=<?= $value->rca ?>'><img width='50px' src='../images/pdf.svg'></a></td>
 
 
-<div style="margin: 20px auto 20px auto; padding: 50px; width: 90%">
-<?php
-    echo '<table id="tblExport"  class="table table-striped">';
+                                            </tr>
+                                        <?php endforeach; ?>
 
-        // echo "<h1 style='background: '>".$value['super']."</h1>";
-
-
-                        echo '
-                       
-                        
-                        <thead class="thead-dark">
-                        <tr>
-                            <th class="text-center" scope="col">Rca</th>
-                            <th style="margin-left: 10px; font-weight: bold" scope="col">Vendedor</th>
-                            <th class="text-center" scope="col">Ação</th>
-                         
-                
-                        </tr>
-                        </thead>
-                        <tbody> ';
-
-                foreach ($result_Vend as $row){
-
-                    echo '<tr style="line-height: 40px;">';
+                                        </tbody>
 
 
-                    echo" <td class='text-center'>$row[0]</td>
-                          <td style='margin-left: 10px; font-weight: bold'>$row[1]</td>
-                          <td class='text-center'><a id='pdf' onclick='abrir()' href='pdf/mixideal.php?rca=".$row[0]."'><img width='50px' src='../images/pdf.svg'></a></td>";
 
-
-                    }
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
 
 
 
 
 
 
-
-                    echo '</tr>';
-
-
-
-
-
-
-
-echo '</tbody>';
-
-
-
-
-
-
-
-      echo '</tbody>
-        </table>';
-
-
- ?>
+    </div>
 
 </div>
+<!-- /Main Content -->
 
-
-<div class="col align-self-center" id="painel" style=" display: none; background: #ffffffc4;position: absolute;width: 100%;height: 100%;margin: 0;text-align: center;top: 0px;">
-
-    <img style="margin-top: 25%" src="email/image/spinner.gif">
-
-
-</div>
-
-
-
-
-</body>
-</html>
+<?php require_once 'footer.php'; ?>

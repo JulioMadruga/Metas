@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if(!isset($_SESSION['user_session']))
@@ -11,6 +12,7 @@ include_once '../database/conectar.php';
 $id = $_SESSION['user_session'];
 
 $usuario =  $_SESSION['name_session'];
+
 $rca =  $_SESSION['rca_session'];
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -83,298 +85,555 @@ $bat = $kpis[0]->baton;
 
 
 
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../assets/img/icon/icon.png" type="image/png" />
-    <title>Objetivos Chocolates Garoto</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/app.css">
-    <link rel="stylesheet" href="../assets/css/style.css?a=1">
-    <style>
-        .loader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #F5F8FA;
-            z-index: 9998;
-            text-align: center;
-        }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Painel Administrador de Acompanhamentos</title>
 
-        .plane-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-        }
+        <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/icon/icon.png">
+    <link rel="icon" href="../assets/img/icon/icon.png" type="image/png">
 
-        table {
-            width: 100%;
-            overflow-x: scroll;
+    <!-- Data table CSS -->
+    <link href="vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 
-        }
-        .titulo {
-            background-color: #363742;
-            color: white;
-        }
-        thead, tbody {
-            display: block;
-            width: 100%;
-        }
-        tbody {
-            overflow-y: scroll;
-            overflow-x: hidden;
-            height: 600px;
-        }
-        tfoot{
-            display: block;
-            width: 100%;
-            height: 40px;
+    <!-- Bootstrap Colorpicker CSS -->
+    <link href="vendors/bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet" type="text/css"/>
 
-        }
+    <!-- select2 CSS -->
+    <link href="vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
 
-        .linha {
-            width: 24% !important;
-            height: 25px;
-            font-size: 12px;
+    <!-- bootstrap-select CSS -->
+    <link href="vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
 
-        }
-        .linha2 {
-            width: 3% !important;
-            height: 25px;
-            font-size: 12px;
-            text-align: right;
+    <link href="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
 
-        }
+    <!-- Custom CSS -->
+    <link href="dist/css/style.css" rel="stylesheet" type="text/css">
 
 
-        .linha3 {
-            width: 24.8% !important;
-            height: 25px;
-            font-size: 12px;
+    <script>
 
-        }
-
-
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <script>   // aqui eh a base da pagina
+               // aqui eh a base da pagina
         window.onload = function(){
-
-            document.getElementById('cood').onchange = function(){
-                window.location = '?cood=' + this.value;
-            }
-
             document.getElementById('mes').onchange = function(){
                 window.location = '?mes=' + this.value;
             }
 
-
-
-            };
-
-        function k(i) {
-            var v = i.value.replace(/\D/g,'');
-            v = (v/100).toFixed(2) + '';
-            v = v.replace(".", ",");
-            v = v.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
-            v = v.replace(/(\d)(\d{3}),/g, "$1.$2,");
-            i.value = "R$"+" "+v;
-        }
+        };
 
 
 
     </script>
 
 
-
 </head>
-<body class="light" >
-<!-- Pre loader -->
-<div id="loader" class="loader">
-    <div class="plane-container">
-        <div class="preloader-wrapper small active">
-            <div class="spinner-layer spinner-blue">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                    <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
 
-            <div class="spinner-layer spinner-red">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                    <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-
-            <div class="spinner-layer spinner-yellow">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                    <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-
-            <div class="spinner-layer spinner-green">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                    <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+<!-- Preloader -->
+<div class="preloader-it">
+    <div class="la-anim-1"></div>
 </div>
-<div id="app">
-    <aside class="main-sidebar fixed offcanvas shadow">
-        <section class="sidebar">
-                <div class="w-80px mt-3 mb-3 ml-3" style="width: 180px">
-                    <img src="../assets/img/basic/logo5.svg" alt="">
-                </div>
-                <div class="relative">
-                    <a data-toggle="collapse" href="#userSettingsCollapse" role="button" aria-expanded="false"
-                       aria-controls="userSettingsCollapse" class="btn-fab btn-fab-sm fab-right fab-top btn-primary shadow1 ">
-                        <i class="icon icon-cogs"></i>
+<!-- /Preloader -->
+<div class="wrapper theme-1-active pimary-color-pink">
+    <!-- Top Menu Items -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="mobile-only-brand pull-left">
+            <div class="nav-header pull-left">
+                <div class="logo-wrap">
+                    <a href="index.php">
+
+                        <img class="brand-img" src="../assets/img/basic/logo5.svg" style="width: 210px;" alt="brand"/>
+
                     </a>
-                    <div class="user-panel p-3 light mb-2">
-                        <div>
-                            <div class="float-left image">
-                                <img class="user_avatar" src="../assets/img/dummy/u1.png" alt="User Image">
-                            </div>
-                            <div class="float-left info">
-                                <h6 class="font-weight-light mt-2 mb-1"><?=$usuario?></h6>
-                                <a href="#"><i class="icon-circle text-primary blink"></i> Online</a>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="collapse multi-collapse" id="userSettingsCollapse">
-                            <div class="list-group mt-3 shadow">
-
-                                <a href="#" class="list-group-item list-group-item-action"><i
-                                            class="mr-2 icon-security text-purple"></i>Alterar a Senha</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="sidebar-menu">
-                    <li class="header"><strong>Menu de Navegação</strong></li>
-
-                    <li><a href="painel.php"><i class="icon icon-analytics blue-grey-text  s-24"></i>Objetivos</a>
-                    </li>
-
-                    <li><a href="cadmeta.php"><i class="icon icon-investment-3 green-text  s-24"></i>Cadastrar Meta </a>
-                    </li>
-
-                    <li class="treeview"><a href="#">
-                            <i class="icon icon icon-people blue-text s-24"></i> <span>Positivações</span> <i
-                                    class="icon icon-angle-left s-18 pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-<!--                            <li><a href="disnorte.php"><i class="icon icon-notebook-list s-24 text-blue"></i>Disnorte</a>-->
-<!--                            </li>-->
-                            <li>
-                                <a href="geral.php"><i class="icon icon-people_outline s-24 text-light-blue "></i>Geral</a>
-                            </li>
-                            <li>
-                                <a href="baton.php"><i class="icon icon-people_outline s-24 text-red "></i>Baton</a>
-                            </li>
-                            <li>
-                                <a href="biscoito.php"><i class="icon icon-people_outline s-24 text-yellow "></i>Biscoito</a>
-                            </li>
-
-                        </ul>
-                    </li>
-
-                    <li><a href="admin/pdf/mixideal2.php?rca=<?= $rca ?>"><i class="icon icon-document-file-pdf2 red-text  s-24"></i>Mix Ideal</a>
-                    </li>
-
-                    <li><a href="cadastro.php"><i class="icon icon-users text-warning s-24"></i>Cadastro de Cliente </a>
-                    </li>
-
-
-
-
-<!---->
-<!--                    <li class="treeview"><a href="#">-->
-<!--                            <i class="icon icon icon-list text-warning s-24"></i> <span>Mix Ideal</span> <i-->
-<!--                                    class="icon icon-angle-left s-18 pull-right"></i>-->
-<!--                        </a>-->
-<!--                        <ul class="treeview-menu">-->
-                            <!--                            <li><a href="disnorte.php"><i class="icon icon-notebook-list s-24 text-blue"></i>Disnorte</a>-->
-                            <!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a href="mchoco.php"><i class="icon icon-notebook-list s-24 brown-text "></i>Chocolates</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a href="mbisc.php"><i class="icon icon-notebook-list s-24 text-yellow "></i>Biscoitos</a>-->
-<!--                            </li>-->
-<!---->
-<!--                        </ul>-->
-<!--                    </li>-->
-
-
-
-                    </li>
-                </ul>
-            </section>
-    </aside>
-    <!--Sidebar End-->
-    <div class="has-sidebar-left">
-        <div class="pos-f-t">
-            <div class="collapse" id="navbarToggleExternalContent">
-                <div class="bg-dark pt-2 pb-2 pl-4 pr-2">
-                    <div class="search-bar">
-                        <input class="transparent s-24 text-white b-0 font-weight-lighter w-128 height-50" type="text"
-                               placeholder="start typing...">
-                    </div>
-                    <a href="#" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-expanded="false"
-                       aria-label="Toggle navigation" class="paper-nav-toggle paper-nav-white active "><i></i></a>
                 </div>
             </div>
+            <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a>
+            <a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
+
         </div>
-        <div class="sticky">
-            <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3" style="position: fixed; width: 100%">
-                <div class="relative">
-                    <a href="#" data-toggle="offcanvas" class="paper-nav-toggle pp-nav-toggle">
-                        <i></i>
-                    </a>
-                </div>
-                <!--Top Menu Start -->
-                <div class="navbar-custom-menu p-t-10">
-                    <h5 style="position: absolute;right: 90px; top: 23px;color: white;"><?=$usuario?></h5>
-                    <ul class="nav navbar-nav">
+        <div id="mobile_only_nav" class="mobile-only-nav pull-right">
+            <ul class="nav navbar-right top-nav pull-right">
 
-                        <!-- User Account-->
-                        <li class="dropdown custom-dropdown user user-menu">
-                            <a href="#" class="nav-link" data-toggle="dropdown">
-                                <img src="../assets/img/dummy/u1.png" class="user-image" alt="User Image">
-                                <i class="icon-more_vert "></i>
-                            </a>
+                <li style="font-size: 24px; line-height: 65px; color: #32556d"><?= $usuario ?></li>
 
-                            </div>
-                        </li>
+
+                <li class="dropdown auth-drp">
+                    <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="dist/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
+                    <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
+                                <li>
+                                    <a href="#"><i class="zmdi zmdi-account"></i><span><?= $usuario ?></span></a>
+                                </li>
+
+                                <li>
+                                    <a href="../index.html"><i class="zmdi zmdi-minus-circle-outline text-danger"></i><span>Sair</span></a>
+                                </li>
+                            </ul>
+
+
                     </ul>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
+    </nav>
+    <!-- /Top Menu Items -->
+
+    <!-- Left Sidebar Menu -->
+    <div class="fixed-sidebar-left">
+        <ul class="nav navbar-nav side-nav nicescroll-bar">
+            <h1 style="height: 10px"></h1>
+
+            <li>
+                <a href="index.php"><div class="pull-left"><i class="txt-primary ti-pie-chart mr-20"></i><span class="right-nav-text">Início</span></div><div class="clearfix"></div></a>
+            </li>
+
+           <li>
+                <a href="javascript:void(0);" data-toggle="collapse" data-target="#app_dr"><div class="pull-left"><i class="txt-success fa fa-bar-chart-o mr-20"></i><span class="right-nav-text">Resultados</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+                <ul id="app_dr" class="collapse collapse-level-1">
+
+                    <li>
+                        <a href="geral.php">Geral</a>
+                    </li>
+
+                    <li>
+                        <a href="resultcood.php">Por Coodenador</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="mixideal.php"><div class="pull-left"><i class="txt-warning fa fa-list-alt mr-20"></i><span class="right-nav-text">Mix Ideal</span></div><div class="clearfix"></div></a>
+            </li>
+
+
+
     </div>
+    <!-- /Left Sidebar Menu -->
+
+    <!-- Right Sidebar Menu -->
+    <div class="fixed-sidebar-right">
+        <ul class="right-sidebar">
+            <li>
+                <div  class="tab-struct custom-tab-1">
+                    <ul role="tablist" class="nav nav-tabs" id="right_sidebar_tab">
+                        <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="chat_tab_btn" href="#chat_tab">chat</a></li>
+                        <li role="presentation" class=""><a  data-toggle="tab" id="messages_tab_btn" role="tab" href="#messages_tab" aria-expanded="false">messages</a></li>
+                        <li role="presentation" class=""><a  data-toggle="tab" id="todo_tab_btn" role="tab" href="#todo_tab" aria-expanded="false">todo</a></li>
+                    </ul>
+                    <div class="tab-content" id="right_sidebar_content">
+                        <div  id="chat_tab" class="tab-pane fade active in" role="tabpanel">
+                            <div class="chat-cmplt-wrap">
+                                <div class="chat-box-wrap">
+                                    <div class="add-friend">
+                                        <a href="javascript:void(0)" class="inline-block txt-grey">
+                                            <i class="zmdi zmdi-more"></i>
+                                        </a>
+                                        <span class="inline-block txt-dark">users</span>
+                                        <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-plus"></i></a>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <form role="search" class="chat-search pl-15 pr-15 pb-15">
+                                        <div class="input-group">
+                                            <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+                                            <span class="input-group-btn">
+												<button type="button" class="btn  btn-default"><i class="zmdi zmdi-search"></i></button>
+												</span>
+                                        </div>
+                                    </form>
+                                    <div id="chat_list_scroll">
+                                        <div class="nicescroll-bar">
+                                            <ul class="chat-list-wrap">
+                                                <li class="chat-list">
+                                                    <div class="chat-body">
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Clay Masse</span>
+                                                                    <span class="time block truncate txt-grey">No one saves us but ourselves.</span>
+                                                                </div>
+                                                                <div class="status away"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user1.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Evie Ono</span>
+                                                                    <span class="time block truncate txt-grey">Unity is strength</span>
+                                                                </div>
+                                                                <div class="status offline"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user2.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Madalyn Rascon</span>
+                                                                    <span class="time block truncate txt-grey">Respect yourself if you would have others respect you.</span>
+                                                                </div>
+                                                                <div class="status online"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user3.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Mitsuko Heid</span>
+                                                                    <span class="time block truncate txt-grey">I’m thankful.</span>
+                                                                </div>
+                                                                <div class="status online"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Ezequiel Merideth</span>
+                                                                    <span class="time block truncate txt-grey">Patience is bitter.</span>
+                                                                </div>
+                                                                <div class="status offline"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user1.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Jonnie Metoyer</span>
+                                                                    <span class="time block truncate txt-grey">Genius is eternal patience.</span>
+                                                                </div>
+                                                                <div class="status online"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user2.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Angelic Lauver</span>
+                                                                    <span class="time block truncate txt-grey">Every burden is a blessing.</span>
+                                                                </div>
+                                                                <div class="status away"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user3.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Priscila Shy</span>
+                                                                    <span class="time block truncate txt-grey">Wise to resolve, and patient to perform.</span>
+                                                                </div>
+                                                                <div class="status online"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                        <a href="javascript:void(0)">
+                                                            <div class="chat-data">
+                                                                <img class="user-img img-circle"  src="dist/img/user4.png" alt="user"/>
+                                                                <div class="user-data">
+                                                                    <span class="name block capitalize-font">Linda Stack</span>
+                                                                    <span class="time block truncate txt-grey">Our patience will achieve more than our force.</span>
+                                                                </div>
+                                                                <div class="status away"></div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="recent-chat-box-wrap">
+                                    <div class="recent-chat-wrap">
+                                        <div class="panel-heading ma-0">
+                                            <div class="goto-back">
+                                                <a  id="goto_back" href="javascript:void(0)" class="inline-block txt-grey">
+                                                    <i class="zmdi zmdi-chevron-left"></i>
+                                                </a>
+                                                <span class="inline-block txt-dark">ryan</span>
+                                                <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-more"></i></a>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-wrapper collapse in">
+                                            <div class="panel-body pa-0">
+                                                <div class="chat-content">
+                                                    <ul class="nicescroll-bar pt-20">
+                                                        <li class="friend">
+                                                            <div class="friend-msg-wrap">
+                                                                <img class="user-img img-circle block pull-left"  src="dist/img/user.png" alt="user"/>
+                                                                <div class="msg pull-left">
+                                                                    <p>Hello Jason, how are you, it's been a long time since we last met?</p>
+                                                                    <div class="msg-per-detail text-right">
+                                                                        <span class="msg-time txt-grey">2:30 PM</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="self mb-10">
+                                                            <div class="self-msg-wrap">
+                                                                <div class="msg block pull-right"> Oh, hi Sarah I'm have got a new job now and is going great.
+                                                                    <div class="msg-per-detail text-right">
+                                                                        <span class="msg-time txt-grey">2:31 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="self">
+                                                            <div class="self-msg-wrap">
+                                                                <div class="msg block pull-right">  How about you?
+                                                                    <div class="msg-per-detail text-right">
+                                                                        <span class="msg-time txt-grey">2:31 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="friend">
+                                                            <div class="friend-msg-wrap">
+                                                                <img class="user-img img-circle block pull-left"  src="dist/img/user.png" alt="user"/>
+                                                                <div class="msg pull-left">
+                                                                    <p>Not too bad.</p>
+                                                                    <div class="msg-per-detail  text-right">
+                                                                        <span class="msg-time txt-grey">2:35 pm</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="input-group">
+                                                    <input type="text" id="input_msg_send" name="send-msg" class="input-msg-send form-control" placeholder="Type something">
+                                                    <div class="input-group-btn emojis">
+                                                        <div class="dropup">
+                                                            <button type="button" class="btn  btn-default  dropdown-toggle" data-toggle="dropdown" ><i class="zmdi zmdi-mood"></i></button>
+                                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                                <li><a href="javascript:void(0)">Action</a></li>
+                                                                <li><a href="javascript:void(0)">Another action</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="javascript:void(0)">Separated link</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group-btn attachment">
+                                                        <div class="fileupload btn  btn-default"><i class="zmdi zmdi-attachment-alt"></i>
+                                                            <input type="file" class="upload">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="messages_tab" class="tab-pane fade" role="tabpanel">
+                            <div class="message-box-wrap">
+                                <div class="msg-search">
+                                    <a href="javascript:void(0)" class="inline-block txt-grey">
+                                        <i class="zmdi zmdi-more"></i>
+                                    </a>
+                                    <span class="inline-block txt-dark">messages</span>
+                                    <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-search"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="set-height-wrap">
+                                    <div class="streamline message-box nicescroll-bar">
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item unread-message">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Clay Masse</span>
+                                                    <span class="inline-block font-11  pull-right message-time">12:28 AM</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject">Themeforest message sent via your envato market profile</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsu messm quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user1.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Evie Ono</span>
+                                                    <span class="inline-block font-11  pull-right message-time">1 Feb</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject">Pogody theme support</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user2.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Madalyn Rascon</span>
+                                                    <span class="inline-block font-11  pull-right message-time">31 Jan</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject">Congratulations from design nominees</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item unread-message">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user3.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Ezequiel Merideth</span>
+                                                    <span class="inline-block font-11  pull-right message-time">29 Jan</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject">Themeforest item support message</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item unread-message">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user4.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Jonnie Metoyer</span>
+                                                    <span class="inline-block font-11  pull-right message-time">27 Jan</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject">Help with beavis contact form</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Priscila Shy</span>
+                                                    <span class="inline-block font-11  pull-right message-time">19 Jan</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject">Your uploaded theme is been selected</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="sl-item">
+                                                <div class="sl-avatar avatar avatar-sm avatar-circle">
+                                                    <img class="img-responsive img-circle" src="dist/img/user1.png" alt="avatar"/>
+                                                </div>
+                                                <div class="sl-content">
+                                                    <span class="inline-block capitalize-font   pull-left message-per">Linda Stack</span>
+                                                    <span class="inline-block font-11  pull-right message-time">13 Jan</span>
+                                                    <div class="clearfix"></div>
+                                                    <span class=" truncate message-subject"> A new rating has been received</span>
+                                                    <p class="txt-grey truncate">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div  id="todo_tab" class="tab-pane fade" role="tabpanel">
+                            <div class="todo-box-wrap">
+                                <div class="add-todo">
+                                    <a href="javascript:void(0)" class="inline-block txt-grey">
+                                        <i class="zmdi zmdi-more"></i>
+                                    </a>
+                                    <span class="inline-block txt-dark">todo list</span>
+                                    <a href="javascript:void(0)" class="inline-block text-right txt-grey"><i class="zmdi zmdi-plus"></i></a>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="set-height-wrap">
+                                    <!-- Todo-List -->
+                                    <ul class="todo-list nicescroll-bar">
+                                        <li class="todo-item">
+                                            <div class="checkbox checkbox-default">
+                                                <input type="checkbox" id="checkbox01"/>
+                                                <label for="checkbox01">Record The First Episode</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="light-grey-hr"/>
+                                        </li>
+                                        <li class="todo-item">
+                                            <div class="checkbox checkbox-pink">
+                                                <input type="checkbox" id="checkbox02"/>
+                                                <label for="checkbox02">Prepare The Conference Schedule</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="light-grey-hr"/>
+                                        </li>
+                                        <li class="todo-item">
+                                            <div class="checkbox checkbox-warning">
+                                                <input type="checkbox" id="checkbox03" checked/>
+                                                <label for="checkbox03">Decide The Live Discussion Time</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="light-grey-hr"/>
+                                        </li>
+                                        <li class="todo-item">
+                                            <div class="checkbox checkbox-success">
+                                                <input type="checkbox" id="checkbox04" checked/>
+                                                <label for="checkbox04">Prepare For The Next Project</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="light-grey-hr"/>
+                                        </li>
+                                        <li class="todo-item">
+                                            <div class="checkbox checkbox-danger">
+                                                <input type="checkbox" id="checkbox05" checked/>
+                                                <label for="checkbox05">Finish Up AngularJs Tutorial</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="light-grey-hr"/>
+                                        </li>
+                                        <li class="todo-item">
+                                            <div class="checkbox checkbox-purple">
+                                                <input type="checkbox" id="checkbox06" checked/>
+                                                <label for="checkbox06">Finish Infinity Project</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="light-grey-hr"/>
+                                        </li>
+                                    </ul>
+                                    <!-- /Todo-List -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- /Right Sidebar Menu -->
+
 
