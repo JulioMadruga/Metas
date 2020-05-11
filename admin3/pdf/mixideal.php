@@ -89,7 +89,7 @@ foreach ($result as $row){
 
 }
 
-$sql.= "'000' as total FROM `clientes_sap` a, clientes_flexx b, usuarios c where a.cod_cli = b.cod_cli and b.rca = c.rca and b.rca = $rca 
+$sql.= "'000' as total_choc, '000' as total_bisc FROM `clientes_sap` a, clientes_flexx b, usuarios c where a.cod_cli = b.cod_cli and b.rca = c.rca and b.rca = $rca 
 and a.cod_canal in(5534705,5534706,5534707,5534708,5534716)";
 
 //echo $sql;
@@ -229,18 +229,33 @@ foreach ($trad as $row) {
 }
 
 
-$n = count($result );
+$result_choc = $result;
+
+//=================================Chocolate====================================================
+function remove_element (&$array, $key,$key1, $key2) // pass array by reference
+{
+    unset($array[$key]);
+    unset($array[$key1]);
+    unset($array[$key2]);
+}
+
+
+remove_element($result_choc, 8,9,10);
+
+//============================================================================
+
+$n = count($result_choc );
 
 $sql2 = "SELECT cod_cli,(";
 
 
 $i = 1;
-foreach ($result as $row){
+foreach ($result_choc  as $row){
 
     if($i<$n){
         $sql2.= "`$row` + ";
     }else {
-        $sql2.= "`$row`) AS total ";
+        $sql2.= "`$row`) AS total_choc ";
     }
 
     $i++;
@@ -250,7 +265,7 @@ foreach ($result as $row){
 $sql2 .= " FROM (SELECT ";
 
 $i = 1;
-foreach ($result as $row){
+foreach ($result_choc  as $row){
 
     if($i<$n){
         $sql2.= "if (`$row`= 'X',0,`$row`) as `$row`,";
@@ -268,6 +283,8 @@ $sql2.= " FROM `temp_mix` GROUP BY cod_cli) sub";
 
 //echo $sql2;
 
+
+
 $total= $conn->prepare($sql2);
 //var_dump($createTabMix);
 $total->execute();
@@ -277,21 +294,107 @@ $result_total = $total->fetchAll();
 
 foreach ($result_total as $row) {
 
-    $upvenda = $conn->prepare("UPDATE temp_mix set total = $row[1] WHERE cod_cli = '$row[0]'");
+    $upvenda = $conn->prepare("UPDATE temp_mix set total_choc = $row[1] WHERE cod_cli = '$row[0]'");
     //var_dump($upvenda);
     $upvenda->execute();
 
 }
 
 
+//===============================================================FINAL TOTAL CHOCOALTE====================================================================
+
+
+$result_bisc = $result;
+//=================================INICIO  BISCOITO====================================================
+function remove_element2 (&$array,$key,$key1, $key2,$key3,$key4,$key5,$key6,$key7) // pass array by reference
+{
+    unset($array[$key]);
+    unset($array[$key1]);
+    unset($array[$key2]);
+    unset($array[$key3]);
+    unset($array[$key4]);
+    unset($array[$key5]);
+    unset($array[$key6]);
+    unset($array[$key7]);
+}
+
+
+remove_element2($result_bisc, 1,2,3, 4, 5, 6, 7,0);
+
+//var_dump($result_bisc);
+
+
+//============================================================================
+$n = count($result_bisc);
+
+$sql2 = "SELECT cod_cli,(";
+
+
+$i = 1;
+foreach ($result_bisc as $row){
+
+    if($i<$n){
+        $sql2.= "`$row` + ";
+    }else {
+        $sql2.= "`$row`) AS total_bisc ";
+    }
+
+    $i++;
+
+}
+
+$sql2 .= " FROM (SELECT ";
+
+$i = 1;
+foreach ($result_bisc as $row){
+
+    if($i<$n){
+        $sql2.= "if (`$row`= 'X',0,`$row`) as `$row`,";
+    }else {
+        $sql2.= "if (`$row`= 'X',0,`$row`) as `$row`, cod_cli ";
+    }
+
+    $i++;
+
+
+
+}
+
+$sql2.= " FROM `temp_mix` GROUP BY cod_cli) sub";
+
+
+
+
+
+$total= $conn->prepare($sql2);
+//var_dump($createTabMix);
+$total->execute();
+$result_total = $total->fetchAll();
+
+
+
+foreach ($result_total as $row) {
+
+    $upvenda = $conn->prepare("UPDATE temp_mix set total_bisc = $row[1] WHERE cod_cli = '$row[0]'");
+    //var_dump($upvenda);
+    $upvenda->execute();
+
+}
+
+
+
+
+//===============================================================FINAL TOTAL BISCOITO====================================================================
+
+
+
+
+
+
+
 $consulta_cli = $conn->prepare("SELECT * FROM `temp_mix` order by cod_canal,razao");
 $consulta_cli->execute();
 $result_cli = $consulta_cli->fetchAll();
-
-//var_dump($result_cli);
-
-
-
 
 
 $resultado = array();
@@ -312,9 +415,13 @@ foreach ($result as $row){
 
 //var_dump($result);
 
-$geral = $conn->prepare("SELECT sum(total) as total FROM temp_mix ");
-$geral->execute();
-$result_geral = $geral->fetchAll();
+$geral_choc = $conn->prepare("SELECT sum(total_choc) as total_choc FROM temp_mix ");
+$geral_choc->execute();
+$result_geral_choc = $geral_choc->fetchAll();
+
+$geral_bisc = $conn->prepare("SELECT sum(total_bisc) as total_bisc FROM temp_mix ");
+$geral_bisc->execute();
+$result_geral_bisc = $geral_bisc->fetchAll();
 
 
 
@@ -341,7 +448,7 @@ $result_geral = $geral->fetchAll();
     <th style="background: #0d47a1; font-size:9px; width: 110px; text-align:left; color: white;">Bairro</th>
     <th style="background: #0d47a1; font-size:9px; width: 100px; text-align:left; color: white;">Cidade</th>
     <th style="background: #0d47a1; font-size:9px; width: 60px; text-align:left;color: white;">Canal</th>
-    <th style="background: #0d47a1; font-size:9px; width: 60px; text-align: center;color: white;">Total</th> 
+    <th style="background: #0d47a1; font-size:9px; width: 60px; text-align: center;color: white;">Total Choc</th> 
     <th style="background: #0d47a1; font-size:8px; width: 50px; text-align: center; color: white;">Bombom Sortido 250g</th>
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Serenata de Amor 825g</th>
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Talento Cst.Pará 90g</th>
@@ -350,6 +457,7 @@ $result_geral = $geral->fetchAll();
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Baton Choc Braco 16g</th> 
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Tablete ao Leite 90g</th>
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Tablete Meio Amargo 90g</th>
+    <th style="background: #0d47a1; font-size:9px; width: 60px; text-align: center;color: white;">Total Bisc</th> 
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Bisc. Rech ao Leite 130g</th>
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Bisc. Rech Choc BCO 130g</th> 
     <th style="background: #0d47a1; font-size:8px; width: 50px;text-align: center; color: white;">Bisc. Cookie Choc 60g</th>  
@@ -378,16 +486,16 @@ $result_geral = $geral->fetchAll();
      $html .= '<td style="font-size: 9px"> '.$value['cidade'].'</td>';
 
      $html .= '<td style="font-size: 9px"> '.$canal.'</td>';
-     if($value['total']>0){
-         $html .= '<td style="text-align: center; font-size: 9px; background:#096c32; color: white"> '.$value['total'].'</td>';
+     if($value['total_choc']>0){
+         $html .= '<td style="text-align: center; font-size: 9px; background:#096c32; color: white"> '.$value['total_choc'].'</td>';
      }else{
-         $html .= '<td style="text-align: center; font-size: 11px; background:red; color: white "> '.$value['total'].'</td>';
+         $html .= '<td style="text-align: center; font-size: 11px; background:red; color: white "> '.$value['total_choc'].'</td>';
 
      }
 
 
 
-     foreach ($result as $row) {
+     foreach ($result_choc as $row) {
 
          if($value[$row] == 'X'){
              $html .= '<td style=" text-align: center; font-size: 9px; width: 65px; background:#b2b2b2"> ' . $value[$row] . '</td>';
@@ -400,6 +508,32 @@ $result_geral = $geral->fetchAll();
 
 
      }
+
+
+     if($value['total_bisc']>0){
+         $html .= '<td style="text-align: center; font-size: 9px; background:#096c32; color: white"> '.$value['total_bisc'].'</td>';
+     }else{
+         $html .= '<td style="text-align: center; font-size: 11px; background:red; color: white "> '.$value['total_bisc'].'</td>';
+
+     }
+
+
+
+     foreach ($result_bisc as $row) {
+
+         if($value[$row] == 'X'){
+             $html .= '<td style=" text-align: center; font-size: 9px; width: 65px; background:#b2b2b2"> ' . $value[$row] . '</td>';
+         }elseif($value[$row] <= 0){
+             $html .= '<td style=" text-align: center; font-size: 9px; width: 65px; background:rgba(255,39,65,0.57)"> ' . $value[$row] . '</td>';
+         }else{
+             $html .= '<td style="text-align: center; font-size: 9px; width: 65px; background:rgba(117,244,113,0.57)"> ' . $value[$row] . '</td>';
+
+         }
+
+
+     }
+
+
 
 
      $html .= '</tr>';
@@ -417,15 +551,27 @@ $result_geral = $geral->fetchAll();
  <tfoot>
  <tr>
  <td colspan="8" style="background:#1d1d1d; color: white; font-size: 10px; text-align: right; padding-right: 10px; border-left: solid white">TOTAL</td>
- <td style="background:#1d1d1d; color: white; font-size: 10px; text-align: center; border-left: solid white">'.$result_geral[0][0].'</td>';
+ <td style="background:#1d1d1d; color: white; font-size: 10px; text-align: center; border-left: solid white">'.$result_geral_choc[0][0].'</td>';
 
- foreach ($result as $row){
+ foreach ($result_choc as $row){
 
 
          $html .='<td style="background:#1d1d1d; color: white; font-size: 10px; text-align: center; border-left: solid white">'.$resultado[$row].'</td>';
 
 
  }
+
+$html .=' <td style="background:#1d1d1d; color: white; font-size: 10px; text-align: center; border-left: solid white">'.$result_geral_bisc[0][0].'</td>';
+
+ foreach ($result_bisc as $row){
+
+
+         $html .='<td style="background:#1d1d1d; color: white; font-size: 10px; text-align: center; border-left: solid white">'.$resultado[$row].'</td>';
+
+
+ }
+
+
 
 
 
@@ -443,7 +589,7 @@ $html .='
  
   ';
 
-  //echo $html;
+//echo $html;
 
 
 
