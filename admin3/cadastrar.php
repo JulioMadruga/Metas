@@ -226,9 +226,9 @@ jQuery(document).ready(function (e) {
 
            <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Valor Chocoaltes </td>
 
-           <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Bisc. Recheado </td>
+           <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Posit. Jumbos </td>
 
-           <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Bisc. Cookies</td>
+           <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Posit. Talento</td>
 
                       <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Valor Biscoitos </td>
 
@@ -431,9 +431,9 @@ if (count($result_meta) ) {
       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
      <label style="font-size: 12px;">Total Geral:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #0F9FCA;color: #ffffff;font-family: sans-serif;" id="total_jumbo" name="total_Jumbo" type="text" size="7" value=""/>
      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     <label style="font-size: 12px;">Total Bisc. Recheados:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #960F0B;color: #ffffff;font-family: sans-serif;" id="total_rech" name="total_baton" type="text" size="7" value=""/>
+     <label style="font-size: 12px;">Total Jumbos:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #960F0B;color: #ffffff;font-family: sans-serif;" id="total_rech" name="total_baton" type="text" size="7" value=""/>
      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-     <label style="font-size: 12px;">Total Bisc. Cookies:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #5cb85c;color: #ffffff;font-family: sans-serif;" id="total_cookie" name="total_Jumbo" type="text" size="7" value=""/>
+     <label style="font-size: 12px;">Total Talento:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #5cb85c;color: #ffffff;font-family: sans-serif;" id="total_cookie" name="total_Jumbo" type="text" size="7" value=""/>
       
           
      <script> calc_kg(<?php echo $vend ?>);</script>

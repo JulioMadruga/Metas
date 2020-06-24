@@ -185,6 +185,67 @@ if(isset($Pbisc[0]->realizado)){
 
 }
 
+//-------------------------------POSITIVAÇÃO TALENTOS ---------------------------------
+
+$Ptal= new PositTalento();
+$Ptal->setTabMes($mes);
+$Ptal->setTabMeta($meta);
+$Ptal->setId($rca);
+$Ptal->setTalento($tal);
+
+
+$Ptal = $Ptal->index();
+
+if(isset($Ptal[0]->realizado)){
+
+    $PtalM = $Ptal[0]->posit_talento;
+    $PtalR = $Ptal[0]->realizado;
+    $PtalPercent = round((($PtalR / $PtalM)*100),2);
+
+    if($PtalPercent>=100){
+
+        $contamedalha ++;
+    }
+
+}else{
+
+    $PtalM = $Ptal[0]->posit_talento;
+    $PtalR = 0;
+    $PtalPercent = 0;
+
+}
+
+//-------------------------------POSITIVAÇÃO JUMBOS  ---------------------------------
+
+$Pjum= new PositJumbos();
+$Pjum->setTabMes($mes);
+$Pjum->setTabMeta($meta);
+$Pjum->setId($rca);
+$Pjum->setJumbos($jum);
+
+
+$Pjum = $Pjum->index();
+
+if(isset($Pjum[0]->realizado)){
+
+    $PjumM = $Pjum[0]->posit_jumbos;
+    $PjumR = $Pjum[0]->realizado;
+    $PjumPercent = round((($PjumR / $PjumM)*100),2);
+
+    if($PjumPercent>=100){
+
+        $contamedalha ++;
+    }
+
+}else{
+
+    $PjumM = $Pjum[0]->posit_jumbos;
+    $PjumR = 0;
+    $PjumPercent = 0;
+
+}
+
+
 
 
 //-------------------------------MIX CHOCOLATE ---------------------------------
@@ -388,6 +449,49 @@ if($MixPercent2>=100){
                         </div>
                     </div>
 
+                    <div class="green lighten-1 text-center text-white">
+                        <?php
+                        if($PtalPercent >=100){
+                            echo '<div class="p-1"><img src="assets/img/medalha.png" style="width: 80px; float: right"> </div>';
+                        }
+                        ?>
+                        <div class="p-5">
+                            <h5 class="font-weight-normal s-14 " >Positivação Talentos 25g</h5>
+                            <p class="s-48 p-t-10 font-weight-lighter" ><?= $PtalM ?></p>
+                            <span class="s-12 font-weight-normal" style="color:#104412 !important;">Realizado</span>
+                            <p class="s-18 font-weight-normal" style="color: #0b2e13 !important;" ><?= $PtalR ?></p>
+                            <p class="p-t-10" style="color:#104412 !important;"><?= $PtalPercent ?>% Realizado</p>
+                            <div class="progress" style="height: 3px;">
+
+                                <div class="progress-bar bg-light-green" role="progressbar" style="width: <?= $PbiscPercent ?>%;" aria-valuenow="45"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="blue lighten-2 text-center text-white">
+                        <?php
+                        if($PjumPercent >=100){
+                            echo '<div class="p-1"><img src="assets/img/medalha.png" style="width: 80px; float: right"> </div>';
+                        }
+                        ?>
+                        <div class="p-5">
+                            <h5 class="font-weight-normal s-14 " >Positivação Jumbos</h5>
+                            <p class="s-48 p-t-10 font-weight-lighter" ><?= $PjumM ?></p>
+                            <span class="s-12 font-weight-normal" style="color: rgba(6,12,93,0.89) !important;">Realizado</span>
+                            <p class="s-18 font-weight-normal" style="color:rgba(6,12,93,0.89)!important;"><?= $PjumR?></p>
+                            <p class="p-t-10" style="color:rgba(6,12,93,0.89)!important;"><?= $PjumPercent ?>% Realizado</p>
+                            <div class="progress" style="height: 3px;">
+
+                                <div class="progress-bar bg-blue" role="progressbar" style="width: <?= $PbiscPercent ?>%;" aria-valuenow="45"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="dark-blue darken-2 text-center text-white">
                         <?php
                         if($MixPercent >=100){
@@ -494,6 +598,26 @@ if($MixPercent2>=100){
                     </div>
 
                     <div class="my-3">
+                        <label class="font-weight-bold text-green">Positivação Talento 25g</label>
+                        <i class="icon icon-arrow-right s-12 text-green "></i>
+                        <small class="text-green"><?= $PtalPercent ?>% desempenho</small>
+                        <div class="progress" style="height: 3px;">
+                            <div class="progress-bar bg-green" role="progressbar" style="width: <?= $PtalPercent ?>%;"
+                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="my-3">
+                        <label class="font-weight-bold text-info">Positivação Jumbos</label>
+                        <i class="icon icon-arrow-right s-12 text-info "></i>
+                        <small class="text-info"><?= $PjumPercent ?>% desempenho</small>
+                        <div class="progress" style="height: 3px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: <?= $PjumPercent ?>%;"
+                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="my-3">
                         <label class="font-weight-bold brown-text">Mix Ideal Chocolate</label>
                         <i class="icon icon-arrow-right s-12 brown-text"></i>
                         <small class="brown-text"><?= $MixPercent ?>% desempenho</small>
@@ -520,7 +644,7 @@ if($MixPercent2>=100){
             <div class="bonus">
                 <div class="titlebonus">BONUS</div>
 
-                <?php $i =1; while ($i<=5): ?>
+                <?php $i =1; while ($i<=7): ?>
 
                     <div class="medalha<?= $i ?>">
 

@@ -3,7 +3,7 @@
 .bonus{
     font-family: 'Bangers', cursive;
     display: grid;
-    grid-template-columns: 2fr repeat(5,1fr);
+    grid-template-columns: 1fr repeat(7,1fr);
     height: 50px;
     max-width: 500px;
     background: #4CAF50;
@@ -46,6 +46,17 @@
 }
 .medalha5{
     grid-column: 6;
+    width: 45px;
+
+}
+
+.medalha6{
+    grid-column: 7;
+    width: 45px;
+
+}
+.medalha7{
+    grid-column: 8;
     width: 45px;
 
 }

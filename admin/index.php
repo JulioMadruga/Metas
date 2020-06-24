@@ -7,10 +7,24 @@ $biscoito->setTabMes($mes);
 $biscoito->setBisc($bisc);
 $biscoito2 = $biscoito->PositGeral();
 
+
 $baton = new PositBaton();
 $baton->setTabMes($mes);
 $baton->setBaton($bat);
 $baton2 = $baton->PositGeral();
+
+
+//$jumbo = new PositJumbos();
+//$jumbo->setTabMes($mes);
+//$jumbo->setJumbos($jum);
+//$jumbo2 = $jumbo->PositGeral();
+
+
+//$talento = new PositTalento();
+//$talento->setTabMes($mes);
+//$talento->setTalento($tal);
+//$talento2 = $talento->PositGeral();
+
 
 
 $geral = new PositGeral();
@@ -176,7 +190,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
 
                                 <?php
 
@@ -190,7 +204,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentGeral ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentGeral ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -205,7 +219,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>
@@ -245,7 +259,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBaton ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning  wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBaton ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -530,7 +544,7 @@ switch ($meta) {
                     <div class="panel-wrapper collapse in">
                         <div class="panel-body sm-data-box-1">
 
-                            <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+                            <div class="cus-sat-stat weight-500 txt-warning text-center mt-5">
 
                                 <?php
 
@@ -542,7 +556,7 @@ switch ($meta) {
                             </div>
                             <div class="progress-anim mt-20">
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-success wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-warning wow animated progress-animated" role="progressbar" aria-valuenow="<?= $percentBisc ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
                             <ul class="flex-stat mt-5">
@@ -557,7 +571,7 @@ switch ($meta) {
                                 <li>
 
                                     <span class="block">
-												<i class="zmdi zmdi-trending-up txt-success" style="font-size: 30px"></i>
+												<i class="zmdi zmdi-trending-up txt-warning" style="font-size: 30px"></i>
 											</span>
                                 </li>
                             </ul>

@@ -124,7 +124,7 @@ $i=0;
 foreach($posit_rech AS $row ) {
     // echo $produto.'<br />';
     // echo $i;
-    $up_posit_rech= $conn->prepare("update $meta set posit_rech ='".$row."' where rca =". $linha["$i"]);
+    $up_posit_rech= $conn->prepare("update $meta set posit_jumbos ='".$row."' where rca =". $linha["$i"]);
     $up_posit_rech->execute();
 
 
@@ -137,7 +137,7 @@ $i=0;
 foreach($posit_cookie AS $row ) {
     // echo $produto.'<br />';
     // echo $i;
-    $up_posit_cookie= $conn->prepare("update $meta set posit_cookies ='".$row."' where rca =". $linha["$i"]);
+    $up_posit_cookie= $conn->prepare("update $meta set posit_talento ='".$row."' where rca =". $linha["$i"]);
     $up_posit_cookie->execute();
 
 

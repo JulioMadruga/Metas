@@ -253,7 +253,7 @@ class Cood extends  DB
     {
 
 
-        $sql = "INSERT INTO campanha_super (mes,supervisor,sortidoM,sortidoF,sortidoT,serenataM,serenataF,serenataT,batomM,batomF,batomT,biscM,biscF,biscT,talento25M,talento2F,talento25T,talento90M,talento90F,talento90T,jumboM,jumboF,jumboT,pastilhaM,pastilhaF,pastilhaT,posM,posF,posT)
+        $sql = "INSERT INTO campanha_super (mes,supervisor,sortidoM,sortidoF,sortidoT,serenataM,serenataF,serenataT,batomM,batomF,batomT,biscM,biscF,biscT,talento25M,talento25F,talento25T,talento90M,talento90F,talento90T,jumboM,jumboF,jumboT,pastilhaM,pastilhaF,pastilhaT,posM,posF,posT)
                 values ('$this->mes','$this->cood',$this->sortido,0,0,$this->serenata,0,0,$this->baton,0,0,$this->bisc,0,0,$this->talento25,0,0,$this->talento90,0,0,$this->jumbo,0,0,$this->pastilha,0,0,$this->po,0,0)";
 
         var_dump($sql);

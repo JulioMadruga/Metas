@@ -318,8 +318,8 @@ foreach ($result_sup as $row) {
 
 
 
-    $consulta_rech2[$i] = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_rech, COUNT(id) as realizado, if(posit_rech - COUNT(id)<0,0,posit_rech - COUNT(id)) as dif  FROM
-   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_rech FROM $mes a, $meta b, usuarios c where
+    $consulta_rech2[$i] = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_jumbos, COUNT(id) as realizado, if(posit_jumbos - COUNT(id)<0,0,posit_jumbos - COUNT(id)) as dif  FROM
+   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_jumbos FROM $mes a, $meta b, usuarios c where
     a.MATERIAL IN ($bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca and a.vendedor = c.Rca and c.super = '$row[0]' group by a.id)SUB GROUP BY VENDEDOR)sub");
 
 
@@ -327,8 +327,8 @@ foreach ($result_sup as $row) {
     $result_rech2[$i] = $consulta_rech2[$i]->fetchAll();
 
 
-    $consulta_cookie[$i] = $conn->prepare("SELECT VENDEDOR, posit_cookies, COUNT(id) as realizado, if(posit_cookies - COUNT(id)<0,0,posit_cookies  - COUNT(id)) as dif  FROM 
-   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_cookies  FROM $mes a, $meta b, usuarios c where 
+    $consulta_cookie[$i] = $conn->prepare("SELECT VENDEDOR, posit_talento, COUNT(id) as realizado, if(posit_talento - COUNT(id)<0,0,posit_talento  - COUNT(id)) as dif  FROM 
+   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_talento  FROM $mes a, $meta b, usuarios c where 
     a.MATERIAL IN ($bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca and a.vendedor = c.Rca and c.super = '$row[0]' group by a.id)SUB GROUP BY VENDEDOR");
 
     $consulta_cookie[$i]->execute();
@@ -336,8 +336,8 @@ foreach ($result_sup as $row) {
 
 
 
-    $consulta_cookie2[$i] = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_cookies , COUNT(id) as realizado, if(posit_cookies  - COUNT(id)<0,0,posit_cookies - COUNT(id)) as dif  FROM 
-   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_cookies  FROM $mes a, $meta b, usuarios c where 
+    $consulta_cookie2[$i] = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_talento , COUNT(id) as realizado, if(posit_talento  - COUNT(id)<0,0,posit_talento - COUNT(id)) as dif  FROM 
+   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_talento  FROM $mes a, $meta b, usuarios c where 
     a.MATERIAL IN ($bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca and a.vendedor = c.Rca and c.super = '$row[0]' group by a.id)SUB GROUP BY VENDEDOR)sub");
 
 
@@ -382,7 +382,7 @@ foreach ($result_sup as $row) {
     // var_dump($result_vendas[$i]);
 
 
-    $consulta_meta[$i] = $conn->prepare("select a.vendedor, a.meta_baton, a.valor, b.Rca, a.trimarca, a.tab, a.posit_rech, a.posit_cookies, a.valor_choc, a.valor_bisc, a.topchoc, a.topbisc from $meta a, usuarios b where a.Vendedor=b.nome and b.super = '$row[0]' order by a.vendedor");
+    $consulta_meta[$i] = $conn->prepare("select a.vendedor, a.meta_baton, a.valor, b.Rca, a.trimarca, a.tab, a.posit_jumbos, a.posit_talento, a.valor_choc, a.valor_bisc, a.topchoc, a.topbisc from $meta a, usuarios b where a.Vendedor=b.nome and b.super = '$row[0]' order by a.vendedor");
     //var_dump($consulta_meta[$i]);
     $consulta_meta[$i]->execute();
     $result_meta[$i] = $consulta_meta[$i]->fetchAll();
@@ -418,7 +418,7 @@ foreach ($result_sup as $row) {
     $result_real_super[$i] = $consulta_real_super[$i]->fetchAll();
     // var_dump($result_real_super[$i]);
 
-    $consulta_meta_super[$i] = $conn->prepare("SELECT SUM(a.meta_baton) as peso, ROUND(SUM(a.valor), 2) as Total, sum(trimarca), sum(tab), sum(posit_rech), sum(posit_cookies), ROUND(SUM(a.valor_choc), 2) as choc, ROUND(SUM(a.valor_bisc), 2) as bisc FROM $meta a, usuarios b WHERE a.rca = b.rca and b.super = '$row[0]'  ");
+    $consulta_meta_super[$i] = $conn->prepare("SELECT SUM(a.meta_baton) as peso, ROUND(SUM(a.valor), 2) as Total, sum(trimarca), sum(tab), sum(posit_jumbos), sum(posit_talento), ROUND(SUM(a.valor_choc), 2) as choc, ROUND(SUM(a.valor_bisc), 2) as bisc FROM $meta a, usuarios b WHERE a.rca = b.rca and b.super = '$row[0]'  ");
     $consulta_meta_super[$i]->execute();
     $result_meta_super[$i] = $consulta_meta_super[$i]->fetchAll();
 
@@ -458,7 +458,7 @@ foreach ($result_sup as $row) {
     $result_totalreal = $consulta_totalreal->fetchAll();
 
 
-    $consulta_totalmeta = $conn->prepare("SELECT SUM(meta_baton) as peso, ROUND(SUM(valor), 2) as Total, sum(trimarca), sum(tab), sum(posit_rech), sum(posit_cookies), ROUND(SUM(valor_choc), 2) as choc, ROUND(SUM(valor_bisc), 2) as bisc FROM $meta");
+    $consulta_totalmeta = $conn->prepare("SELECT SUM(meta_baton) as peso, ROUND(SUM(valor), 2) as Total, sum(trimarca), sum(tab), sum(posit_jumbos), sum(posit_talento), ROUND(SUM(valor_choc), 2) as choc, ROUND(SUM(valor_bisc), 2) as bisc FROM $meta");
     $consulta_totalmeta->execute();
     $result_totalmeta = $consulta_totalmeta->fetchAll();
 
@@ -486,16 +486,16 @@ foreach ($result_sup as $row) {
     $result_jum_totalr = $consulta_jum_total->fetchAll();
 
 
-    $consulta_rech_total = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_rech, COUNT(id) as realizado, if(posit_rech - COUNT(id)<0,0,posit_rech - COUNT(id)) as dif  FROM 
-   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_rech FROM $mes a, $meta b where 
+    $consulta_rech_total = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_jumbos, COUNT(id) as realizado, if(posit_jumbos - COUNT(id)<0,0,posit_jumbos - COUNT(id)) as dif  FROM 
+   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_jumbos FROM $mes a, $meta b where 
     a.MATERIAL IN ($bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca  group by a.id)SUB GROUP BY VENDEDOR)sub");
 
     $consulta_rech_total->execute();
     $result_rech_totalr = $consulta_rech_total->fetchAll();
 
 
-    $consulta_cookie_total = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_rech, COUNT(id) as realizado, if(posit_rech - COUNT(id)<0,0,posit_rech - COUNT(id)) as dif  FROM 
-   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_rech FROM $mes a, $meta b where 
+    $consulta_cookie_total = $conn->prepare("SELECT SUM(realizado) from (SELECT VENDEDOR, posit_jumbos, COUNT(id) as realizado, if(posit_jumbos - COUNT(id)<0,0,posit_jumbos - COUNT(id)) as dif  FROM 
+   (SELECT b.VENDEDOR, a.NOME_PARCEIRO,a.id, b.vendedor as vend, b.posit_jumbos FROM $mes a, $meta b where 
     a.MATERIAL IN ($bisc) AND a.QUANTIDADE>0 and a.vendedor = b.rca  group by a.id)SUB GROUP BY VENDEDOR)sub");
 
     $consulta_cookie_total->execute();
@@ -1154,8 +1154,8 @@ echo '</tr>';
             }
 
             //var_dump($result_vendas);
-
             foreach ($result_rech[$z] as $row2) {
+
 
 
                 If (trim($row[0]) == trim($row2[1])) {

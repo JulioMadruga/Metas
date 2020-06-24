@@ -61,9 +61,9 @@ $mes_extenso = array(
     'Dec' => 'Dezembro'
 );
 
-$meta = $mes_meta["$mes"];
+$meta = "meta4";
 
-$mes = $mes_extenso["$mes"];
+$mes = "abril";
 
 
 $categoria = array(

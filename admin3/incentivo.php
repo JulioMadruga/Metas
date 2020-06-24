@@ -6,7 +6,7 @@ if(!isset($_SESSION['user_session']))
     header("Location: index.html");
 }
 
-include_once '../Database/Conexao.php';
+include_once '../database/Conexao.php';
 
 $id2 = $_SESSION['user_session'];
 
@@ -62,7 +62,7 @@ $mes_extenso = array(
 
 $meta = $mes_meta["$mes"];
 
-$mes = $mes_extenso["$mes"];
+$mes = "Abril";
 
 
 
@@ -144,17 +144,22 @@ foreach ($result_cood as $value){
     $super = $value['super'];
 
     $sortidof= $conn->prepare("SELECT b.super, sum(cast(replace(replace(a.Valor_total, '.', ''), ',', '.') as decimal(10,2))) as total FROM $mes a, usuarios b where a.vendedor = b.Rca and Material = '$sortido' and b.super = '$super'");
+
+   // var_dump($sortidof);
+
     $sortidof->execute();
     $result_sortidof= $sortidof->fetchAll();
 
     foreach ($result_sortidof as $item){
 
         $sortidoV = $item['total'];
-        $cood = $item['super'];
+        $cood = trim($item['super']);
 
-        $UP= $conn->prepare("UPDATE campanha_super set sortidoF = $sortidoV  where supervisor = '$cood ' and mes = '$mes' ");
-        $UP->execute();
+        $UP= $conn->prepare("UPDATE campanha_super set sortidoF = '$sortidoV'  where supervisor = '$cood ' and mes = '$mes'");
+    //var_dump($UP);
+      $UP->execute();
 
+     //die();
 
     }
 
@@ -241,7 +246,7 @@ foreach ($result_cood as $value){
         $batonV = $item['total'];
         $cood = $item['super'];
 
-        $UP= $conn->prepare("UPDATE campanha_super set batomF = $batonV  where supervisor = '$cood ' and mes = '$mes' ");
+        $UP= $conn->prepare("UPDATE campanha_super set batomF = '$batonV' where supervisor = '$cood ' and mes = '$mes' ");
         $UP->execute();
 
 
@@ -337,7 +342,7 @@ foreach ($result_cood as $value){
             $talento25V = $item['total'];
             $cood = $item['super'];
 
-            $UP= $conn->prepare("UPDATE campanha_super set talento25F = $talento25V  where supervisor = '$cood ' and mes = '$mes' ");
+            $UP= $conn->prepare("UPDATE campanha_super set talento25F = '$talento25V' where supervisor = '$cood ' and mes = '$mes' ");
             $UP->execute();
 
 
