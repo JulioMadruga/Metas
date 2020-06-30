@@ -168,6 +168,27 @@
 
 <script src="js/vue.js"></script>
 <script src="assets/js/app.js"></script>
+<?php
+
+$url1 =strtolower($_SERVER["REQUEST_URI"]);
+$url = str_replace("/garoto/","",$url1);
+//echo $url;
+
+switch ($url) {
+
+case "nestleatevc.php":
+echo '<script src="js/script_garoto.js"></script>';
+break;
+case "nestleatevc":
+echo '<script src="js/script_garoto.js"></script>';
+break;
+case "disnorte.php":
+echo '<script src="js/script_disnorte.js"></script>';
+break;
+
+
+}
+?>
 <script>
 
     $( "#solicitar" ).click(function() {

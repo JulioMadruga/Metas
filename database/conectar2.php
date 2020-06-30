@@ -1,9 +1,14 @@
 <?php
 $site = "http://localhost/AnalisePDV";
-$servidor ="garoto.mysql.dbaas.com.br";    // servidor
-$username = "garoto";        // usuário
-$password = "D!sN0rt3G@r0t0";            // senha
-$banco = "garoto";
+//$servidor ="garoto.mysql.dbaas.com.br";    // servidor
+//$username = "garoto";        // usuário
+//$password = "D!sN0rt3G@r0t0";            // senha
+//$banco = "garoto";
+
+$servidor ="localhost";    // servidor
+$username = "root";        // usuário
+$password = "";            // senha
+$banco = "pdv";
 
 
 $conn2 = new PDO("mysql:host=$servidor;dbname=$banco", $username, $password,

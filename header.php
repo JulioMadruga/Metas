@@ -294,6 +294,9 @@ $tal = $kpis[0]->talento;
                     <li><a href="cadastro.php"><i class="icon icon-users text-warning s-24"></i>Cadastro de Cliente </a>
                     </li>
 
+                    <li><a href="nestleatevc.php"><i class="icon icon-tablet text-blue s-24"></i>Nestle até Vc </a>
+                    </li>
+
 
 
 
