@@ -1,27 +1,29 @@
 <?php
 require_once '../Database/Conexao.php';
 
-$consulta_ved = $conn->prepare("SELECT rca FROM usuarios where tipo = 'logar' order by nome");
+$meta = $_POST['mes'];
+
+$consulta_ved = $conn->prepare("SELECT a.rca FROM $meta a, usuarios b WHERE  a.Rca = b.Rca and b.tipo= 'logar' order by vendedor");
  $consulta_ved-> execute();
  $result2= $consulta_ved->fetchAll();
 
-     
+
        $i = 0;
     foreach($result2 as $row) {
-        
-        extract($row);
-        
-         $linha[$i] = "'$row[0]'";
-		 
-             
-                       
-        $i++;
-      
-       } 
-      
-       
 
-          
+        extract($row);
+
+         $linha[$i] = "'$row[0]'";
+
+
+
+        $i++;
+
+       }
+
+
+
+
           $meta = $_POST['mes'];
           $valor= $_POST['valor'];
           $trimarca= $_POST['trimarca'];
@@ -31,6 +33,7 @@ $consulta_ved = $conn->prepare("SELECT rca FROM usuarios where tipo = 'logar' or
 
           $posit_rech = $_POST['posit_rech'];
           $posit_cookie = $_POST['posit_cookie'];
+          $posit_serenata = $_POST['posit_serenata'];
           $valor_bisc = $_POST['valor_bisc'];
 
 
@@ -46,8 +49,8 @@ foreach($valor AS $row ) {
   // var_dump($up_valor);
 
    $i++ ;
-   
-   
+
+
 }
 
 $i=0;
@@ -56,10 +59,10 @@ foreach($trimarca AS $row ) {
   // echo $i;
    $up_trimarca= $conn->prepare("update $meta set trimarca = $row where rca =". $linha["$i"]);
    $up_trimarca->execute();
-   
+
    $i++ ;
-   
-   
+
+
 }
 
 
@@ -71,11 +74,11 @@ foreach($meta_baton AS $row ) {
    $up_meta_baton= $conn->prepare("update $meta set meta_baton = $row where rca =". $linha["$i"]);
 
    $up_meta_baton->execute();
-  
-   
+
+
    $i++ ;
-   
-   
+
+
 }
 
 $i=0;
@@ -85,10 +88,10 @@ foreach($jumbo AS $row ) {
    $up_jumbo= $conn->prepare("update $meta set tab = $row where rca =". $linha["$i"]);
    $up_jumbo->execute();
 
-   
+
    $i++ ;
-   
-   
+
+
 }
 
 
@@ -147,6 +150,20 @@ foreach($posit_cookie AS $row ) {
 
 }
 
+$i=0;
+foreach($posit_serenata AS $row ) {
+    // echo $produto.'<br />';
+    // echo $i;
+    $up_posit_serenata= $conn->prepare("update $meta set posit_serenata ='".$row."' where rca =". $linha["$i"]);
+    $up_posit_serenata->execute();
+
+
+
+    $i++ ;
+
+
+}
+
 
 if(isset($_POST['excluir'])){
 
@@ -155,21 +172,21 @@ foreach($excluir as $item){
 
    $Excluir_Vend= $conn->prepare("delete from $meta WHERE vendedor='$item'");
    $Excluir_Vend->execute();
-   
+
    $Excluir_Vend2= $conn->prepare("delete from Usuarios WHERE nome='$item'and tipo = 'logar'");
    $Excluir_Vend2->execute();
-    
-   echo ("<script>alert('O Vendedor ".$item." foi Exluido');</script>"); 
-    
+
+   echo ("<script>alert('O Vendedor ".$item." foi Exluido');</script>");
+
 //aqui o resto da query
 }
 echo "<meta HTTP-EQUIV='refresh' CONTENT='0;URL=cadastrar.php'>";
- die; 
+ die;
 }
 
 
 echo ("<script>alert('Dados Atualizado com Sucesso!!!');window.history.go(-1);</script>"); die;
-     
-      
+
+
       
       ?>

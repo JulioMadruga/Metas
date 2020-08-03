@@ -230,6 +230,8 @@ jQuery(document).ready(function (e) {
 
            <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Posit. Talento</td>
 
+           <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Posit. Serenata</td>
+
                       <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Valor Biscoitos </td>
 
            <td style="width: 100px; text-align: center;border: solid; border-color: #737373;">Valor Total </td>
@@ -352,14 +354,16 @@ if (count($result_meta) ) {
             echo "<td style='width: 180px; text-align: center; font-weight: bold; border: solid; border-color: #737373;'>" . $row[0] . "</td>";
         }
 
+             echo "<td style='display:none; width: 50px; height:40px; text-align: center; border: solid; background-color: #960F0B;border-color: #737373;'><input style='background-color: #960F0B; color:#ffffff; text-align: center; border: none; ' id='rca".$i."' name='rca[]".$i."' type='text' size='6' value='".$row[1]."'/></td>";
                echo "<td style='width: 50px; height:40px; text-align: center; border: solid; background-color: #960F0B;border-color: #737373;'><input style='background-color: #960F0B; color:#ffffff; text-align: center; border: none; ' id='meta_baton".$i."' name='meta_baton[]".$i."' type='text' size='6' value='".$row[2]."'/></td>";
                echo "<td style='width: 50px; height:40px; text-align: center; border: solid; background-color: #5cb85c; border-color: #737373;'><input style='background-color: #5cb85c; color:#ffffff; text-align: center; border: none; ' id='trimarca".$i."' name='trimarca[]' type='text' size='6' value='".$row[3]."'/></td>";
                echo "<td style='width: 50px; height:40px; text-align: center; border: solid; background-color: #0F9FCA;border-color: #737373;'><input style='background-color: #0F9FCA; color:#ffffff; text-align: center; border: none; ' id='jumbo".$i."' name='jumbo[]".$i."' type='text' size='6' value='".$row[4]."'/></td>";
                echo "<td style='width: 50px; height:40px; text-align: center; border: solid; border-color: #737373;'><input style='text-align: center; border: none; background-color: rgba(0,0,0,0)' id='valor_choc".$i."'name='valor_choc[]' type='text' size='7' value='".$row[5]."'/></td>";
                echo "<td style='width: 50px; height:40px; text-align: center; border: solid; background-color: #960F0B;border-color: #737373;'><input style='background-color: #960F0B; color:#ffffff; text-align: center; border: none; ' id='posit_rech".$i."' name='posit_rech[]".$i."' type='text' size='6' value='".$row[6]."'/></td>";
                echo "<td style='width: 50px; height:40px; text-align: center; border: solid; background-color: #5cb85c; border-color: #737373;'><input style='background-color: #5cb85c; color:#ffffff; text-align: center; border: none; ' id='posit_cookie".$i."' name='posit_cookie[]' type='text' size='6' value='".$row[7]."'/></td>";
-               echo "<td style='width: 50px; height:40px; text-align: center; border: solid; border-color: #737373;'><input style='text-align: center; border: none; background-color: rgba(0,0,0,0)' id='valor_bisc".$i."'name='valor_bisc[]' type='text' size='7' value='".$row[8]."'/></td>";
-               echo "<td style='width: 50px; height:40px; text-align: center; border: solid; border-color: #737373;'><input style='text-align: center; border: none; background-color: rgba(0,0,0,0)' id='valor".$i."'name='valor[]' type='text' size='7' value='".$row[9]."' readonly/></td>";
+             echo "<td style='width: 50px; height:40px; text-align: center; border: solid; background-color: #f9bb00; border-color: #737373;'><input style='background-color: #f9bb00; color:#ffffff; text-align: center; border: none; ' id='posit_serenata".$i."' name='posit_serenata[]' type='text' size='6' value='".$row[8]."'/></td>";
+               echo "<td style='width: 50px; height:40px; text-align: center; border: solid; border-color: #737373;'><input style='text-align: center; border: none; background-color: rgba(0,0,0,0)' id='valor_bisc".$i."'name='valor_bisc[]' type='text' size='7' value='".$row[9]."'/></td>";
+               echo "<td style='width: 50px; height:40px; text-align: center; border: solid; border-color: #737373;'><input style='text-align: center; border: none; background-color: rgba(0,0,0,0)' id='valor".$i."'name='valor[]' type='text' size='7' value='".$row[10]."' readonly/></td>";
 
 
              $i++;
@@ -422,7 +426,7 @@ if (count($result_meta) ) {
 
         <a style="margin-top: 5px; margin-left: 8px;" href="javascript: abrir();"class="btn btn-info">Cadastrar Vendedor</a>
 
-      <div style =" width: 870px; float: right; background:#D8DEE0; padding:5px; text-align: center">
+      <div style =" width: 910px; float: right; background:#D8DEE0; padding:5px; text-align: center">
 
       
      <label style="font-size: 12px;">Total Biscoito:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #5cb85c;color: #ffffff;font-family: sans-serif;" id="total_tri" name="total_tri" type="text" size="7" value=""/>
@@ -434,6 +438,8 @@ if (count($result_meta) ) {
      <label style="font-size: 12px;">Total Jumbos:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #960F0B;color: #ffffff;font-family: sans-serif;" id="total_rech" name="total_baton" type="text" size="7" value=""/>
      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
      <label style="font-size: 12px;">Total Talento:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #5cb85c;color: #ffffff;font-family: sans-serif;" id="total_cookie" name="total_Jumbo" type="text" size="7" value=""/>
+     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+     <label style="font-size: 12px;">Total Serenata:&nbsp</label><input style="border:none; height: 30px;width: 45px; font-size: 13px;text-align: center; background-color: #f9bb00;color: #ffffff;font-family: sans-serif;" id="total_serenata" name="total_serenata" type="text" size="7" value=""/>
       
           
      <script> calc_kg(<?php echo $vend ?>);</script>

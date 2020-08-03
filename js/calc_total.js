@@ -8,6 +8,7 @@ function calc_kg(vd){
     somar_tab = 0;
     somar_rech = 0;
     somar_cookie = 0;
+    somar_serenata = 0;
 
     somar_total = 0;
 
@@ -22,6 +23,7 @@ function calc_kg(vd){
 
          var rech = parseInt(document.getElementById('posit_rech'+i).value);
          var cookies = parseInt(document.getElementById('posit_cookie'+i).value);
+        var serenata = parseInt(document.getElementById('posit_serenata'+i).value);
 
          var valor_choc = parseFloat(document.getElementById('valor_choc'+i).value);
          var valor_bisc = parseFloat(document.getElementById('valor_bisc'+i).value);
@@ -44,13 +46,17 @@ function calc_kg(vd){
 
 
 
-         somar_rech = somar_rech + rech;
+        somar_rech = somar_rech + rech;
 
         document.getElementById('total_rech').value = somar_rech;
 
         somar_cookie = somar_cookie + cookies;
 
         document.getElementById('total_cookie').value = somar_cookie;
+
+        somar_serenata = somar_serenata + serenata;
+
+        document.getElementById('total_serenata').value = somar_serenata;
 
 
 
@@ -232,7 +238,6 @@ function jum(){
     }
 
 }
-
 
 
 
