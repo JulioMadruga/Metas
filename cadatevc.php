@@ -165,6 +165,7 @@ $images = array_merge($images2);
 
 $imgJSON = json_encode($images);
 
+$nestleatevc = "S";
 
 
 $import = $conn->prepare("INSERT INTO clientes_site (id_user,rca, nome,cod_cli,razao, canal, images, status, data_cad) VALUES
@@ -172,4 +173,4 @@ $import = $conn->prepare("INSERT INTO clientes_site (id_user,rca, nome,cod_cli,r
 // var_dump($import);
 $import->execute();
 
-header("Location:cadastro.php?result=ok");
+header("Location:clienteatevc.php?result=ok");

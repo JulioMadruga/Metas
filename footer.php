@@ -170,6 +170,7 @@
 <script src="assets/js/app.js"></script>
 <?php
 
+
 $url1 =strtolower($_SERVER["REQUEST_URI"]);
 $url = str_replace("/garoto/","",$url1);
 //echo $url;

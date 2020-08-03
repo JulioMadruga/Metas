@@ -28,12 +28,13 @@ class MetaGeral extends  DB
         $this->meta = $meta;
     }
 
-    public function AtualizaPosit ($baton, $bisc, $geral)
+    public function AtualizaPosit ($baton, $bisc, $geral, $jumbos, $talento25, $serenata)
     {
+
 
         if (empty($geral)) {
 
-            $sql = "UPDATE $this->meta set Rbaton = 0, Rbisc = 0, Rgeral = 0 ";
+            $sql = "UPDATE $this->meta set Rbaton = 0, Rbisc = 0, Rgeral = 0, RJumbos =0, RTalento = 0, RSerenata = 0";
             $stm = DB::prepare($sql);
             $stm->execute();
         } else {
@@ -53,6 +54,31 @@ class MetaGeral extends  DB
                 $stm->execute();
 
             }
+
+            foreach ($jumbos as $value) {
+
+                $sql = "UPDATE $this->meta set RJumbos = '$value->realizado' where Rca = '$value->rca'";
+                $stm = DB::prepare($sql);
+                $stm->execute();
+
+            }
+
+            foreach ($talento25 as $value) {
+
+                $sql = "UPDATE $this->meta set RTalento = '$value->realizado' where Rca = '$value->rca'";
+                $stm = DB::prepare($sql);
+                $stm->execute();
+
+            }
+
+            foreach ($serenata as $value) {
+
+                $sql = "UPDATE $this->meta set RSerenata = '$value->realizado' where Rca = '$value->rca'";
+                $stm = DB::prepare($sql);
+                $stm->execute();
+
+            }
+
 
             foreach ($geral as $value) {
 
@@ -199,7 +225,8 @@ class MetaGeral extends  DB
 
     public function ResultCoodGeral($cood){
 
-        $sql = "SELECT a.rca, b.nome, a.tab, a.Rgeral, a.meta_baton, a.Rbaton, a.trimarca, a.Rbisc, a.MetaMixChoc, a.RmixChoc, a.MetaMixBisc, 
+        $sql = "SELECT a.rca, b.nome, a.tab, a.Rgeral, a.meta_baton, a.Rbaton, a.trimarca, a.Rbisc, a.posit_jumbos, a.RJumbos, a.posit_talento, a.RTalento,
+                a.posit_serenata, a.RSerenata,a.MetaMixChoc, a.RmixChoc, a.MetaMixBisc, 
                 a.RMixBisc, a.valor_choc, a.RVendaChoc, a.valor_bisc, a.RVendaBisc, a.valor, a.RVendaTotal FROM `$this->meta`a, `usuarios` b 
                 WHERE a.rca = b.Rca and b.super = '$cood' ORDER by b.nome";
 
@@ -232,7 +259,8 @@ class MetaGeral extends  DB
 
     public function ResultCoodGeralTotal($cood){
 
-        $sql = "SELECT a.rca, b.nome, Sum(a.tab) as Mgeral, Sum(a.Rgeral) as Rgeral, Sum(a.meta_baton) as Mbaton, Sum(a.Rbaton) as Rbaton, Sum(a.trimarca) as Mbisc, Sum(a.Rbisc) as Rbisc, Sum(a.MetaMixChoc) as MetaMixChoc , Sum(a.RmixChoc) as RmixChoc , 
+        $sql = "SELECT a.rca, b.nome, Sum(a.tab) as Mgeral, Sum(a.Rgeral) as Rgeral, Sum(a.meta_baton) as Mbaton, Sum(a.Rbaton) as Rbaton, Sum(a.trimarca) as Mbisc, Sum(a.Rbisc) as Rbisc,Sum(a.posit_jumbos) as Mjumbos, Sum(a.RJumbos) as Rjumbos,
+                Sum(a.posit_talento) as Mtalento, Sum(a.RTalento) as Rtalento, Sum(a.posit_serenata) as Mserenata, Sum(a.RSerenata) as Rserenata, Sum(a.MetaMixChoc) as MetaMixChoc , Sum(a.RmixChoc) as RmixChoc , 
                 Sum(a.MetaMixBisc) as MetaMixBisc, Sum(a.RMixBisc) as RMixBisc , round(Sum(a.valor_choc),2) as valor_choc, round(Sum(a.RVendaChoc),2) as RVendaChoc, round(Sum(a.valor_bisc),2) as valor_bisc, round(Sum(a.RVendaBisc),2) as RVendaBisc, 
                 round(Sum(a.valor),2) as Valor, round(Sum(a.RVendaTotal),2) as RVendaTotal FROM `$this->meta`a, `usuarios` b 
                 WHERE a.rca = b.Rca and b.super = '$cood' ORDER by b.nome";

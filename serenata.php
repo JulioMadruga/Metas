@@ -53,18 +53,13 @@ switch ($meta) {
     }
 }
 
-$positivados = new PositTalento();
-$positivados->setId($rca);
-$positivados->setTabMes($mes);
-$positivados->setTalento($tal);
+$positivados2 = new Positivacoes();
+$positivados2->setId($rca);
+$positivados2->setTabMes($mes);
+$positivados2->setProd($ser);
 
-$positivados = $positivados->PositAll();
-
-$notPosit = new PositTalento();
-$notPosit->setId($rca);
-$notPosit->setTabMes($mes);
-$notPosit->setTalento($tal);
-$notPosit = $notPosit->NotPosit();
+$positivados = $positivados2->PositAll();
+$notPosit = $positivados2->NotPosit();
 
 //var_dump($positivados);
 
@@ -78,7 +73,7 @@ $notPosit = $notPosit->NotPosit();
                     <div class="col">
                         <h1 class="s-18">
                             <i class="icon-people"></i>
-                            POSITIVAÇÃO DE TALENTO 25G<span class="s-14"> Mês de <?=$mes?></span>
+                            POSITIVAÇÃO DE SERENATA<span class="s-14"> Mês de <?=$mes?></span>
                         </h1>
                     </div>
                 </div>

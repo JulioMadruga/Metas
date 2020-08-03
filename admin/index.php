@@ -2,38 +2,39 @@
 
 <?php
 
-$biscoito = new PositBisc();
-$biscoito->setTabMes($mes);
-$biscoito->setBisc($bisc);
-$biscoito2 = $biscoito->PositGeral();
+$positivacao = new Positivacoes();
+$positivacao->setTabMes($mes);
+$positivacao->setProd($bisc);
+$biscoito = $positivacao->PositGeral();
 
 
-$baton = new PositBaton();
-$baton->setTabMes($mes);
-$baton->setBaton($bat);
-$baton2 = $baton->PositGeral();
+$positivacao->setTabMes($mes);
+$positivacao->setProd($bat);
+$baton = $positivacao->PositGeral();
+
+$positivacao->setTabMes($mes);
+$positivacao->setProd($jum);
+$jumbos = $positivacao->PositGeral();
+
+$positivacao->setTabMes($mes);
+$positivacao->setProd($tal);
+$talento25 = $positivacao->PositGeral();
+
+$positivacao->setTabMes($mes);
+$positivacao->setProd($ser);
+$serenata = $positivacao->PositGeral();
 
 
-//$jumbo = new PositJumbos();
-//$jumbo->setTabMes($mes);
-//$jumbo->setJumbos($jum);
-//$jumbo2 = $jumbo->PositGeral();
-
-
-//$talento = new PositTalento();
-//$talento->setTabMes($mes);
-//$talento->setTalento($tal);
-//$talento2 = $talento->PositGeral();
+$positivacao->setTabMes($mes);
+$geral = $positivacao->PositG();
 
 
 
-$geral = new PositGeral();
-$geral->setTabMes($mes);
-$geral2 = $geral->PositG();
+
 
 $atuaPosit = new MetaGeral();
 $atuaPosit->setMeta($meta);
-$atuaVenda = $atuaPosit->AtualizaPosit($baton2,$biscoito2,$geral2);
+$atuaVenda = $atuaPosit->AtualizaPosit($baton,$biscoito,$geral,$jumbos,$talento25,$serenata);
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -641,213 +642,6 @@ switch ($meta) {
         <!-- /Row -->
 
     <?php endforeach; ?>
-
-        <!-- Row -->
-        <div class="row">
-
-
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default card-view">
-                    <div class="panel-heading">
-                        <div class="pull-left">
-                            <h6 class="panel-title txt-dark">RESULTADOS POR COORDENADORES</h6>
-                        </div>
-                        <div class="pull-right">
-                            <a href="#" class="pull-left inline-block full-screen ">
-                                <i class="zmdi zmdi-fullscreen"></i>
-                            </a>
-
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="panel-wrapper collapse in">
-                        <div class="panel-body row pa-0">
-                            <div class="table-wrap">
-                                <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-
-                                        <thead>
-
-                                        <tr>
-                                            <th>Coordenador</th>
-                                            <th>Positivações</th>
-                                            <th>Mix ideal</th>
-                                            <th>Valor</th>
-                                        </tr>
-
-                                        </thead>
-                                        <tbody>
-
-                                        <?php foreach ($coordenadores2 as $value): ?>
-                                        <tr>
-                                            <td><?= $value->super?></td>
-
-                                           <?php
-
-                                           $batonCoodR = $baton->PositCoodBat($value->super)->total;
-                                           If($batonCoodR <= 0){$batonCoodR=0.01;}
-                                           $biscCoodR =$biscoito->PositCoodBisc($value->super)->total;
-                                           If($biscCoodR <= 0){$biscCoodR=0.01;}
-                                           $geralCoodR = $geral->PositCoodGeral($value->super)->total;
-                                           If($geralCoodR <= 0){$geralCoodR=0.01;}
-
-
-
-
-                                           $coordenadores->setCood($value->super);
-                                           $PositCoodM = $coordenadores->MetaPosit($meta);
-
-                                           $batonCoodM = $PositCoodM[0]->baton;
-                                           If($batonCoodM <= 0){$batonCoodM=0.01;}
-                                           $biscCoodM = $PositCoodM[0]->bisc;
-                                           If($biscCoodM <= 0){$biscCoodM=0.01;}
-                                           $geralCoodM = $PositCoodM[0]->geral;
-                                           If($geralCoodM <= 0){$geralCoodM=0.01;}
-
-
-
-                                          $calcPosit = ((( $batonCoodR / $batonCoodM )*100) + (( $biscCoodR/$biscCoodM )*100) + (( $geralCoodR/$geralCoodM )*100))/3;
-
-                                           $calcPosit = Round($calcPosit);
-
-                                           if($calcPosit<= 33){
-                                               $color = "danger";
-                                           }elseif ($calcPosit >33 && $calcPosit<50){
-                                               $color = "warning";
-                                           }else{
-                                               $color = "success";
-                                           }
-
-
-                                           ?>
-
-
-
-                                            <td>
-                                                <span class="badge weight-500 txt-<?= $color ?>" style="margin-bottom: 5px; background: #1e2021 !important;"><?= $calcPosit ?>%</span>
-                                                <div class="progress progress-xs mb-0 ">
-                                                    <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcPosit ?>%"></div>
-                                                </div>
-                                            </td>
-
-
-                                            <?php
-
-
-
-                                            $MixChocCoodR = $atuaPosit->ResultCoodGeral2($value->super)->RmixChoc;
-                                            If($MixChocCoodR <= 0){$MixChocCoodR=0.01;}
-
-                                            $MixBiscCoodR = $atuaPosit->ResultCoodGeral2($value->super)->RMixBisc;
-                                            If($MixBiscCoodR <= 0){$MixBiscCoodR=0.01;}
-
-                                            $MixChocCood = $atuaPosit->ResultCoodGeral2($value->super)->MetaMixChoc;
-                                            $percent = $MetaMixchoc2->MPercentGeral()->media;
-                                            $MixChocCood = $MixChocCood * $percent;
-                                            If($MixChocCood <= 0){$MixChocCood=0.01;}
-
-                                            $MixBiscCood = $atuaPosit->ResultCoodGeral2($value->super)->MetaMixBisc;
-                                            $percent = $MetaMixbisc2->MPercentGeral()->media;
-                                            $MixBiscCood = $MixBiscCood * $percent;
-                                            If($MixBiscCood <= 0){$MixBiscCood=0.01;}
-
-
-
-
-                                            $calcMix = ((( $MixChocCoodR / $MixChocCood )*100) + (( $MixBiscCoodR/$MixBiscCood )*100) )/2;
-
-                                            $calcMix= Round($calcMix);
-
-                                            if($calcMix<= 33){
-                                                $color = "danger";
-                                            }elseif ($calcMix >33 && $calcMix< 50){
-                                                $color = "warning";
-                                            }else{
-                                                $color = "success";
-                                            }
-
-
-                                            ?>
-
-
-
-                                            <td>
-                                                <span class="badge weight-500 txt-<?= $color ?>" style="margin-bottom: 5px; background: #1e2021 !important;"><?= $calcMix ?>%</span>
-                                                <div class="progress progress-xs mb-0 ">
-                                                    <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcMix ?>%"></div>
-                                                </div>
-                                            </td>
-
-
-
-                                            <?php
-
-
-
-                                            $RVendaChocR = $atuaPosit->ResultCoodGeral2($value->super)->RVendaChoc;
-                                            If($RVendaChocR <= 0){$RVendaChocR=0.01;}
-
-                                            $RVendaBiscR = $atuaPosit->ResultCoodGeral2($value->super)->RVendaBisc;
-                                            If($RVendaBiscR <= 0){$RVendaBiscR=0.01;}
-
-                                            $RVendaTotalR = $atuaPosit->ResultCoodGeral2($value->super)->RVendaTotal;
-                                            If($RVendaTotalR <= 0){$RVendaTotalR=0.01;}
-
-
-
-                                            $Mvalor_choc = $atuaPosit->ResultCoodGeral2($value->super)->valor_choc;
-                                            If($Mvalor_choc <= 0){$Mvalor_choc=0.01;}
-
-                                            $Mvalor_bisc = $atuaPosit->ResultCoodGeral2($value->super)->valor_bisc;
-                                            If($Mvalor_bisc <= 0){$Mvalor_bisc=0.01;}
-
-                                            $Mvalor = $atuaPosit->ResultCoodGeral2($value->super)->Valor;
-                                            If($Mvalor<= 0){$Mvalor=0.01;}
-
-
-
-
-                                            $calcTot= ( $RVendaTotalR/$Mvalor)*100;
-
-                                            $calcTot= Round($calcTot);
-
-                                            if($calcTot<= 33){
-                                                $color = "danger";
-                                            }elseif ($calcTot >33 && $calcTot< 50){
-                                                $color = "warning";
-                                            }else{
-                                                $color = "success";
-                                            }
-
-
-                                            ?>
-
-
-
-                                            <td>
-                                                <span class="badge weight-500 txt-<?= $color ?>" style="margin-bottom: 5px; background: #1e2021 !important;"><?= $calcTot?>%</span>
-                                                <div class="progress progress-xs mb-0 ">
-                                                    <div class="progress-bar progress-bar-<?= $color ?>" style="width: <?= $calcTot ?>%"></div>
-                                                </div>
-                                            </td>
-
-
-
-
-
-                                        </tr>
-                                        <?php endforeach; ?>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Row -->
 
 
 

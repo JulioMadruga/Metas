@@ -8,28 +8,28 @@
 
 require_once 'conexao/DB.php';
 
-class PositBaton extends  DB
+class Positivacoes extends  DB
 {
 
     public $id;
     public $TabMes;
     public $TabMeta;
-    public $Baton;
+    public $Prod;
 
     /**
      * @return mixed
      */
-    public function getBaton()
+    public function getProd()
     {
-        return $this->Baton;
+        return $this->Prod;
     }
 
     /**
-     * @param mixed $Baton
+     * @param mixed $Prod
      */
-    public function setBaton($Baton)
+    public function setProd($Prod)
     {
-        $this->Baton = $Baton;
+        $this->Prod = $Prod;
     }
 
     /**
@@ -87,8 +87,8 @@ class PositBaton extends  DB
     {
 
 
-        $sql = "SELECT meta_baton, COUNT(NOME_parceiro) as realizado FROM (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.meta_baton, b.rca FROM 
-                $this->TabMes a, $this->TabMeta b where a.MATERIAL IN ($this->Baton)
+        $sql = "SELECT meta_Prod, COUNT(NOME_parceiro) as realizado FROM (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.meta_Prod, b.rca FROM 
+                $this->TabMes a, $this->TabMeta b where a.MATERIAL IN ($this->Prod)
                  AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB where rca = $this->id GROUP BY VENDEDOR";
 
         $stm = DB::prepare($sql);
@@ -112,7 +112,7 @@ class PositBaton extends  DB
 
         public function meta(){
 
-            $sql = "SELECT meta_baton from $this->TabMeta where Rca = $this->id ";
+            $sql = "SELECT meta_Prod from $this->TabMeta where Rca = $this->id ";
 
             $stm = DB::prepare($sql);
             $stm->execute();
@@ -125,7 +125,31 @@ class PositBaton extends  DB
 
     public function PositAll(){
 
-        $sql = "SELECT a.ID, b.razao FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->Baton) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id";
+        $sql = "SELECT a.ID, b.razao FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->Prod) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+    }
+
+    public function PositAllG(){
+
+        $sql = "SELECT a.ID, a.Nome_parceiro FROM $this->TabMes a where a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by a.ID";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+    }
+
+    public function NotPositG(){
+
+        $sql = "SELECT Cod_Cli, razao FROM clientes WHERE rca = $this->id AND Cod_cli not in(SELECT a.ID FROM $this->TabMes a where a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by a.ID) order by Cod_cli";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -139,7 +163,7 @@ class PositBaton extends  DB
 
     public function NotPosit(){
 
-        $sql = "SELECT Cod_Cli, razao FROM clientes WHERE rca = $this->id AND Cod_cli not in(SELECT a.ID FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->Baton) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id) order by Cod_cli";
+        $sql = "SELECT Cod_Cli, razao FROM clientes WHERE rca = $this->id AND Cod_cli not in(SELECT a.ID FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->Prod) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id) order by Cod_cli";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -152,7 +176,7 @@ class PositBaton extends  DB
 
     public function PositGeral(){
 
-        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where a.MATERIAL IN ($this->Baton) AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
+        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where a.MATERIAL IN ($this->Prod) AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -166,7 +190,21 @@ class PositBaton extends  DB
 
 
         $sql = "SELECT sum(realizado) as total from(SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where 
-                a.MATERIAL IN ($this->Baton) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
+                a.MATERIAL IN ($this->Prod) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchObject();
+
+        return $stm;
+
+    }
+
+    public function PositCoodBisc($cood){
+
+
+        $sql = "SELECT sum(realizado) as total from(SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where 
+                a.MATERIAL IN ($this->Prod) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -177,7 +215,32 @@ class PositBaton extends  DB
     }
 
 
+    public function PositCoodGeral($cood){
 
+
+        $sql = "SELECT sum(realizado) as total from(SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where 
+                a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchObject();
+
+        return $stm;
+
+    }
+
+
+    public function PositG(){
+
+        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where  a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
+
+        $stm = DB::prepare($sql);
+        $stm->execute();
+        $stm = $stm->fetchAll();
+
+        return $stm;
+
+    }
 
 
 

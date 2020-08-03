@@ -8,28 +8,28 @@
 
 require_once 'conexao/DB.php';
 
-class PositTalento extends  DB
+class PositSerenata extends  DB
 {
 
     public $id;
     public $TabMes;
     public $TabMeta;
-    public $Talento;
+    public $serenata;
 
     /**
      * @return mixed
      */
-    public function getTalento()
+    public function getserenata()
     {
-        return $this->Talento;
+        return $this->serenata;
     }
 
     /**
-     * @param mixed $Talento
+     * @param mixed $serenata
      */
-    public function setTalento($Talento)
+    public function setserenata($serenata)
     {
-        $this->Talento = $Talento;
+        $this->serenata = $serenata;
     }
 
     /**
@@ -87,10 +87,10 @@ class PositTalento extends  DB
     {
 
 
-        $sql = "SELECT posit_talento, COUNT(NOME_parceiro) as realizado FROM (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.posit_Talento, b.rca FROM 
-                $this->TabMes a, $this->TabMeta b where a.MATERIAL IN ($this->Talento)
+        $sql = "SELECT posit_serenata, COUNT(NOME_parceiro) as realizado FROM (SELECT b.VENDEDOR, a.NOME_PARCEIRO, b.posit_serenata, b.rca FROM 
+                $this->TabMes a, $this->TabMeta b where a.MATERIAL IN ($this->serenata)
                  AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB where rca = $this->id GROUP BY VENDEDOR";
-
+         print_r($sql);
          $stm = DB::prepare($sql);
         $stm->execute();
         $stm = $stm->fetchAll();
@@ -112,7 +112,7 @@ class PositTalento extends  DB
 
         public function meta(){
 
-            $sql = "SELECT posit_talento from $this->TabMeta where Rca = $this->id ";
+            $sql = "SELECT posit_serenata from $this->TabMeta where Rca = $this->id ";
 
             $stm = DB::prepare($sql);
             $stm->execute();
@@ -125,7 +125,7 @@ class PositTalento extends  DB
 
     public function PositAll(){
 
-        $sql = "SELECT a.ID, b.razao FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->Talento) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id";
+        $sql = "SELECT a.ID, b.razao FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->serenata) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -139,7 +139,7 @@ class PositTalento extends  DB
 
     public function NotPosit(){
 
-        $sql = "SELECT Cod_Cli, razao FROM clientes WHERE rca = $this->id AND Cod_cli not in(SELECT a.ID FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->Talento) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id) order by Cod_cli";
+        $sql = "SELECT Cod_Cli, razao FROM clientes WHERE rca = $this->id AND Cod_cli not in(SELECT a.ID FROM $this->TabMes a, clientes b where a.vendedor = b.rca AND a.ID=b.Cod_Cli and a.MATERIAL IN ($this->serenata) and a.Quantidade>0 and a.VENDEDOR=$this->id GROUP by id) order by Cod_cli";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -152,7 +152,7 @@ class PositTalento extends  DB
 
     public function PositGeral(){
 
-        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where a.MATERIAL IN ($this->Talento) AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
+        $sql = "SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where a.MATERIAL IN ($this->serenata) AND a.QUANTIDADE>0 and a.vendedor = b.rca group by a.id)SUB GROUP BY rca";
 
         $stm = DB::prepare($sql);
         $stm->execute();
@@ -166,7 +166,7 @@ class PositTalento extends  DB
 
 
         $sql = "SELECT sum(realizado) as total from(SELECT rca, COUNT(id) as realizado FROM (SELECT b.rca, a.id FROM $this->TabMes a, usuarios b where 
-                a.MATERIAL IN ($this->Talento) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
+                a.MATERIAL IN ($this->serenata) AND a.QUANTIDADE>0 and a.vendedor = b.rca and b.super = '$cood' group by a.id)SUB GROUP BY rca) sub";
 
         $stm = DB::prepare($sql);
         $stm->execute();

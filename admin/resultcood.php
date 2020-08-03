@@ -2,24 +2,39 @@
 
 <?php
 
-$biscoito = new PositBisc();
-$biscoito->setTabMes($mes);
-$biscoito->setBisc($bisc);
-$biscoito = $biscoito->PositGeral();
-
-$baton = new PositBaton();
-$baton->setTabMes($mes);
-$baton->setBaton($bat);
-$baton = $baton->PositGeral();
+$positivacao = new Positivacoes();
+$positivacao->setTabMes($mes);
+$positivacao->setProd($bisc);
+$biscoito = $positivacao->PositGeral();
 
 
-$geral = new PositGeral();
-$geral->setTabMes($mes);
-$geral = $geral->PositG();
+$positivacao->setTabMes($mes);
+$positivacao->setProd($bat);
+$baton = $positivacao->PositGeral();
+
+$positivacao->setTabMes($mes);
+$positivacao->setProd($jum);
+$jumbos = $positivacao->PositGeral();
+
+$positivacao->setTabMes($mes);
+$positivacao->setProd($tal);
+$talento25 = $positivacao->PositGeral();
+
+$positivacao->setTabMes($mes);
+$positivacao->setProd($ser);
+$serenata = $positivacao->PositGeral();
+
+
+$positivacao->setTabMes($mes);
+$geral = $positivacao->PositG();
+
+
+
+
 
 $atuaPosit = new MetaGeral();
 $atuaPosit->setMeta($meta);
-$atuaVenda = $atuaPosit->AtualizaPosit($baton,$biscoito,$geral);
+$atuaVenda = $atuaPosit->AtualizaPosit($baton,$biscoito,$geral,$jumbos,$talento25,$serenata);
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -165,6 +180,11 @@ switch ($meta) {
             </div>
         </form>
 
+        <?php
+        $mixtotalsuper = array();
+        $mixtotalsuperBisc = array();
+
+        ?>
           <?php foreach ($coordenadores as $cood) :?>
         <!-- Row -->
         <div class="row">
@@ -196,43 +216,33 @@ switch ($meta) {
                                     ?>
 
 
-                                    <table class="table display product-overview border-none" id="support_table">
+                                    <table class="table display product-overview border-none" id="support_table" style="text-align: center">
                                         <thead>
-                                        <tr>
-                                            <th colspan="7" style="background:#556b49e3;text-align: center ">Positivações</th>
-                                            <th style="width: 3px; border: none !important;"></th>
-                                            <th colspan="4" style="background:#4c6d6a;text-align: center ">Mix Ideal</th>
-                                            <th style="width: 3px; border: none !important;"></th>
-                                            <th colspan="7" style="background:#324450;text-align: center ">Valor</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Vendedores</th>
-                                            <th>Meta Geral</th>
-                                            <th>Real Geral</th>
-                                            <th>Meta Baton</th>
-                                            <th>Real Baton</th>
-                                            <th>Meta Bisc</th>
-                                            <th>Real Bisc</th>
-                                            <th style="width: 3px; border: none !important;"></th>
-                                            <th>Meta Choc</th>
-                                            <th>Real Choc</th>
-                                            <th>Meta Bisc</th>
-                                            <th>Real Bisc</th>
-                                            <th style="width: 3px; border: none !important;"></th>
-                                            <th>Meta Choc</th>
-                                            <th>Real Choc</th>
-                                            <th>Meta Bisc</th>
-                                            <th>Real Bisc</th>
-                                            <th>Meta Total</th>
-                                            <th>Real Total</th>
-                                            <th>Devoluções</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody style="font-size: 14px">
+                                            <tr>
+                                                <th colspan="20" style="background:#556b49e3;">Positivações</th>
+                                            </tr>
 
+                                            <tr>
+                                                <th colspan="2" style="text-align: left ">Vendedores</th>
+                                                <th>Meta Geral</th>
+                                                <th>Real Geral</th>
+                                                <th>Meta Baton</th>
+                                                <th>Real Baton</th>
+                                                <th>Meta Bisc</th>
+                                                <th>Real Bisc</th>
+                                                <th>Meta Jumbos</th>
+                                                <th>Real Jumbos</th>
+                                                <th>Meta Talento 25g</th>
+                                                <th>Real Talento 25g</th>
+                                                <th>Meta Serenata</th>
+                                                <th>Real Serenata</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody style="font-size: 14px">
                                         <?php foreach ($result as $value): ?>
                                         <tr>
-                                            <td><?= $value->nome ?></td>
+                                            <td colspan="2" style="text-align: left "><?= $value->nome ?></td>
                                             <td><?= $value->tab ?></td>
 
                                             <?php $dif = $value->tab - $value->Rgeral ; if( $dif<=0): ?>
@@ -274,10 +284,176 @@ switch ($meta) {
                                             <?php endif;?>
 
 
+                                            <td><?= $value->posit_jumbos ?></td>
+
+                                            <?php $dif = $value->posit_jumbos - $value->RJumbos; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RJumbos ?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RJumbos?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td><?= $value->posit_talento ?></td>
+
+                                            <?php $dif = $value->posit_talento - $value->RTalento; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RTalento ?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RTalento?></span>
+                                                </td>
+                                            <?php endif;?>
+
+                                            <td><?= $value->posit_serenata ?></td>
+
+                                            <?php $dif = $value->posit_serenata - $value->RSerenata; if( $dif<=0): ?>
+                                                <td>
+                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $value->RSerenata?></span>
+                                                </td>
+
+
+                                            <?php else:?>
+                                                <td>
+                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $value->RSerenata?></span>
+                                                </td>
+                                            <?php endif;?>
 
 
 
-                                            <td style="width: 3px; border: none !important;" ></td>
+                                        </tr>
+                                        </tbody>
+
+                                        <?php endforeach; ?>
+
+                                        <tbody style="background: #303030; color: white">
+                                        <?php $resultTotal = $atuaPosit->ResultCoodGeralTotal($cood->super); ?>
+
+                                         <?php foreach ($resultTotal as $item): ?>
+
+                                        <td colspan="2">Total</td>
+
+                                        <td><?= $item->Mgeral?></td>
+
+
+                                        <?php $dif = $item->Mgeral - $item->Rgeral; if( $dif<=0): ?>
+                                            <td>
+                                                <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rgeral?></span>
+                                            </td>
+                                        <?php else:?>
+                                            <td>
+                                                <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rgeral?></span>
+                                            </td>
+                                        <?php endif;?>
+
+
+                                        <td><?= $item->Mbaton?></td>
+
+
+                                        <?php $dif = $item->Mbaton - $item->Rbaton; if( $dif<=0): ?>
+                                            <td>
+                                                <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rbaton ?></span>
+                                            </td>
+                                        <?php else:?>
+                                            <td>
+                                                <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rbaton ?></span>
+                                            </td>
+                                        <?php endif;?>
+
+
+                                        <td><?= $item->Mbisc?></td>
+
+                                        <?php $dif = $item->Mbisc - $item->Rbisc; if( $dif<=0): ?>
+                                            <td>
+                                                <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rbisc ?></span>
+                                            </td>
+                                        <?php else:?>
+                                            <td>
+                                                <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rbisc ?></span>
+                                            </td>
+                                        <?php endif;?>
+
+                                             <td><?= $item->Mjumbos?></td>
+
+                                             <?php $dif = $item->Mjumbos - $item->Rjumbos; if( $dif<=0): ?>
+                                                 <td>
+                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rjumbos ?></span>
+                                                 </td>
+                                             <?php else:?>
+                                                 <td>
+                                                     <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rjumbos ?></span>
+                                                 </td>
+                                             <?php endif;?>
+                                             <td><?= $item->Mtalento?></td>
+
+                                             <?php $dif = $item->Mtalento - $item->Rtalento; if( $dif<=0): ?>
+                                                 <td>
+                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rtalento?></span>
+                                                 </td>
+                                             <?php else:?>
+                                                 <td>
+                                                     <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rtalento ?></span>
+                                                 </td>
+                                             <?php endif;?>
+
+                                             <td><?= $item->Mserenata?></td>
+
+                                             <?php $dif = $item->Mserenata - $item->Rserenata; if( $dif<=0): ?>
+                                                 <td>
+                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rserenata ?></span>
+                                                 </td>
+                                             <?php else:?>
+                                                 <td>
+                                                     <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rserenata ?></span>
+                                                 </td>
+                                             <?php endif; endforeach;?>
+
+
+                                        </tbody>
+
+
+
+
+                                        <thead>
+                                        <tr>
+                                            <th colspan="6" style="background:#4c6d6a;text-align: center ">Mix Ideal</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th colspan="7" style="background:#324450;text-align: center ">Valor</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" style="text-align: left ">Vendedores</th>
+
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th style="width: 3px; border: none !important;"></th>
+                                            <th>Meta Choc</th>
+                                            <th>Real Choc</th>
+                                            <th>Meta Bisc</th>
+                                            <th>Real Bisc</th>
+                                            <th>Meta Total</th>
+                                            <th>Real Total</th>
+                                            <th>Devoluções</th>
+                                        </tr>
+                                        </thead>
+
+
+                                        <?php foreach ($result as $value): ?>
+
+                                        <tbody style="font-size: 14px">
+
+
+                                        <tr>
+                                            <td colspan="2"  style="text-align: left "><?= $value->nome ?></td>
+
 
 
                                             <?php
@@ -287,6 +463,7 @@ switch ($meta) {
                                             $percent = $MetaMixchoc2->MPercent();
                                             $MetaMixC = Round($value->MetaMixChoc * $percent[0]->topchoc);
 
+                                            $mixtotalsuper [] = $MetaMixC;
                                             ?>
 
 
@@ -317,6 +494,8 @@ switch ($meta) {
                                             $MetaMixbisc2->setId($value->rca);
                                             $percent = $MetaMixbisc2->MPercent();
                                             $MetaMixB = Round($value->MetaMixBisc * $percent[0]->topbisc);
+
+                                            $mixtotalsuperBisc [] = $MetaMixB;
 
                                             ?>
 
@@ -434,61 +613,25 @@ switch ($meta) {
 
                                         <td>Total</td>
 
-                                        <td><?= $item->Mgeral?></td>
-
-
-                                            <?php $dif = $item->Mgeral - $item->Rgeral; if( $dif<=0): ?>
-                                                <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rgeral?></span>
-                                                </td>
-                                            <?php else:?>
-                                                <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rgeral?></span>
-                                                </td>
-                                            <?php endif;?>
-
-
-                                        <td><?= $item->Mbaton?></td>
-
-
-                                            <?php $dif = $item->Mbaton - $item->Rbaton; if( $dif<=0): ?>
-                                                <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rbaton ?></span>
-                                                </td>
-                                            <?php else:?>
-                                                <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rbaton ?></span>
-                                                </td>
-                                            <?php endif;?>
-
-
-                                        <td><?= $item->Mbisc?></td>
-
-                                            <?php $dif = $item->Mbisc - $item->Rbisc; if( $dif<=0): ?>
-                                                <td>
-                                                    <span class="label label-success" style="color: black; font-size: 14px"><?= $item->Rbisc ?></span>
-                                                </td>
-                                            <?php else:?>
-                                                <td>
-                                                    <span class="label label-danger" style="color: black; font-size: 14px"><?= $item->Rbisc ?></span>
-                                                </td>
-                                            <?php endif;?>
-
-
 
                                         <td style="width: 3px; border: none !important;" ></td>
 
                                         <?php
 
-                                            $MetaMixchoc2->setTabMeta($meta);
-                                            $MetaMixchoc2->setId($value->rca);
-                                            $percent = $MetaMixchoc2->MPercentGeral()->media;
-                                            $MixChoc = round($item->MetaMixChoc * $percent) ?>
+                                            $totalMetaMix = array_sum($mixtotalsuper);
+
+                                            $mixtotalsuper = [];
+
+                                            $totalMetaMixBisc = array_sum($mixtotalsuperBisc);
+
+                                            $mixtotalsuperBisc = [];
+
+                                         ?>
 
 
-                                        <td><?= $MixChoc ?></td>
+                                        <td><?= $totalMetaMix ?></td>
 
-                                            <?php $dif = $MixChoc - $item->RmixChoc; if( $dif<=0): ?>
+                                            <?php $dif = $totalMetaMix  - $item->RmixChoc; if( $dif<=0): ?>
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->RmixChoc ?></span>
                                                 </td>
@@ -500,18 +643,11 @@ switch ($meta) {
                                             <?php endif;?>
 
 
-                                            <?php
 
-                                            $MetaMixbisc2->setTabMeta($meta);
-                                            $MetaMixbisc2->setId($value->rca);
-                                            $percent = $MetaMixbisc2->MPercentGeral()->media;
-                                            $MixBisc = round($item->MetaMixBisc * $percent); ?>
+                                        <td><?= $totalMetaMixBisc ?></td>
 
 
-                                        <td><?= $MixBisc?></td>
-
-
-                                            <?php $dif = $MixBisc - $item->RMixBisc; if( $dif<=0): ?>
+                                            <?php $dif = $totalMetaMixBisc  - $item->RMixBisc; if( $dif<=0): ?>
                                                 <td>
                                                     <span class="label label-success" style="color: black; font-size: 14px"><?= $item->RMixBisc ?></span>
                                                 </td>

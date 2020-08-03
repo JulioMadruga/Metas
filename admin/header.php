@@ -82,7 +82,9 @@ $kpis = new Kpis();
 $kpis = $kpis->all();
 $bisc = $kpis[0]->rech;
 $bat = $kpis[0]->baton;
-
+$jum = $kpis[0]->jumbos;
+$tal = $kpis[0]->talento;
+$ser = $kpis[0]->serenata;
 
 
 ?>

@@ -53,18 +53,13 @@ switch ($meta) {
     }
 }
 
-$positivados = new PositBaton();
-$positivados->setId($rca);
-$positivados->setTabMes($mes);
-$positivados->setBaton($bat);
+$positivados2 = new Positivacoes();
+$positivados2->setId($rca);
+$positivados2->setTabMes($mes);
+$positivados2->setProd($bat);
 
-$positivados = $positivados->PositAll();
-
-$notPosit = new PositBaton();
-$notPosit->setId($rca);
-$notPosit->setTabMes($mes);
-$notPosit->setBaton($bat);
-$notPosit = $notPosit->NotPosit();
+$positivados = $positivados2->PositAll();
+$notPosit = $positivados2->NotPosit();
 
 //var_dump($positivados);
 

@@ -78,10 +78,12 @@ $meta = $mes_meta["$mes"];
 
 $kpis = new Kpis();
 $kpis = $kpis->all();
+//var_dump($kpis);
 $bisc = $kpis[0]->rech;
 $bat = $kpis[0]->baton;
 $jum = $kpis[0]->jumbos;
 $tal = $kpis[0]->talento;
+$ser = $kpis[0]->serenata;
 
 
 ?>
@@ -166,7 +168,19 @@ $tal = $kpis[0]->talento;
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    <script>   // aqui eh a base da pagina
+
+
+    <?php
+
+    $url1 =strtolower($_SERVER["REQUEST_URI"]);
+    $url = str_replace("/metas/","",$url1);
+ //echo $url;
+
+    if($url !== "clienteatevc.php" && $url !== "clienteatevc" && $url !== "clienteatevc.php?result=ok"){
+
+        echo "
+
+        <script>   // aqui eh a base da pagina
         window.onload = function(){
             document.getElementById('mes').onchange = function(){
                 window.location = '?mes=' + this.value;
@@ -177,6 +191,15 @@ $tal = $kpis[0]->talento;
 
 
     </script>
+        
+        ";
+
+    }
+
+    ?>
+
+
+
 
 
 
@@ -284,6 +307,15 @@ $tal = $kpis[0]->talento;
                             <li>
                                 <a href="biscoito.php"><i class="icon icon-people_outline s-24 text-yellow "></i>Biscoito</a>
                             </li>
+                            <li>
+                                <a href="jumbos.php"><i class="icon icon-people_outline s-24 text-success "></i>Jumbos</a>
+                            </li>
+                            <li>
+                                <a href="talento25.php"><i class="icon icon-people_outline s-24 text-info"></i>Talento 25g</a>
+                            </li>
+                            <li>
+                                <a href="serenata.php"><i class="icon icon-people_outline s-24 text-warning "></i>Serenata</a>
+                            </li>
 
                         </ul>
                     </li>
@@ -294,7 +326,7 @@ $tal = $kpis[0]->talento;
                     <li><a href="cadastro.php"><i class="icon icon-users text-warning s-24"></i>Cadastro de Cliente </a>
                     </li>
 
-                    <li><a href="nestleatevc.php"><i class="icon icon-tablet text-blue s-24"></i>Nestle até Vc </a>
+                    <li><a href="clienteatevc.php"><i class="icon icon-tablet text-blue s-24"></i>Nestle até Vc </a>
                     </li>
 
 

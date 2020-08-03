@@ -53,6 +53,7 @@ switch ($meta) {
     }
 }
 
+
 //----------------------------VENDA CHOCOLATE------------------------------------
 $vendChoc = new Vendachoc();
 $vendChoc->setId($rca);
@@ -61,6 +62,8 @@ $vendChoc->setTabMes($mes);
 $vendChoc->setTabMeta($meta);
 
 $vendChoc = $vendChoc->index();
+
+//var_dump($vendChoc);
 
 if(isset($vendChoc[0]->Tot)){
     $vendaChocM = $vendChoc[0]->meta;
@@ -244,6 +247,39 @@ if(isset($Pjum[0]->realizado)){
     $PjumPercent = 0;
 
 }
+
+
+
+//-------------------------------POSITIVAÇÃO SERENATA  ---------------------------------
+
+$Pserenata= new PositSerenata();
+$Pserenata->setTabMes($mes);
+$Pserenata->setTabMeta($meta);
+$Pserenata->setId($rca);
+$Pserenata->setserenata($ser);
+
+
+$Pserenata= $Pserenata->index();
+
+if(isset($Pserenata[0]->realizado)){
+
+    $PserenataM = $Pserenata[0]->posit_serenata;
+    $PserenataR = $Pserenata[0]->realizado;
+    $PserenataPercent = round((($PserenataR / $PserenataM)*100),2);
+
+    if($PserenataPercent>=100){
+
+        $contamedalha ++;
+    }
+
+}else{
+
+    $PserenataM = $Pserenata[0]->posit_serenata;
+    $PserenataR = 0;
+    $PserenataPercent = 0;
+
+}
+
 
 
 
@@ -492,6 +528,29 @@ if($MixPercent2>=100){
 
 
 
+
+                    <div class="yellow darken-3 text-center text-white">
+                        <?php
+                        if($PserenataPercent >=100){
+                            echo '<div class="p-1"><img src="assets/img/medalha.png" style="width: 80px; float: right"> </div>';
+                        }
+                        ?>
+                        <div class="p-5">
+                            <h5 class="font-weight-normal s-14 " >Positivação Serenata</h5>
+                            <p class="s-48 p-t-10 font-weight-lighter" ><?= $PserenataM ?></p>
+                            <span class="s-12 font-weight-normal" style="color: rgba(6,12,93,0.89) !important;">Realizado</span>
+                            <p class="s-18 font-weight-normal" style="color:rgba(6,12,93,0.89)!important;"><?= $PserenataR?></p>
+                            <p class="p-t-10" style="color:rgba(6,12,93,0.89)!important;"><?= $PserenataPercent ?>% Realizado</p>
+                            <div class="progress" style="height: 3px;">
+
+                                <div class="progress-bar bg-orange" role="progressbar" style="width: <?= $PbiscPercent ?>%;" aria-valuenow="45"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="dark-blue darken-2 text-center text-white">
                         <?php
                         if($MixPercent >=100){
@@ -616,6 +675,18 @@ if($MixPercent2>=100){
                                  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
+
+                    <div class="my-3">
+                        <label class="font-weight-bold text-yellow ">Positivação Serenata</label>
+                        <i class="icon icon-arrow-right s-12 text-yellow "></i>
+                        <small class="text-yellow"><?= $PserenataPercent?>% desempenho</small>
+                        <div class="progress" style="height: 3px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $PserenataPercent ?>%;"
+                                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+
 
                     <div class="my-3">
                         <label class="font-weight-bold brown-text">Mix Ideal Chocolate</label>
